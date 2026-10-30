@@ -36,6 +36,12 @@ def issue_for(tag):
 def target_date():
     return max(NOW().date()+timedelta(days=1),date(2026,11,1)).isoformat()
 
+def gate():
+    current=releases();tag=PREFIX+target_date()+'-v1'
+    allowed=not any(state(r)['status']!='SCHEDULED_USER_REPORTED' or r['tag_name']==tag for r in current)
+    with Path(os.environ['GITHUB_OUTPUT']).open('a') as output:output.write(f'allowed={str(allowed).lower()}\n')
+    print('New generation allowed:',allowed)
+
 def prepare(repair=False):
     repo=api(f'repos/{REPO}')
     assert repo['private'] is False, 'Stop: free public-runner condition changed'
@@ -95,6 +101,8 @@ Video listo para revisar desde el teléfono. Abre la entrega con tu sesión de G
 
 **[Abrir entrega y video]({url})** · Fecha propuesta: **{record['date']} a las 19:00, Ciudad de México**.
 
+Si GitHub cambia el enlace del borrador tras actualizar su estado, [abre Entregas](https://github.com/{REPO}/releases) y elige «Revisión {record['date']}».
+
 70 s · 1080 × 1920 · 30 FPS · avatar abrazando el acertijo · prueba técnica y descarga verificadas.
 
 Para aprobar este archivo exacto, comenta esta línea (puedes copiarla desde el teléfono):
@@ -129,6 +137,7 @@ Ejecución: {record.get('run_url','')}
 def failure_notice():
     # Also covers dependency/download failures before a release reservation exists.
     notify()
+    if any(state(r)['status']=='FAILED_NEEDS_REVIEW' for r in releases()):return
     marker=f'<!-- rv70-cloud-failure-{NOW().date().isoformat()} -->'
     if any(marker in i['body'] for i in issues()):return
     url=os.environ.get('RUN_URL',f'https://github.com/{REPO}/actions')
@@ -172,4 +181,4 @@ def comment():
 
 if __name__=='__main__':
     assert os.environ.get('GITHUB_REPOSITORY',REPO)==REPO
-    {'prepare':prepare,'repair':lambda:prepare(repair=True),'notify':notify,'comment':comment,'failure':failure_notice,'remind':remind}[sys.argv[1]]()
+    {'prepare':prepare,'gate':gate,'repair':lambda:prepare(repair=True),'notify':notify,'comment':comment,'failure':failure_notice,'remind':remind}[sys.argv[1]]()
