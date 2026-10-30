@@ -31,19 +31,25 @@ def main():
     sheet.save(OUT/'revision.jpg',quality=95)
     actual[8.].save(OUT/'portada.jpg',quality=96)
     actual[2.].save(OUT/'vista-previa.jpg',quality=96)
+    data=json.loads((OUT/'plan.json').read_text(encoding='utf-8'))
     roundchecks=[]
-    for i,(mt,st) in enumerate([(8.,16.),(27.,36.),(48.,57.)]):
-        am=np.asarray(actual[mt],dtype=float);bs=np.asarray(actual[st],dtype=float)
-        details=[];changed=[]
-        size=[88,76,68][i]
-        for (name,color),(x,y) in zip(design.ROUNDS[i]['items'],design.slots(i)):
-            box=(round((x-size/2)*1.5),round((y-size/2)*1.5),round((x+size/2)*1.5),round((y+size/2)*1.5))
-            x0,y0,x1,y1=box;error=float(np.abs(am[y0:y1,x0:x1]-bs[y0:y1,x0:x1]).mean())
-            if error>5:changed.append(name)
-            details.append({'object':name,'difference':round(error,4)})
-        assert changed==[design.ROUNDS[i]['target']],details
-        assert all(d['difference']<3 for d in details if d['object']!=design.ROUNDS[i]['target'])
-        roundchecks.append({'round':i+1,'changed_objects':changed,'details':details,'fully_hidden_seconds':1,'answer_seconds':5})
+    if data.get('family','color')=='color':
+        for i,(mt,st) in enumerate([(8.,16.),(27.,36.),(48.,57.)]):
+            am=np.asarray(actual[mt],dtype=float);bs=np.asarray(actual[st],dtype=float)
+            details=[];changed=[]
+            size=[88,76,68][i]
+            for (name,color),(x,y) in zip(design.ROUNDS[i]['items'],design.slots(i)):
+                box=(round((x-size/2)*1.5),round((y-size/2)*1.5),round((x+size/2)*1.5),round((y+size/2)*1.5))
+                x0,y0,x1,y1=box;error=float(np.abs(am[y0:y1,x0:x1]-bs[y0:y1,x0:x1]).mean())
+                if error>5:changed.append(name)
+                details.append({'object':name,'difference':round(error,4)})
+            assert changed==[design.ROUNDS[i]['target']],details
+            assert all(d['difference']<3 for d in details if d['object']!=design.ROUNDS[i]['target'])
+            roundchecks.append({'round':i+1,'changed_objects':changed,'details':details,'fully_hidden_seconds':1,'answer_seconds':5})
+    else:
+        import challenges
+        challenges.validate(data)
+        roundchecks=challenges.verify_rendered(actual,data)
     raw=subprocess.check_output(['ffmpeg','-v','error','-i',str(VIDEO),'-vn','-f','f32le','-ac','1','-ar','24000','pipe:1'])
     sound=np.frombuffer(raw,dtype='<f4');assert abs(len(sound)/24000-70)<.05
     narration=json.loads((OUT/'narracion.json').read_text(encoding='utf-8'))
@@ -53,7 +59,7 @@ def main():
         rms=float(np.sqrt(np.mean(seg**2)));assert rms>.02
         speech.append({'id':event['id'],'start':event['start'],'duration':event['duration'],'rms':round(rms,5)})
     silences=[]
-    for start,end in [(9,12.7),(28,32.7),(48,53.7),(15.5,19.7),(35.5,39.7),(56.5,60.7)]:
+    for start,end in [(10,12.7),(29,32.7),(49,53.7),(16.3,19.7),(36.3,39.7),(57.3,60.7)]:
         seg=sound[round(start*24000):round(end*24000)];rms=float(np.sqrt(np.mean(seg**2)));assert rms<.002,(start,rms)
         silences.append({'start':start,'end':end,'rms':rms})
     peak=float(np.max(np.abs(sound)));assert peak<1

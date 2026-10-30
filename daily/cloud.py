@@ -8,6 +8,7 @@ from urllib.parse import quote, urlsplit
 REPO='estebansanchezoficial/reto-visual-70'
 OWNER='estebansanchezoficial'
 PREFIX='rv70-review-'
+TERMINAL={'SCHEDULED_USER_REPORTED','SUPERSEDED'}
 ROOT=Path(__file__).resolve().parent.parent
 OUT=ROOT/'output/current'
 NOW=lambda:datetime.now(ZoneInfo('America/Mexico_City'))
@@ -39,9 +40,46 @@ def target_date():
 
 def gate():
     current=releases();tag=PREFIX+target_date()+'-v1'
-    allowed=not any(state(r)['status']!='SCHEDULED_USER_REPORTED' or r['tag_name']==tag for r in current)
+    allowed=not any(state(r)['status'] not in TERMINAL or r['tag_name']==tag for r in current)
     with Path(os.environ['GITHUB_OUTPUT']).open('a') as output:output.write(f'allowed={str(allowed).lower()}\n')
     print('New generation allowed:',allowed)
+
+def content_history():
+    history=json.loads((ROOT/'daily/content-history.json').read_text(encoding='utf-8'))
+    for release in releases():
+        if not any(a['name']=='plan.json' for a in release['assets']):continue
+        folder=ROOT/'output/history'/release['tag_name'];folder.mkdir(parents=True,exist_ok=True)
+        gh('release','download',release['tag_name'],'-R',REPO,'--pattern','plan.json','--dir',str(folder))
+        plan=json.loads((folder/'plan.json').read_text(encoding='utf-8'));record=state(release)
+        plan.update(family=plan.get('family','color'),sha256=record.get('sha256'),revision=plan.get('revision',int(release['tag_name'].rsplit('-v',1)[1])),status=record['status'])
+        history.append(plan)
+    return history
+
+def correct():
+    assert api(f'repos/{REPO}')['private'] is False
+    tag=os.environ['CORRECTION_TAG']
+    assert re.fullmatch(r'rv70-review-\d{4}-\d{2}-\d{2}-v\d+',tag)
+    current=releases();old=next(r for r in current if r['tag_name']==tag);record=state(old)
+    if record['status']!='CORRECTION_REQUESTED':print('Correction already handled or not requested; no retry.');return
+    history=content_history();original=next(h for h in history if h.get('date')==record['date'] and h.get('revision',1)==int(tag.rsplit('-v',1)[1]))
+    text=record['correction_text']
+    # Supported automatic corrections change puzzle content/mechanic. Never claim
+    # to have applied arbitrary animation, layout, audio or licensing instructions.
+    unsupported=re.search(r'boca|manos|avatar|volumen|m[uú]sica|voz|arriba|abajo|grande|peque[nñ]|tama[nñ]|posici[oó]n|velocidad|subt[ií]tulo',text,re.I)
+    supported=re.search(r'repit|repet|igual|parecid|distint|otro|acertijo|reto|din[aá]mica|contenido|c[aá]lculo|vocal|patr[oó]n',text,re.I)
+    if unsupported or not supported:
+        record.update(status='CORRECTION_NEEDS_MANUAL',correction_block_reason='El cambio solicitado no está implementado en el corrector automático de contenido. Se necesita intervención; no se generó una supuesta corrección.')
+        gh('release','edit',tag,'-R',REPO,'--notes',json.dumps(record));notify();return
+    revision=int(tag.rsplit('-v',1)[1])+1;newtag=tag.rsplit('-v',1)[0]+f'-v{revision}'
+    assert not any(r['tag_name']==newtag for r in current), 'Version already reserved; reconcile before retry'
+    record['status']='CORRECTING'
+    gh('release','edit',tag,'-R',REPO,'--notes',json.dumps(record))
+    replacement={'status':'PREPARING','date':record['date'],'revision':revision,'scheduled':False,'published':False,'parent_tag':tag,'review_issue':record['review_issue'],'correction_text':text,'correction_source':record['correction_source'],'correction_request_id':record['correction_request_id']}
+    gh('release','create',newtag,'-R',REPO,'--draft','--target','main','--title',f"Reto Visual 70 — revisión {record['date']} v{revision}",'--notes',json.dumps(replacement))
+    deliver(newtag,replacement,history,rejected_family=original.get('family','color'))
+    record.update(status='SUPERSEDED',replacement_tag=newtag)
+    gh('release','edit',tag,'-R',REPO,'--notes',json.dumps(record))
+    notify()
 
 def prepare(repair=False):
     repo=api(f'repos/{REPO}')
@@ -52,27 +90,36 @@ def prepare(repair=False):
     if repair:
         reserved=next((r for r in current if r['tag_name']==tag),None)
         assert reserved and state(reserved)['status']=='FAILED_NEEDS_REVIEW' and not reserved['assets'], 'Repair requires a reviewed failed reservation with no uploaded assets'
-        assert all(r['tag_name']==tag or state(r)['status']=='SCHEDULED_USER_REPORTED' for r in current)
+        assert all(r['tag_name']==tag or state(r)['status'] in TERMINAL for r in current)
         record['manual_repair_run']=os.environ.get('RUN_URL')
         gh('release','edit',tag,'-R',REPO,'--notes',json.dumps(record))
     else:
         # Keep one package until scheduling is explicitly reported. No backlog/retries.
-        if any(state(r)['status']!='SCHEDULED_USER_REPORTED' for r in current):
+        if any(state(r)['status'] not in TERMINAL for r in current):
             print('Existing unresolved package: no generation or retry.');return
         if any(r['tag_name']==tag for r in current):print('Date already reserved.');return
         gh('release','create',tag,'-R',REPO,'--draft','--target','main','--title',f'Reto Visual 70 — revisión {day}','--notes',json.dumps(record))
+    deliver(tag,record,content_history())
+
+def deliver(tag,record,history,rejected_family=None):
+    OUT.mkdir(parents=True,exist_ok=True)
+    history_path=ROOT/'output/content-history.json'
+    history_path.write_text(json.dumps(history,ensure_ascii=False),encoding='utf-8')
     try:
         subprocess.run([sys.executable,str(ROOT/'daily/prepare_models.py')],check=True)
-        subprocess.run([sys.executable,str(ROOT/'daily/generate.py'),'--date',day],check=True)
+        args=[sys.executable,str(ROOT/'daily/generate.py'),'--date',record['date'],'--revision',str(record.get('revision',1)),'--history',str(history_path)]
+        if rejected_family:args+=['--rejected-family',rejected_family]
+        subprocess.run(args,check=True)
         qa=json.loads((OUT/'verificacion-final.json').read_text())
         assert qa['status']=='PASS_PENDING_USER_APPROVAL'
-        names=['video.mp4','portada.jpg','descripcion.txt','verificacion-final.json','manifest.json','plan.json','revision.jpg','narracion.json']
+        names=['video.mp4','portada.jpg','descripcion.txt','verificacion-final.json','manifest.json','plan.json','revision.jpg','narracion.json','comparison.json']
         gh('release','upload',tag,*[str(OUT/n) for n in names],'-R',REPO)
         # Verify remote bytes, not only upload exit status.
         verify=ROOT/'output/download-check';verify.mkdir(exist_ok=True,parents=True)
         gh('release','download',tag,'-R',REPO,'--pattern','video.mp4','--dir',str(verify))
         assert hashlib.sha256((verify/'video.mp4').read_bytes()).hexdigest()==qa['sha256']
-        record.update(status='READY_FOR_REVIEW',sha256=qa['sha256'],bytes=qa['bytes'],run_url=os.environ.get('RUN_URL'))
+        plan=json.loads((OUT/'plan.json').read_text(encoding='utf-8'))
+        record.update(family=plan['family'],revision=plan['revision'],status='READY_FOR_REVIEW',sha256=qa['sha256'],bytes=qa['bytes'],run_url=os.environ.get('RUN_URL'))
         gh('release','edit',tag,'-R',REPO,'--notes',json.dumps(record))
         print(json.dumps(record))
     except Exception:
@@ -83,10 +130,16 @@ def prepare(repair=False):
 def notify():
     for release in releases():
         record=state(release);tag=release['tag_name']
-        if record['status']=='SCHEDULED_USER_REPORTED':continue
-        existing=issue_for(tag)
+        if record['status'] in TERMINAL:continue
+        existing=issue_for(tag) or next((i for i in issues() if i['number']==record.get('review_issue')),None)
         refresh=existing and record['status']=='READY_FOR_REVIEW' and record['sha256'] not in existing['body']
         marker=f'<!-- notice-{NOW().date().isoformat()} -->'
+        if existing and record['status'] in ['FAILED_NEEDS_REVIEW','CORRECTION_NEEDS_MANUAL']:
+            attention=f"<!-- attention-{tag}-{record['status']} -->"
+            comments=api(f"repos/{REPO}/issues/{existing['number']}/comments?per_page=100")
+            if not any(attention in c['body'] for c in comments):
+                api(f"repos/{REPO}/issues/{existing['number']}/comments",{'body':f"{attention}\nNo se pudo completar la corrección: {record.get('correction_block_reason','falló la ejecución técnica; revisar Actions')}. Se conserva la versión anterior y se bloquea cualquier aprobación/programación. No habrá reintento automático. Ejecución: {os.environ.get('RUN_URL','')}"})
+            continue
         if existing and not refresh:
             if record['status'] not in ['READY_FOR_REVIEW','APPROVED_PENDING_TIKTOK']:continue
             comments=api(f"repos/{REPO}/issues/{existing['number']}/comments?per_page=100")
@@ -116,7 +169,11 @@ Para aprobar este archivo exacto, comenta esta línea (puedes copiarla desde el 
 
 `APROBAR {sha}`
 
-Para pedir cambios: `CORREGIR: explica el cambio`.
+Para pedir cambios, copia y completa:
+
+`CORREGIR: [qué debe cambiar]. Corrígelo y vuelve a notificarme hoy para revisión; no lo programes sin mi aprobación.`
+
+La orden inicia una corrección en la nube en cuanto se recibe, sin esperar al aviso de las 09:00. La nueva versión pasa comparación con videos anteriores, render y verificación antes de avisarte en este mismo hilo. La aprobación anterior queda anulada. Si la ejecución falla o el cambio necesita intervención, recibirás el aviso de bloqueo ese mismo día; no se marcará como corregido sin evidencia.
 
 La aprobación registra tu decisión; **no significa que esté programado en TikTok**. La música nativa se añade en TikTok: Inside Algorithm — Cool Ember Sync, suave (-24 dB), entrada 1 s y salida 2 s. Mantener activado «Creado por IA». La disponibilidad de la canción debe comprobarse allí.
 
@@ -165,7 +222,7 @@ def comment():
     event=json.loads(Path(os.environ['GITHUB_EVENT_PATH']).read_text())
     if event['sender']['login']!=OWNER or event['comment']['user']['login']!=OWNER:return
     if event['issue'].get('pull_request'):return
-    match=re.search(r'<!-- (rv70-review-\d{4}-\d{2}-\d{2}-v1) -->',event['issue']['body'] or '')
+    match=re.search(r'<!-- (rv70-review-\d{4}-\d{2}-\d{2}-v\d+) -->',event['issue']['body'] or '')
     if not match:return
     tag=match.group(1);release=next(r for r in releases() if r['tag_name']==tag);record=state(release)
     text=event['comment']['body'].strip();sha=record.get('sha256')
@@ -175,17 +232,24 @@ def comment():
         assert hashlib.sha256((folder/'video.mp4').read_bytes()).hexdigest()==sha
         record.update(status='APPROVED_PENDING_TIKTOK',approval_comment=event['comment']['html_url'])
         message='Aprobación registrada para este SHA-256. **Pendiente programar realmente en TikTok** con aviso de IA y música nativa. Esta acción no publica ni programa el video.'
-    elif text.startswith('CORREGIR:') and record['status'] in ['READY_FOR_REVIEW','APPROVED_PENDING_TIKTOK']:
-        record['status']='CORRECTION_REQUESTED';message='Cambio registrado. Se bloquea la generación siguiente hasta resolver y revisar una nueva versión; esta aprobación no se reutilizará.'
+    elif text.startswith('CORREGIR:') and record['status'] in ['READY_FOR_REVIEW','APPROVED_PENDING_TIKTOK','CORRECTION_NEEDS_MANUAL']:
+        record.update(status='CORRECTION_REQUESTED',correction_text=text,correction_request_id=event['comment']['id'],correction_source=event['comment']['html_url'],review_issue=event['issue']['number'])
+        record.pop('approval_comment',None)
+        message='Corrección recibida. Prepararé una nueva versión en la nube y volveré a notificarte en este mismo hilo al terminar, sin esperar a mañana. No se programa sin tu nueva aprobación; si falla o requiere intervención, se avisará el bloqueo.'
     elif sha and re.fullmatch(rf'REGISTRAR_PROGRAMADO {sha} https://www\.tiktok\.com/@retovisual70/video/\d+',text) and record['status']=='APPROVED_PENDING_TIKTOK':
         record.update(status='SCHEDULED_USER_REPORTED',tiktok_url=text.split()[-1],scheduled=True,published=False)
         message='Programación declarada por el propietario y enlace guardado. No se ha verificado su estado directamente en TikTok. Se habilita la preparación siguiente.'
     else:return
     gh('release','edit',tag,'-R',REPO,'--notes',json.dumps(record))
     api(f"repos/{REPO}/issues/{event['issue']['number']}/comments",{'body':message})
+    if record['status']=='CORRECTION_REQUESTED':
+        try:gh('workflow','run','produccion-diaria.yml','-R',REPO,'--ref','main','-f','mode=correct','-f',f'correction_tag={tag}')
+        except Exception:
+            record.update(status='CORRECTION_NEEDS_MANUAL',correction_block_reason='No se pudo iniciar la ejecución de corrección. Revisar permisos/Actions; no se ha corregido el archivo.')
+            gh('release','edit',tag,'-R',REPO,'--notes',json.dumps(record));notify();raise
     if record['status']=='SCHEDULED_USER_REPORTED':
         gh('issue','close',str(event['issue']['number']),'-R',REPO)
 
 if __name__=='__main__':
     assert os.environ.get('GITHUB_REPOSITORY',REPO)==REPO
-    {'prepare':prepare,'gate':gate,'repair':lambda:prepare(repair=True),'notify':notify,'comment':comment,'failure':failure_notice,'remind':remind}[sys.argv[1]]()
+    {'prepare':prepare,'gate':gate,'correct':correct,'repair':lambda:prepare(repair=True),'notify':notify,'comment':comment,'failure':failure_notice,'remind':remind}[sys.argv[1]]()

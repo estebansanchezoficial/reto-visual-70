@@ -9,9 +9,13 @@ on:
       mode:
         description: Preparar o enviar revision existente (no publica)
         type: choice
-        options: [prepare, notify, remind, repair]
+        options: [prepare, notify, remind, repair, correct]
         required: true
         default: prepare
+      correction_tag:
+        description: Reserva cuya correccion solicito el propietario
+        type: string
+        required: false
 permissions:
   contents: write
   issues: write
@@ -27,6 +31,7 @@ jobs:
       GH_TOKEN: ${{ github.token }}
       GITHUB_REPOSITORY: ${{ github.repository }}
       RUN_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+      CORRECTION_TAG: ${{ inputs.correction_tag }}
       OMP_NUM_THREADS: '2'
       OPENBLAS_NUM_THREADS: '2'
     steps:
@@ -46,6 +51,8 @@ jobs:
             echo 'value=notify' >> "$GITHUB_OUTPUT"
           elif [ "$INPUT_MODE" = 'repair' ]; then
             echo 'value=repair' >> "$GITHUB_OUTPUT"
+          elif [ "$INPUT_MODE" = 'correct' ]; then
+            echo 'value=correct' >> "$GITHUB_OUTPUT"
           else
             echo 'value=prepare' >> "$GITHUB_OUTPUT"
           fi
@@ -54,7 +61,7 @@ jobs:
         if: steps.mode.outputs.value == 'prepare'
         run: python daily/cloud.py gate
       - name: Dependencias gratuitas de produccion
-        if: (steps.mode.outputs.value == 'prepare' && steps.gate.outputs.allowed == 'true') || steps.mode.outputs.value == 'repair'
+        if: (steps.mode.outputs.value == 'prepare' && steps.gate.outputs.allowed == 'true') || steps.mode.outputs.value == 'repair' || steps.mode.outputs.value == 'correct'
         run: |
           set -euo pipefail
           if ! command -v ffmpeg >/dev/null || ! command -v ffprobe >/dev/null; then
@@ -74,6 +81,9 @@ jobs:
       - name: Crear aviso de revision
         if: steps.mode.outputs.value == 'notify'
         run: python daily/cloud.py notify
+      - name: Corregir comparar y volver a avisar el mismo dia
+        if: steps.mode.outputs.value == 'correct'
+        run: python daily/cloud.py correct
       - name: Recordatorio de publicacion aprobada a las 18 50
         if: steps.mode.outputs.value == 'remind'
         run: python daily/cloud.py remind

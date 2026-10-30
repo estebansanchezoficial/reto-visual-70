@@ -1,0 +1,202 @@
+[
+  {
+    "episode": 2,
+    "revision": 1,
+    "date": "2026-10-30",
+    "family": "color",
+    "rounds": [
+      {
+        "start": 6,
+        "mask": 13,
+        "search": 14,
+        "answer": 20,
+        "end": 25,
+        "items": [
+          [
+            "mug",
+            "amarillo"
+          ],
+          [
+            "key",
+            "verde"
+          ],
+          [
+            "heart",
+            "rosa"
+          ],
+          [
+            "umbrella",
+            "morado"
+          ]
+        ],
+        "target": "mug",
+        "new": "azul"
+      },
+      {
+        "start": 25,
+        "mask": 33,
+        "search": 34,
+        "answer": 40,
+        "end": 45,
+        "items": [
+          [
+            "star",
+            "rojo"
+          ],
+          [
+            "leaf",
+            "amarillo"
+          ],
+          [
+            "gift",
+            "morado"
+          ],
+          [
+            "mug",
+            "azul"
+          ],
+          [
+            "key",
+            "naranja"
+          ],
+          [
+            "heart",
+            "rosa"
+          ]
+        ],
+        "target": "star",
+        "new": "verde"
+      },
+      {
+        "start": 45,
+        "mask": 54,
+        "search": 55,
+        "answer": 61,
+        "end": 66,
+        "items": [
+          [
+            "clock",
+            "azul"
+          ],
+          [
+            "heart",
+            "rojo"
+          ],
+          [
+            "umbrella",
+            "naranja"
+          ],
+          [
+            "star",
+            "amarillo"
+          ],
+          [
+            "leaf",
+            "verde"
+          ],
+          [
+            "gift",
+            "morado"
+          ],
+          [
+            "key",
+            "turquesa"
+          ],
+          [
+            "mug",
+            "rosa"
+          ]
+        ],
+        "target": "clock",
+        "new": "rosa"
+      }
+    ],
+    "sha256": "66a788c6405875de551ad350c5f95d3c30782b31451e8be1829d3319fe036407",
+    "status": "SCHEDULED_LAST_VERIFIED",
+    "source": "previously verified local PROGRAMACION.json; not a live TikTok status query"
+  },
+  {
+    "episode": 3,
+    "revision": 1,
+    "date": "2026-10-31",
+    "family": "pattern",
+    "rounds": [
+      {
+        "start": 6,
+        "answer": 20,
+        "end": 25,
+        "sequence": [
+          "circle",
+          "triangle",
+          "circle",
+          "triangle"
+        ],
+        "choices": [
+          "triangle",
+          "circle",
+          "square"
+        ],
+        "correct": 1,
+        "next": "circle",
+        "rule": "alternate_circle_triangle",
+        "answer_label": "RESPUESTA B · CÍRCULO",
+        "explanation": [
+          "UN CÍRCULO, UN TRIÁNGULO",
+          "Se alternan una y otra vez."
+        ]
+      },
+      {
+        "start": 25,
+        "answer": 40,
+        "end": 45,
+        "sequence": [
+          "circle",
+          "circle",
+          "square",
+          "circle",
+          "circle"
+        ],
+        "choices": [
+          "triangle",
+          "circle",
+          "square"
+        ],
+        "correct": 2,
+        "next": "square",
+        "rule": "repeat_circle_circle_square",
+        "answer_label": "RESPUESTA C · CUADRADO",
+        "explanation": [
+          "CÍRCULO · CÍRCULO · CUADRADO",
+          "El grupo de tres se repite."
+        ]
+      },
+      {
+        "start": 45,
+        "answer": 61,
+        "end": 66,
+        "sequence": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "choices": [
+          5,
+          6,
+          4
+        ],
+        "correct": 0,
+        "next": 5,
+        "rule": "add_one_point",
+        "answer_label": "RESPUESTA A · CINCO PUNTOS",
+        "explanation": [
+          "1 · 2 · 3 · 4 · 5",
+          "Cada paso suma un punto."
+        ]
+      }
+    ],
+    "sha256": "9142409c27edb71fc8650052da35769a8bd94c70343195f5d5a463d5e7580069",
+    "status": "SCHEDULED_LAST_VERIFIED",
+    "source": "previously verified local PROGRAMACION.json; not a live TikTok status query"
+  }
+]
