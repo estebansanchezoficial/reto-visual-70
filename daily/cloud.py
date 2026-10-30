@@ -3,6 +3,7 @@ from datetime import datetime, timedelta, date
 from zoneinfo import ZoneInfo
 from pathlib import Path
 import hashlib, json, os, re, subprocess, sys
+from urllib.parse import quote, urlsplit
 
 REPO='estebansanchezoficial/reto-visual-70'
 OWNER='estebansanchezoficial'
@@ -93,11 +94,17 @@ def notify():
             api(f"repos/{REPO}/issues/{existing['number']}/comments",{'body':f"{marker}\nRevisión diaria 09:00: esta entrega sigue en {record['status']}. [Abrir video]({release['html_url']}). Fecha propuesta: {record['date']}, 19:00 Ciudad de México. Si ya venció, hace falta otra fecha antes de programar. No se ha creado otro video ni se ha publicado."})
             continue
         url=release['html_url']
+        login_url='https://github.com/login?return_to='+quote(urlsplit(url).path,safe='')
+        video_url=next((a['browser_download_url'] for a in release['assets'] if a['name']=='video.mp4'),url)
         if record['status']=='READY_FOR_REVIEW':
             sha=record['sha256']
             body=f'''<!-- {tag} -->
 {marker}
-Video listo para revisar desde el teléfono. Abre la entrega con tu sesión de GitHub e inicia **video.mp4**; contiene la voz Alex. Descarga también portada.jpg y descripcion.txt si vas a publicarlo.
+Video listo para revisar desde el teléfono. La entrega está en borrador: abre el enlace en Chrome o Safari e inicia sesión como **estebansanchezoficial en ese navegador**. La sesión de GitHub Mobile no garantiza la sesión del navegador. Si «Entregas» aparece vacío o muestra 404, comprueba primero esa cuenta; los archivos no se han borrado.
+
+**[Iniciar sesión y abrir la entrega]({login_url})** · **[Abrir o descargar video.mp4 con voz]({video_url})**
+
+Dentro de la entrega abre **Assets / Recursos** si aparece plegado. Descarga también portada.jpg y descripcion.txt si vas a publicarlo.
 
 **[Abrir entrega y video]({url})** · Fecha propuesta: **{record['date']} a las 19:00, Ciudad de México**.
 
