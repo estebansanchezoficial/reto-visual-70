@@ -1,0 +1,85 @@
+name: Prueba A - Infraestructura (manual)
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm_first_run:
+        description: 'Confirmo que es la única ejecución autorizada de la Prueba A'
+        required: true
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: prueba-a-infraestructura
+  cancel-in-progress: false
+
+jobs:
+  diagnostico:
+    if: >-
+      github.repository == 'estebansanchezoficial/reto-visual-70' &&
+      github.event.repository.private == false &&
+      github.ref == 'refs/heads/main' &&
+      github.run_attempt == 1 && inputs.confirm_first_run
+    runs-on: ubuntu-24.04
+    timeout-minutes: 2
+    steps:
+      # No checkout, setup actions, cache, artifacts, secrets or multimedia.
+      # Public repository + standard hosted runner: free under GitHub's policy.
+      # No automatic retries. A second manual dispatch needs new authorization.
+      - name: Verify tools and record infrastructure resources
+        shell: bash
+        run: |
+          set -euo pipefail
+          started=$(date +%s)
+          finish() {
+            result=$?
+            trap - EXIT
+            echo "Diagnostic wall time (seconds): $(( $(date +%s) - started ))"
+            echo 'Final system availability (not process consumption):'
+            free -b
+            df -B1 "$RUNNER_TEMP"
+            exit "$result"
+          }
+          trap finish EXIT
+          echo "Run: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          echo "Commit: $GITHUB_SHA; runner environment: $RUNNER_ENVIRONMENT"
+          test "$RUNNER_ENVIRONMENT" = github-hosted
+          cat /etc/os-release
+          test "$(. /etc/os-release; echo "$ID:$VERSION_ID")" = ubuntu:24.04
+          uname -srmo
+          echo 'Available CPU, RAM and temporary filesystem (not usage):'
+          nproc
+          lscpu
+          free -b
+          df -B1 "$RUNNER_TEMP"
+          command -v python3.12 ffmpeg ffprobe
+          test -x /usr/bin/time
+          # time -v reports child CPU time and maximum single-process RSS,
+          # not the simultaneous RAM peak of the whole runner/process tree.
+          /usr/bin/time -v bash -euo pipefail <<'DIAGNOSTIC'
+          python3.12 --version
+          python3.12 -c 'import sys; assert sys.version_info[:2] == (3, 12)'
+          if ! python3.12 -c 'import PIL; print("Existing Pillow:", PIL.__version__)'; then
+            python3.12 -m venv "$RUNNER_TEMP/prueba-a-venv"
+            source "$RUNNER_TEMP/prueba-a-venv/bin/activate"
+            python -m pip --isolated install --index-url https://pypi.org/simple \
+              --only-binary=:all: --no-deps --no-cache-dir --retries 0 --timeout 15 \
+              --disable-pip-version-check 'Pillow==12.0.0'
+          fi
+          python_cmd=$(command -v python3.12)
+          if [[ -n "${VIRTUAL_ENV:-}" ]]; then python_cmd="$VIRTUAL_ENV/bin/python"; fi
+          "$python_cmd" -c 'import sys, PIL, PIL._imaging; print("Python:", sys.version); print("Pillow:", PIL.__version__); print("Pillow native extension: OK")'
+          ffmpeg -version
+          ffprobe -version
+          # List encoders only; do not encode or generate any media.
+          ffmpeg -hide_banner -encoders | awk '/libx264/ {print; found=1} END {exit !found}'
+          echo 'Temporary venv allocated size (KiB; not peak filesystem use):'
+          if [[ -d "$RUNNER_TEMP/prueba-a-venv" ]]; then
+            du -sk "$RUNNER_TEMP/prueba-a-venv"
+          else
+            echo '0 (existing Pillow reused)'
+          fi
+          DIAGNOSTIC
