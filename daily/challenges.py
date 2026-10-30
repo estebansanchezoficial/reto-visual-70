@@ -12,10 +12,13 @@ DATA=None
 
 def fingerprint(data):
     family=data.get('family','color')
-    if family=='arithmetic':content=[(r['a'],r['op'],r['b']) for r in data['rounds']]
+    if family=='arithmetic':content=[(sorted([r['a'],r['b']]) if r['op']=='+' else [r['a'],r['b']],r['op']) for r in data['rounds']]
     elif family=='vowels':content=[r['word'] for r in data['rounds']]
-    elif family=='pattern':content=[(r['sequence'],r['next']) for r in data['rounds']]
-    else:content=[(r['items'],r['target'],r['new']) for r in data['rounds']]
+    elif family=='pattern':
+        names={'circle':'CÍRCULO','triangle':'TRIÁNGULO','square':'CUADRADO'}
+        content=[([names.get(v,v) for v in r['sequence']],names.get(r['next'],r['next'])) for r in data['rounds']]
+    else:content=[(sorted(r['items']),r['target'],r['new']) for r in data['rounds']]
+    content=sorted(content,key=lambda value:json.dumps(value,ensure_ascii=False,sort_keys=True))
     return hashlib.sha256(json.dumps([family,content],ensure_ascii=False,sort_keys=True).encode()).hexdigest()
 
 def recent_families(history,episode):

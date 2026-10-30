@@ -41,6 +41,11 @@ class CloudTests(unittest.TestCase):
         data=generate.plan('2026-11-01');older={**data,'episode':1}
         with self.assertRaises(AssertionError):challenges.compare(data,[older])
 
+    def test_reordering_rounds_is_not_a_new_video(self):
+        data=generate.plan('2026-11-01')
+        changed={**data,'rounds':list(reversed(data['rounds'])),'date':'2030-01-01'}
+        self.assertEqual(challenges.fingerprint(data),challenges.fingerprint(changed))
+
     def test_correction_changes_mechanic_and_requires_new_approval(self):
         data=generate.plan('2026-11-01',revision=2,rejected_family='color')
         self.assertNotEqual(data['family'],'color');self.assertEqual(data['revision'],2)
