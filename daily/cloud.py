@@ -35,6 +35,19 @@ def issues():
 def issue_for(tag):
     return next((i for i in issues() if f'<!-- {tag} -->' in i['body']),None)
 
+def review_url(number):
+    return f'https://github.com/{REPO}/issues/{number}'
+
+def refresh_review_links(number,before,after):
+    """Draft URLs may change when notes/state change; keep the review current."""
+    issue=json.loads(gh('issue','view',str(number),'-R',REPO,'--json','body'))
+    body=issue['body'];old=before['html_url'];new=after['html_url']
+    updated=body.replace(old,new).replace(quote(urlsplit(old).path,safe=''),quote(urlsplit(new).path,safe=''))
+    old_video=next((a['browser_download_url'] for a in before.get('assets',[]) if a['name']=='video.mp4'),None)
+    new_video=next((a['browser_download_url'] for a in after.get('assets',[]) if a['name']=='video.mp4'),None)
+    if old_video and new_video:updated=updated.replace(old_video,new_video)
+    if updated!=body:gh('issue','edit',str(number),'-R',REPO,'--body',updated)
+
 def target_date():
     return max(NOW().date()+timedelta(days=1),date(2026,11,1)).isoformat()
 
@@ -144,7 +157,7 @@ def notify():
             if record['status'] not in ['READY_FOR_REVIEW','APPROVED_PENDING_TIKTOK']:continue
             comments=api(f"repos/{REPO}/issues/{existing['number']}/comments?per_page=100")
             if marker in existing['body'] or any(marker in c['body'] for c in comments):continue
-            api(f"repos/{REPO}/issues/{existing['number']}/comments",{'body':f"{marker}\nRevisión diaria 09:00: esta entrega sigue en {record['status']}. [Abrir video]({release['html_url']}). Fecha propuesta: {record['date']}, 19:00 Ciudad de México. Si ya venció, hace falta otra fecha antes de programar. No se ha creado otro video ni se ha publicado."})
+            api(f"repos/{REPO}/issues/{existing['number']}/comments",{'body':f"{marker}\nRevisión diaria 09:00: esta entrega sigue en {record['status']}. [Abrir revisión vigente y video]({review_url(existing['number'])}). Fecha propuesta: {record['date']}, 19:00 Ciudad de México. Si ya venció, hace falta otra fecha antes de programar. No se ha creado otro video ni se ha publicado."})
             continue
         url=release['html_url']
         login_url='https://github.com/login?return_to='+quote(urlsplit(url).path,safe='')
@@ -196,7 +209,7 @@ Ejecución: {record.get('run_url','')}
             body=f"<!-- {tag} -->\nEstado: {record['status']}. No se generará otro video ni se reintentará automáticamente. Revisa [Actions](https://github.com/{REPO}/actions) antes de intervenir."
         if refresh:
             gh('issue','edit',str(existing['number']),'-R',REPO,'--title',title,'--body',body)
-            api(f"repos/{REPO}/issues/{existing['number']}/comments",{'body':f"Preparación corregida y verificada. [Abre la entrega y revisa video.mp4]({url}). El mensaje principal ya incluye la orden de aprobación con el hash exacto. No está programado ni publicado."})
+            api(f"repos/{REPO}/issues/{existing['number']}/comments",{'body':f"Preparación corregida y verificada. [Abre la revisión vigente y su video]({review_url(existing['number'])}). El mensaje principal contiene el acceso al MP4 y la orden de aprobación con el hash exacto. No está programado ni publicado."})
             print('Review notification updated:',existing['number'])
         else:
             result=api(f'repos/{REPO}/issues',{'title':title,'body':body,'assignees':[OWNER]})
@@ -220,7 +233,7 @@ def remind():
         marker=f"<!-- publish-reminder-{record['date']} -->"
         comments=api(f"repos/{REPO}/issues/{issue['number']}/comments?per_page=100")
         if any(marker in c['body'] for c in comments):continue
-        api(f"repos/{REPO}/issues/{issue['number']}/comments",{'body':f"{marker}\nAviso previo a las 19:00: este archivo está aprobado, pero falta completar la publicación/programación en TikTok desde tu teléfono, con la música nativa y el aviso de IA activado. [Abrir entrega]({release['html_url']}). Verifica primero que no esté ya programado; no duplicar la carga. Si ya lo programaste, registra aquí el enlace con la orden indicada arriba."})
+        api(f"repos/{REPO}/issues/{issue['number']}/comments",{'body':f"{marker}\nAviso previo a las 19:00: este archivo está aprobado, pero falta completar la publicación/programación en TikTok desde tu teléfono, con la música nativa y el aviso de IA activado. [Abrir revisión vigente]({review_url(issue['number'])}). Verifica primero que no esté ya programado; no duplicar la carga. Si ya lo programaste, registra aquí el enlace con la orden indicada arriba."})
 
 def comment():
     event=json.loads(Path(os.environ['GITHUB_EVENT_PATH']).read_text())
@@ -245,6 +258,8 @@ def comment():
         message='Programación declarada por el propietario y enlace guardado. No se ha verificado su estado directamente en TikTok. Se habilita la preparación siguiente.'
     else:return
     gh('release','edit',tag,'-R',REPO,'--notes',json.dumps(record))
+    refreshed=api(f"repos/{REPO}/releases/{release['id']}")
+    refresh_review_links(event['issue']['number'],release,refreshed)
     api(f"repos/{REPO}/issues/{event['issue']['number']}/comments",{'body':message})
     if record['status']=='CORRECTION_REQUESTED':
         try:gh('workflow','run','produccion-diaria.yml','-R',REPO,'--ref','main','-f','mode=correct','-f',f'correction_tag={tag}')

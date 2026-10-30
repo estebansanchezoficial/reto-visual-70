@@ -46,6 +46,19 @@ class CloudTests(unittest.TestCase):
         changed={**data,'rounds':list(reversed(data['rounds'])),'date':'2030-01-01'}
         self.assertEqual(challenges.fingerprint(data),challenges.fingerprint(changed))
 
+    def test_draft_url_change_updates_login_page_and_video(self):
+        from urllib.parse import quote,urlsplit
+        old='https://github.com/example/repo/releases/tag/untagged-old'
+        new='https://github.com/example/repo/releases/tag/untagged-new'
+        before={'html_url':old,'assets':[{'name':'video.mp4','browser_download_url':old+'/video.mp4'}]}
+        after={'html_url':new,'assets':[{'name':'video.mp4','browser_download_url':new+'/video.mp4'}]}
+        body=old+' '+old+'/video.mp4 '+quote(urlsplit(old).path,safe='')
+        with patch.object(cloud,'gh',return_value=json.dumps({'body':body})) as call:
+            cloud.refresh_review_links(4,before,after)
+            updated=call.call_args.args[-1]
+            self.assertNotIn('untagged-old',updated)
+            self.assertIn('untagged-new',updated)
+
     def test_correction_changes_mechanic_and_requires_new_approval(self):
         data=generate.plan('2026-11-01',revision=2,rejected_family='color')
         self.assertNotEqual(data['family'],'color');self.assertEqual(data['revision'],2)
@@ -54,10 +67,10 @@ class CloudTests(unittest.TestCase):
     def test_owner_correction_dispatches_immediately_without_approval(self):
         tag=cloud.PREFIX+'2026-11-01-v2'
         event={'sender':{'login':cloud.OWNER},'comment':{'id':123,'html_url':'https://example.test/comment/123','user':{'login':cloud.OWNER},'body':'CORREGIR: cambia el reto repetido y vuelve a avisarme hoy.'},'issue':{'number':4,'body':f'<!-- {tag} -->'}}
-        release={'tag_name':tag,'body':json.dumps({'status':'APPROVED_PENDING_TIKTOK','sha256':'1'*64,'approval_comment':'old'})}
+        release={'id':123,'tag_name':tag,'body':json.dumps({'status':'APPROVED_PENDING_TIKTOK','sha256':'1'*64,'approval_comment':'old'})}
         with tempfile.TemporaryDirectory() as tmp:
             path=Path(tmp)/'event.json';path.write_text(json.dumps(event))
-            with patch.dict(os.environ,{'GITHUB_EVENT_PATH':str(path)}),patch.object(cloud,'releases',return_value=[release]),patch.object(cloud,'api'),patch.object(cloud,'gh') as mutation:
+            with patch.dict(os.environ,{'GITHUB_EVENT_PATH':str(path)}),patch.object(cloud,'releases',return_value=[release]),patch.object(cloud,'api'),patch.object(cloud,'refresh_review_links'),patch.object(cloud,'gh') as mutation:
                 cloud.comment()
                 dispatch=[c.args for c in mutation.call_args_list if c.args[0]=='workflow']
                 self.assertEqual(len(dispatch),1);self.assertIn('mode=correct',dispatch[0])
