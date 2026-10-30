@@ -1,0 +1,9 @@
+Pillow==12.0.0
+numpy==2.2.6
+opencv-python-headless==4.11.0.86
+soundfile==0.14.0
+kokoro-onnx==0.6.1
+misaki[espeak]==0.9.4
+onnxruntime==1.23.2
+phonemizer==3.4.0
+espeakng-loader==0.2.4

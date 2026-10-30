@@ -1,0 +1,19 @@
+# Producción y revisión en la nube
+
+El flujo de GitHub Actions ejecuta la plantilla aprobada sin depender del ordenador del usuario. No utiliza OpenAI API, credenciales de TikTok, servicios de pago, caché ni artefactos de Actions. Usa el runner estándar `ubuntu-24.04` del repositorio público. Se detiene si el repositorio deja de ser público. El diagnóstico de infraestructura A se conserva sin cambios.
+
+Horario de Ciudad de México (UTC−6): preparación a las 08:07, aviso de revisión a las 09:00. Los horarios de GitHub son aproximados y pueden retrasarse. La entrega es para el día siguiente, como mínimo el 1 de noviembre de 2026 para proteger los videos 001–003 ya tratados.
+
+Las entregas se almacenan en **releases en borrador**, visibles al propietario autenticado, y los avisos en issues asignadas a `estebansanchezoficial`. Los gráficos mínimos de la plantilla y el código sí forman parte del repositorio público. Los archivos no contienen credenciales. Los modelos se descargan de la publicación oficial de kokoro-onnx y se verifican por SHA-256 en cada ejecución. Alex es TTS genérico `em_alex`; no se importa ni modifica el proyecto YouTube. Las licencias están en assets/licenses.
+
+En el teléfono: iniciar sesión en GitHub con la misma cuenta, permitir notificaciones de GitHub Mobile y recibir asignaciones/participación. Abrir el issue, seguir el enlace a la entrega, ver o descargar `video.mp4` y comentar la orden de aprobación con el hash que aparece allí. La revisión técnica no sustituye la revisión visual y auditiva del propietario. El aviso enviado no demuestra que Android/iOS haya mostrado una notificación; los permisos del teléfono se comprueban allí.
+
+Solo se acepta aprobación del propietario, para el SHA-256 exacto, después de volver a descargar y verificar el MP4. `CORREGIR:` bloquea la entrega para revisión manual. La aprobación registra `APPROVED_PENDING_TIKTOK`; **no sube, programa ni publica**. TikTok mantiene la música Inside Algorithm — Cool Ember Sync en su editor nativo; no se redistribuye la pista. Usar -24 dB, fundidos de 1/2 segundos y el aviso de IA activado; verificar la disponibilidad de la pista.
+
+No existe conexión autorizada de publicación TikTok en este flujo. El paso restante se realiza desde TikTok/TikTok Studio o un proveedor compatible autorizado. La API Direct Post requiere una integración auditada y no admite una utilidad privada interna como destino de uso. Incluso proveedores como Buffer indican que el uso de música nativa necesita completar el envío en la aplicación mediante notificación.
+
+Después de programar realmente, el propietario puede comentar `REGISTRAR_PROGRAMADO <sha256> https://www.tiktok.com/@retovisual70/video/<id>`. Se guarda como declaración del propietario, no como comprobación directa de TikTok. Esto libera la preparación siguiente. Una fecha vencida no se traslada automáticamente. No hay reintentos automáticos ni acumulación de videos: una entrega pendiente, aprobada sin programar, fallida o con correcciones bloquea otra generación.
+
+El run de producción está limitado a 20 minutos; el de revisión a 3 minutos. Se serializan para evitar carreras y duplicados. Ante un fallo se conserva una reserva de fecha y se pide intervención. Revisar el run y la entrega antes de un despacho manual; nunca borrar la reserva para reintentar sin reconciliar lo existente.
+
+Fuentes: https://docs.github.com/en/billing/concepts/product-billing/github-actions · https://docs.github.com/en/subscriptions-and-notifications/get-started/configuring-notifications · https://developers.tiktok.com/docs/en/content-sharing-guidelines · https://support.buffer.com/en-us/articles/using-tiktok-with-buffer-oGEroY9Of2

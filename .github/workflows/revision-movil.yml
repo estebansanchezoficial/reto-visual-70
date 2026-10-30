@@ -1,0 +1,21 @@
+name: Reto Visual 70 - Aprobacion desde telefono
+on:
+  issue_comment:
+    types: [created]
+permissions:
+  contents: write
+  issues: write
+concurrency:
+  group: rv70-cloud-review
+  cancel-in-progress: false
+jobs:
+  registrar:
+    if: github.event.comment.user.login == 'estebansanchezoficial' && !github.event.issue.pull_request
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - name: Registrar decision del propietario sin publicar
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 daily/cloud.py comment
