@@ -6,7 +6,8 @@ import numpy as np
 import second_video as video
 
 FAMILIES=['arithmetic','vowels','color','pattern']
-WORDS=['CAMINO','VENTANA','MARIPOSA','BIBLIOTECA','TELEFONO','CARACOL','UNIVERSO','PRIMAVERA','ELEFANTE','CHOCOLATE','MURCIELAGO','CUADERNO','ESTRELLA','PLANETA','SEMILLA','GIRASOL','ESCUELA','AEROPUERTO','AVENTURA','NATURALEZA','CARRETERA','MONEDA','ESTUDIANTE','ROMPECABEZAS']
+WORDS=['CAMINO','VENTANA','MARIPOSA','BIBLIOTECA','TELÉFONO','CARACOL','UNIVERSO','PRIMAVERA','ELEFANTE','CHOCOLATE','MURCIÉLAGO','CUADERNO','ESTRELLA','PLANETA','SEMILLA','GIRASOL','ESCUELA','AEROPUERTO','AVENTURA','NATURALEZA','CARRETERA','MONEDA','ESTUDIANTE','ROMPECABEZAS']
+VOWELS='AEIOUÁÉÍÓÚÜ'
 TITLES={'arithmetic':'¿CUÁNTO DA?','vowels':'¿CUÁNTAS VOCALES?','pattern':'¿QUÉ FIGURA SIGUE?'}
 DATA=None
 
@@ -48,8 +49,8 @@ def make_rounds(family,rng):
             expected=a+b if op=='+' else a-b
             r.update(a=a,b=b,op=op,next=expected,explanation=f'{a} {op} {b} = {expected}')
         elif family=='vowels':
-            word=used_words[i];expected=sum(c in 'AEIOU' for c in word)
-            r.update(word=word,next=expected,explanation=' · '.join(c for c in word if c in 'AEIOU'))
+            word=used_words[i];expected=sum(c in VOWELS for c in word)
+            r.update(word=word,next=expected,explanation=' · '.join(c for c in word if c in VOWELS))
         elif family=='pattern':
             a,b,c=rng.sample(['CÍRCULO','TRIÁNGULO','CUADRADO'],3)
             pattern=[a,b] if i==0 else ([a,a,b] if i==1 else [a,b,c])
@@ -65,7 +66,7 @@ def make_rounds(family,rng):
 def validate(data):
     for r in data['rounds']:
         if data['family']=='arithmetic':expected=r['a']+r['b'] if r['op']=='+' else r['a']-r['b']
-        elif data['family']=='vowels':expected=sum(c in 'AEIOU' for c in r['word'])
+        elif data['family']=='vowels':expected=sum(c in VOWELS for c in r['word'])
         elif data['family']=='pattern':
             assert r['sequence']==[r['pattern'][i%len(r['pattern'])] for i in range(len(r['sequence']))]
             expected=r['pattern'][len(r['sequence'])%len(r['pattern'])]

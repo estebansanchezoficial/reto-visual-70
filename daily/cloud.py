@@ -153,6 +153,8 @@ def notify():
             sha=record['sha256']
             body=f'''<!-- {tag} -->
 {marker}
+**Versión vigente: v{record.get('revision',1)} · Dinámica: { {'arithmetic':'cálculos','vowels':'vocales en palabras','pattern':'secuencias de figuras','color':'memoria de colores'}.get(record.get('family','color'),record.get('family'))}**
+
 Video listo para revisar desde el teléfono. La entrega está en borrador: abre el enlace en Chrome o Safari e inicia sesión como **estebansanchezoficial en ese navegador**. La sesión de GitHub Mobile no garantiza la sesión del navegador. Si «Entregas» aparece vacío o muestra 404, comprueba primero esa cuenta; los archivos no se han borrado.
 
 **[Iniciar sesión y abrir la entrega]({login_url})** · **[Abrir o descargar video.mp4 con voz]({video_url})**
@@ -175,6 +177,8 @@ Para pedir cambios, copia y completa:
 
 La orden inicia una corrección en la nube en cuanto se recibe, sin esperar al aviso de las 09:00. La nueva versión pasa comparación con videos anteriores, render y verificación antes de avisarte en este mismo hilo. La aprobación anterior queda anulada. Si la ejecución falla o el cambio necesita intervención, recibirás el aviso de bloqueo ese mismo día; no se marcará como corregido sin evidencia.
 
+El corrector automático actual cambia el contenido y la dinámica del acertijo. Cambios de voz, avatar, animación o encuadre requieren intervención y generan un aviso; no se considerarán aplicados automáticamente.
+
 La aprobación registra tu decisión; **no significa que esté programado en TikTok**. La música nativa se añade en TikTok: Inside Algorithm — Cool Ember Sync, suave (-24 dB), entrada 1 s y salida 2 s. Mantener activado «Creado por IA». La disponibilidad de la canción debe comprobarse allí.
 
 Después de programarlo realmente, registra el enlace de TikTok con:
@@ -186,7 +190,7 @@ El sistema bloqueará otro video mientras esta entrega siga pendiente. Si la fec
 SHA-256: `{sha}`
 Ejecución: {record.get('run_url','')}
 '''
-            title=f"Revisar video — {record['date']} · Reto Visual 70"
+            title=f"Revisar video v{record.get('revision',1)} — {record['date']} · Reto Visual 70"
         else:
             title=f"Atención: preparación {record['date']} · Reto Visual 70"
             body=f"<!-- {tag} -->\nEstado: {record['status']}. No se generará otro video ni se reintentará automáticamente. Revisa [Actions](https://github.com/{REPO}/actions) antes de intervenir."
