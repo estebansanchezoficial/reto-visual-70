@@ -34,6 +34,12 @@ class CloudTests(unittest.TestCase):
             with self.assertRaises(AssertionError):cloud.prepare()
             mutation.assert_not_called()
 
+    def test_repair_cannot_replace_an_uploaded_video(self):
+        reserved={'tag_name':cloud.PREFIX+cloud.target_date()+'-v1','body':json.dumps({'status':'FAILED_NEEDS_REVIEW'}),'assets':[{'name':'video.mp4'}]}
+        with patch.object(cloud,'api',return_value={'private':False}),patch.object(cloud,'releases',return_value=[reserved]),patch.object(cloud,'gh') as mutation:
+            with self.assertRaises(AssertionError):cloud.prepare(repair=True)
+            mutation.assert_not_called()
+
     def test_non_owner_comment_has_no_effect(self):
         with tempfile.TemporaryDirectory() as tmp:
             event=Path(tmp)/'event.json';event.write_text(json.dumps({'sender':{'login':'someone-else'}}))

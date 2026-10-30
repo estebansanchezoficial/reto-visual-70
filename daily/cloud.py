@@ -36,17 +36,24 @@ def issue_for(tag):
 def target_date():
     return max(NOW().date()+timedelta(days=1),date(2026,11,1)).isoformat()
 
-def prepare():
+def prepare(repair=False):
     repo=api(f'repos/{REPO}')
     assert repo['private'] is False, 'Stop: free public-runner condition changed'
     current=releases()
-    # Keep one package until scheduling is explicitly reported. No backlog/retries.
-    if any(state(r)['status']!='SCHEDULED_USER_REPORTED' for r in current):
-        print('Existing unresolved package: no generation or retry.');return
     day=target_date();tag=PREFIX+day+'-v1'
-    if any(r['tag_name']==tag for r in current):print('Date already reserved.');return
     record={'status':'PREPARING','date':day,'scheduled':False,'published':False}
-    gh('release','create',tag,'-R',REPO,'--draft','--target','main','--title',f'Reto Visual 70 — revisión {day}','--notes',json.dumps(record))
+    if repair:
+        reserved=next((r for r in current if r['tag_name']==tag),None)
+        assert reserved and state(reserved)['status']=='FAILED_NEEDS_REVIEW' and not reserved['assets'], 'Repair requires a reviewed failed reservation with no uploaded assets'
+        assert all(r['tag_name']==tag or state(r)['status']=='SCHEDULED_USER_REPORTED' for r in current)
+        record['manual_repair_run']=os.environ.get('RUN_URL')
+        gh('release','edit',tag,'-R',REPO,'--notes',json.dumps(record))
+    else:
+        # Keep one package until scheduling is explicitly reported. No backlog/retries.
+        if any(state(r)['status']!='SCHEDULED_USER_REPORTED' for r in current):
+            print('Existing unresolved package: no generation or retry.');return
+        if any(r['tag_name']==tag for r in current):print('Date already reserved.');return
+        gh('release','create',tag,'-R',REPO,'--draft','--target','main','--title',f'Reto Visual 70 — revisión {day}','--notes',json.dumps(record))
     try:
         subprocess.run([sys.executable,str(ROOT/'daily/prepare_models.py')],check=True)
         subprocess.run([sys.executable,str(ROOT/'daily/generate.py'),'--date',day],check=True)
@@ -69,11 +76,21 @@ def prepare():
 def notify():
     for release in releases():
         record=state(release);tag=release['tag_name']
-        if record['status']=='SCHEDULED_USER_REPORTED' or issue_for(tag):continue
+        if record['status']=='SCHEDULED_USER_REPORTED':continue
+        existing=issue_for(tag)
+        refresh=existing and record['status']=='READY_FOR_REVIEW' and record['sha256'] not in existing['body']
+        marker=f'<!-- notice-{NOW().date().isoformat()} -->'
+        if existing and not refresh:
+            if record['status'] not in ['READY_FOR_REVIEW','APPROVED_PENDING_TIKTOK']:continue
+            comments=api(f"repos/{REPO}/issues/{existing['number']}/comments?per_page=100")
+            if marker in existing['body'] or any(marker in c['body'] for c in comments):continue
+            api(f"repos/{REPO}/issues/{existing['number']}/comments",{'body':f"{marker}\nRevisión diaria 09:00: esta entrega sigue en {record['status']}. [Abrir video]({release['html_url']}). Fecha propuesta: {record['date']}, 19:00 Ciudad de México. Si ya venció, hace falta otra fecha antes de programar. No se ha creado otro video ni se ha publicado."})
+            continue
         url=release['html_url']
         if record['status']=='READY_FOR_REVIEW':
             sha=record['sha256']
             body=f'''<!-- {tag} -->
+{marker}
 Video listo para revisar desde el teléfono. Abre la entrega con tu sesión de GitHub e inicia **video.mp4**; contiene la voz Alex. Descarga también portada.jpg y descripcion.txt si vas a publicarlo.
 
 **[Abrir entrega y video]({url})** · Fecha propuesta: **{record['date']} a las 19:00, Ciudad de México**.
@@ -101,8 +118,32 @@ Ejecución: {record.get('run_url','')}
         else:
             title=f"Atención: preparación {record['date']} · Reto Visual 70"
             body=f"<!-- {tag} -->\nEstado: {record['status']}. No se generará otro video ni se reintentará automáticamente. Revisa [Actions](https://github.com/{REPO}/actions) antes de intervenir."
-        result=api(f'repos/{REPO}/issues',{'title':title,'body':body,'assignees':[OWNER]})
-        print('Review notification:',result['html_url'])
+        if refresh:
+            gh('issue','edit',str(existing['number']),'-R',REPO,'--title',title,'--body',body)
+            api(f"repos/{REPO}/issues/{existing['number']}/comments",{'body':f"Preparación corregida y verificada. [Abre la entrega y revisa video.mp4]({url}). El mensaje principal ya incluye la orden de aprobación con el hash exacto. No está programado ni publicado."})
+            print('Review notification updated:',existing['number'])
+        else:
+            result=api(f'repos/{REPO}/issues',{'title':title,'body':body,'assignees':[OWNER]})
+            print('Review notification:',result['html_url'])
+
+def failure_notice():
+    # Also covers dependency/download failures before a release reservation exists.
+    notify()
+    marker=f'<!-- rv70-cloud-failure-{NOW().date().isoformat()} -->'
+    if any(marker in i['body'] for i in issues()):return
+    url=os.environ.get('RUN_URL',f'https://github.com/{REPO}/actions')
+    api(f'repos/{REPO}/issues',{'title':'Atención: fallo de producción en nube · Reto Visual 70','body':f'{marker}\nLa ejecución no terminó correctamente. [Revisar el fallo]({url}). No se reintentará automáticamente ni se programó un video. Reconciliar cualquier entrega existente antes de intervenir.','assignees':[OWNER]})
+
+def remind():
+    for release in releases():
+        record=state(release)
+        if record['status']!='APPROVED_PENDING_TIKTOK' or record['date']!=NOW().date().isoformat():continue
+        issue=issue_for(release['tag_name'])
+        if not issue:continue
+        marker=f"<!-- publish-reminder-{record['date']} -->"
+        comments=api(f"repos/{REPO}/issues/{issue['number']}/comments?per_page=100")
+        if any(marker in c['body'] for c in comments):continue
+        api(f"repos/{REPO}/issues/{issue['number']}/comments",{'body':f"{marker}\nAviso previo a las 19:00: este archivo está aprobado, pero falta completar la publicación/programación en TikTok desde tu teléfono, con la música nativa y el aviso de IA activado. [Abrir entrega]({release['html_url']}). Verifica primero que no esté ya programado; no duplicar la carga. Si ya lo programaste, registra aquí el enlace con la orden indicada arriba."})
 
 def comment():
     event=json.loads(Path(os.environ['GITHUB_EVENT_PATH']).read_text())
@@ -131,4 +172,4 @@ def comment():
 
 if __name__=='__main__':
     assert os.environ.get('GITHUB_REPOSITORY',REPO)==REPO
-    {'prepare':prepare,'notify':notify,'comment':comment}[sys.argv[1]]()
+    {'prepare':prepare,'repair':lambda:prepare(repair=True),'notify':notify,'comment':comment,'failure':failure_notice,'remind':remind}[sys.argv[1]]()

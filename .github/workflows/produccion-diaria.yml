@@ -3,12 +3,13 @@ on:
   schedule:
     - cron: '7 14 * * *'
     - cron: '0 15 * * *'
+    - cron: '50 0 * * *'
   workflow_dispatch:
     inputs:
       mode:
         description: Preparar o enviar revision existente (no publica)
         type: choice
-        options: [prepare, notify]
+        options: [prepare, notify, remind, repair]
         required: true
         default: prepare
 permissions:
@@ -38,23 +39,38 @@ jobs:
           INPUT_MODE: ${{ inputs.mode }}
           CRON: ${{ github.event.schedule }}
         run: |
-          if [ "$CRON" = '0 15 * * *' ] || [ "$INPUT_MODE" = 'notify' ]; then
+          if [ "$CRON" = '50 0 * * *' ] || [ "$INPUT_MODE" = 'remind' ]; then
+            echo 'value=remind' >> "$GITHUB_OUTPUT"
+          elif [ "$CRON" = '0 15 * * *' ] || [ "$INPUT_MODE" = 'notify' ]; then
             echo 'value=notify' >> "$GITHUB_OUTPUT"
+          elif [ "$INPUT_MODE" = 'repair' ]; then
+            echo 'value=repair' >> "$GITHUB_OUTPUT"
           else
             echo 'value=prepare' >> "$GITHUB_OUTPUT"
           fi
       - name: Dependencias gratuitas de produccion
-        if: steps.mode.outputs.value == 'prepare'
+        if: steps.mode.outputs.value == 'prepare' || steps.mode.outputs.value == 'repair'
         run: |
-          ffmpeg -version | head -n 1
-          ffprobe -version | head -n 1
+          set -euo pipefail
+          if ! command -v ffmpeg >/dev/null || ! command -v ffprobe >/dev/null; then
+            timeout 180s sudo apt-get update -qq
+            timeout 180s sudo apt-get install -y --no-install-recommends ffmpeg
+          fi
+          ffmpeg -version
+          ffprobe -version
           python -m pip install -r daily/requirements.txt
       - name: Preparar y verificar entrega
         if: steps.mode.outputs.value == 'prepare'
         run: python daily/cloud.py prepare
+      - name: Reparacion manual de reserva fallida sin archivos
+        if: steps.mode.outputs.value == 'repair'
+        run: python daily/cloud.py repair
       - name: Crear aviso de revision
         if: steps.mode.outputs.value == 'notify'
         run: python daily/cloud.py notify
+      - name: Recordatorio de publicacion aprobada a las 18 50
+        if: steps.mode.outputs.value == 'remind'
+        run: python daily/cloud.py remind
       - name: Avisar fallo sin reintentar
         if: failure()
-        run: python daily/cloud.py notify
+        run: python daily/cloud.py failure

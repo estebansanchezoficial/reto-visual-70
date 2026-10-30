@@ -2,7 +2,7 @@
 
 El flujo de GitHub Actions ejecuta la plantilla aprobada sin depender del ordenador del usuario. No utiliza OpenAI API, credenciales de TikTok, servicios de pago, caché ni artefactos de Actions. Usa el runner estándar `ubuntu-24.04` del repositorio público. Se detiene si el repositorio deja de ser público. El diagnóstico de infraestructura A se conserva sin cambios.
 
-Horario de Ciudad de México (UTC−6): preparación a las 08:07, aviso de revisión a las 09:00. Los horarios de GitHub son aproximados y pueden retrasarse. La entrega es para el día siguiente, como mínimo el 1 de noviembre de 2026 para proteger los videos 001–003 ya tratados.
+Horario de Ciudad de México (UTC−6): preparación a las 08:07, aviso de revisión a las 09:00. Si hay un archivo aprobado pendiente de TikTok para ese mismo día, se envía un recordatorio a las 18:50. Los horarios de GitHub son aproximados y pueden retrasarse. La entrega es para el día siguiente, como mínimo el 1 de noviembre de 2026 para proteger los videos 001–003 ya tratados. Si ya hay una entrega pendiente, el aviso de las 09:00 la recuerda como máximo una vez por día y no crea otro video.
 
 Las entregas se almacenan en **releases en borrador**, visibles al propietario autenticado, y los avisos en issues asignadas a `estebansanchezoficial`. Los gráficos mínimos de la plantilla y el código sí forman parte del repositorio público. Los archivos no contienen credenciales. Los modelos se descargan de la publicación oficial de kokoro-onnx y se verifican por SHA-256 en cada ejecución. Alex es TTS genérico `em_alex`; no se importa ni modifica el proyecto YouTube. Las licencias están en assets/licenses.
 
