@@ -46,4 +46,13 @@ class CloudTests(unittest.TestCase):
             with patch.dict(os.environ,{'GITHUB_EVENT_PATH':str(event)}),patch.object(cloud,'gh') as mutation:
                 cloud.comment();mutation.assert_not_called()
 
+    def test_owner_cannot_approve_a_different_hash(self):
+        tag=cloud.PREFIX+'2026-11-01-v1'
+        event={'sender':{'login':cloud.OWNER},'comment':{'user':{'login':cloud.OWNER},'body':'APROBAR '+'0'*64},'issue':{'number':4,'body':f'<!-- {tag} -->'}}
+        release={'tag_name':tag,'body':json.dumps({'status':'READY_FOR_REVIEW','sha256':'1'*64})}
+        with tempfile.TemporaryDirectory() as tmp:
+            path=Path(tmp)/'event.json';path.write_text(json.dumps(event))
+            with patch.dict(os.environ,{'GITHUB_EVENT_PATH':str(path)}),patch.object(cloud,'releases',return_value=[release]),patch.object(cloud,'gh') as mutation:
+                cloud.comment();mutation.assert_not_called()
+
 if __name__=='__main__':unittest.main()

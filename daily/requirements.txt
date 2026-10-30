@@ -7,3 +7,4 @@ misaki[espeak]==0.9.4
 onnxruntime==1.23.2
 phonemizer==3.4.0
 espeakng-loader==0.2.4
+tzdata==2025.2

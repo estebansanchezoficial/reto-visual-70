@@ -10,7 +10,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   registrar:
-    if: github.event.comment.user.login == 'estebansanchezoficial' && !github.event.issue.pull_request
+    if: github.event.repository.private == false && github.event.comment.user.login == 'estebansanchezoficial' && !github.event.issue.pull_request
     runs-on: ubuntu-24.04
     timeout-minutes: 3
     steps:
