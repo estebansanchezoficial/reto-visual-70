@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       confirm_first_run:
-        description: 'Confirmo que es la única ejecución autorizada de la Prueba A'
+        description: 'Confirmo autorización explícita para esta ejecución manual de la Prueba A'
         required: true
         type: boolean
         default: false
@@ -55,7 +55,30 @@ jobs:
           lscpu
           free -b
           df -B1 "$RUNNER_TEMP"
-          command -v python3.12 ffmpeg ffprobe
+          # Check every executable independently: command -v with several names
+          # can succeed when only one exists.
+          for tool in python3.12 timeout sudo; do
+            command -v "$tool" || { echo "Missing required tool: $tool" >&2; exit 127; }
+          done
+          if ! command -v ffmpeg >/dev/null || ! command -v ffprobe >/dev/null; then
+            echo 'Installing Ubuntu ffmpeg package (includes ffprobe); no media processing.'
+            install_started=$(date +%s)
+            # One bounded attempt, using the runner's configured Ubuntu repositories.
+            # Leave time for Pillow and verification within the unchanged 2-minute job.
+            timeout --kill-after=5s 75s sudo -n env DEBIAN_FRONTEND=noninteractive \
+              bash -euo pipefail <<'INSTALL'
+          apt_options=(-o Acquire::Retries=0 -o Acquire::http::Timeout=10
+                       -o Acquire::https::Timeout=10 -o DPkg::Lock::Timeout=5)
+          apt-get "${apt_options[@]}" -o APT::Update::Error-Mode=any update
+          apt-get "${apt_options[@]}" install -y --no-install-recommends ffmpeg
+          INSTALL
+            echo "FFmpeg installation wall time (seconds): $(( $(date +%s) - install_started ))"
+          else
+            echo 'Existing FFmpeg and FFprobe reused.'
+          fi
+          for tool in python3.12 ffmpeg ffprobe; do
+            command -v "$tool" || { echo "Missing required tool: $tool" >&2; exit 127; }
+          done
           test -x /usr/bin/time
           # time -v reports child CPU time and maximum single-process RSS,
           # not the simultaneous RAM peak of the whole runner/process tree.
