@@ -1,0 +1,16 @@
+name: Reto Visual 70 - Verificar conexion Buffer sin publicar
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verificar:
+    if: github.repository == 'estebansanchezoficial/reto-visual-70' && github.event.repository.private == false
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verificar cuenta canal y permisos sin crear publicaciones
+        env:
+          BUFFER_API_KEY: ${{ secrets.BUFFER_API_KEY }}
+        run: python3 daily/buffer_api.py
