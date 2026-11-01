@@ -30,6 +30,6 @@ Para corregir antes de programar: CORREGIR: [qué cambiar]. Corrígelo y vuelve 
 
 35pruebaslocalesPASS. Conexión y pruebas Linux: https://github.com/estebansanchezoficial/reto-visual-70/actions/runs/41341309387 . Borrador técnicoMP4/IA/statusdraft: https://github.com/estebansanchezoficial/reto-visual-70/actions/runs/41340856575 . Esa prueba no programó ni publicó. Borrador técnico retirado después: https://github.com/estebansanchezoficial/reto-visual-70/actions/runs/41357405881 .
 
-Primera programación real pendiente de aprobar005v3: de7f410f46eb2088043cc87f1f4fb337545689845abe8fbb933986f30d2a4d55, propuesto2nov2026 a19:00CDMX. V1/V2superseded. Video004 ya tenía programación nativa previa: no reenviarlo. No afirmar que la publicación real ya se probó.
+Primera programación real comprobada:005v3, SHA de7f410f46eb2088043cc87f1f4fb337545689845abe8fbb933986f30d2a4d55, para2nov2026 a19:00CDMX. Workflow automático SUCCESS https://github.com/estebansanchezoficial/reto-visual-70/actions/runs/41359771979. ID Buffer6ae7c432902c3fb1dec07c14; API y panel confirman una publicación scheduled, archivo/IA/crédito/fecha. Issue5 cerrado. Aún no publicado; comprobar resultado después de la hora. V1/V2superseded. Video004 conserva su programación nativa anterior; no reenviar ninguno.
 
 Fuentes: https://developers.buffer.com/guides/hosting-media · https://developers.buffer.com/guides/posts-and-scheduling.html · https://buffer.com/pricing · https://creativecommons.org/licenses/by/4.0/
