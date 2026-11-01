@@ -30,7 +30,7 @@ def preflight():
     orgs = query('query { account { organizations { id } } }')['account']['organizations']
     matches = []
     for org in orgs:
-        channels = query('query($org: OrganizationId!) { channels(input:{organizationId:$org}) { id name displayName service isQueuePaused authorizationStatus { feature status reason } } }', {'org': org['id']})['channels']
+        channels = query('query($org: OrganizationId!) { channels(input:{organizationId:$org}) { id name displayName service isQueuePaused } }', {'org': org['id']})['channels']
         for channel in channels:
             if channel['id'] == CHANNEL_ID:
                 matches.append((org['id'], channel))
@@ -44,6 +44,9 @@ def preflight():
     result = {'status':'CONNECTION_READ_VERIFIED', 'organization_id':org_id, 'channel':channel,
               'published':False, 'scheduled':False, 'publishing_enabled':False}
     print(json.dumps(result, ensure_ascii=False))
+    for name in ['CreatePostInput','PostInputMetaData','TikTokPostMetadataInput','PostInput','Post','PostStatus']:
+        schema = query('query($name:String!) { __type(name:$name) { name inputFields { name type { name kind ofType { name kind } } } fields { name type { name kind ofType { name kind } } } enumValues { name } } }', {'name':name})
+        print(json.dumps(schema))
     return result
 
 
