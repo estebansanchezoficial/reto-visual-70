@@ -1,0 +1,24 @@
+name: Reto Visual 70 - Comprobar resultado Buffer sin reenviar
+on:
+  schedule:
+    - cron: '25 1 * * *'
+    - cron: '25 2 * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+  issues: write
+concurrency:
+  group: rv70-cloud-review
+  cancel-in-progress: false
+jobs:
+  comprobar:
+    if: github.repository == 'estebansanchezoficial/reto-visual-70' && github.event.repository.private == false && vars.RV70_BUFFER_ENABLED == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - name: Consultar estado y avisar solo cambios accionables
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BUFFER_API_KEY: ${{ secrets.BUFFER_API_KEY }}
+        run: python3 daily/publish.py reconcile

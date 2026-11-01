@@ -42,7 +42,7 @@ def preflight(schema=False):
     if channel['isQueuePaused']:
         raise RuntimeError('Buffer queue is paused')
     result = {'status':'CONNECTION_READ_VERIFIED', 'organization_id':org_id, 'channel':channel,
-              'published':False, 'scheduled':False, 'publishing_enabled':False}
+              'published':False, 'scheduled':False, 'mutation_performed':False}
     print(json.dumps(result, ensure_ascii=False))
     if schema:
         for name in ['CreatePostInput','PostInputMetaData','TikTokPostMetadataInput','PostInput','Post','PostStatus']:

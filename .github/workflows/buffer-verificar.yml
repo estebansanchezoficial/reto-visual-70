@@ -15,6 +15,8 @@ jobs:
     timeout-minutes: 3
     steps:
       - uses: actions/checkout@v4
+      - name: Comprobar limites de aprobacion y envio
+        run: python3 -m unittest discover -s tests -p test_buffer.py
       - name: Verificar cuenta canal y permisos sin crear publicaciones
         env:
           BUFFER_API_KEY: ${{ secrets.BUFFER_API_KEY }}

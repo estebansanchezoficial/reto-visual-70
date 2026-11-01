@@ -2,6 +2,24 @@
 
 ## Decisión vigente — 1 noviembre 2026
 
+## Conexión Buffer comprobada y envío preparado
+
+Cuenta Free $0 sin prueba de pago, canal retovisual70, channelId 6ae78a17e29c69a1712b879a, organización 6ae7877f176d1861e6dbc27a. Correo verificado. Clave exclusiva BUFFER_API_KEY en GitHub Secrets, vence 1 noviembre2027; solo account:read/posts:read/posts:write. Los permisos TikTok adicionales fueron autorizados por el propietario; la clave de nuestra automatización no permite comentarios, analíticas ni cambios de cuenta. No exponer claves en código/logs/chat.
+
+La comprobación de conexión cloud terminó SUCCESS: https://github.com/estebansanchezoficial/reto-visual-70/actions/runs/41340559597 . La primera comprobación falló por un campo de consulta no admitido, corregido antes de la ejecución exitosa; no fue un intento de publicación.
+
+La prueba de borrador técnico terminó SUCCESS: https://github.com/estebansanchezoficial/reto-visual-70/actions/runs/41340856575 . Fixture de4s con música licenciada; Buffer conserva status draft, isAiGenerated true y URL del MP4. ID 6ae790131e69de2cfc10913e. No programado ni publicado. Esto comprueba creación y lectura de borrador; NO prueba todavía programación/publicación de un video real.
+
+Envío en daily/publish.py, activación controlada por variable RV70_BUFFER_ENABLED. Tras APROBAR sha exacto del propietario, verificar comentario vigente, descargar/verificar paquete, reservar estado antes de cualquier envío, crear una copia pública SOLO del archivo aprobado en release rv70-publish-SHA para que Buffer pueda obtenerlo, verificar descarga pública por SHA, crear UNA publicación customScheduled19:00CDMX con avisoIA y crédito, releer ID/fecha/URL/etiqueta/modo. Ante respuesta ambigua, BUFFER_NEEDS_RECONCILIATION y aviso, sin reintentos de envío. Corregir genera otrohash y requiere aprobación nueva. No se envía si quedan menos15min para19:00; pedir otrafecha.
+
+Los borradores de revisión permanecen privados. La distribución pública del MP4 final empieza después de su aprobación para publicar; no convertir el release privado en público. No usar enlaces firmados que caduquen. La aceptación definitiva del envío programado por esta ruta debe comprobarse en el primer archivo real aprobado.
+
+buffer-reconciliar.yml consulta a19:25y20:25CDMX (cron best effort), nunca reenvía. Solo avisa en cambios accionables; status sent con externalLink se registra PUBLISHED_REPORTED_BUFFER, evidencia API, sin fingir comprobación visual de TikTok. Guardar siempre el ID antes de la relectura. El objetivo y horarios del canal están en7/semana, lunes-domingo19:00MexicoCity.
+
+La primera programación real sigue pendiente de la aprobación de005v3, SHA de7f410f46eb2088043cc87f1f4fb337545689845abe8fbb933986f30d2a4d55. No reutilizar la aprobación del005v1 ni tocar004 programado previamente.
+
+## Antecedente de preparación (estado anterior)
+
 El usuario autorizó una pista gratuita alternativa con licencia comprobable al no acreditarse una fuente autorizada para integrar Inside Algorithm. Se descargó Cipher — Kevin MacLeod, ISRC USUAN1100844, desde el compositor. Su ficha indica CC BY 4.0; archivo y atribución constan en assets/music/license.json. La licencia permite copia y adaptación comercial con crédito, vínculo a la licencia y declaración de cambios. No atribuir esta licencia a la canción anterior.
 
 La generación futura mezcla automáticamente Cipher a -24 dB, entrada 1 s y salida 2 s, después de verificar el máster de voz. Verifica decodificación, duración, imágenes idénticas, presencia de voz y pico sin saturación. El hash final corresponde al MP4 con música. La descripción incorpora el crédito obligatorio. La mezcla necesita revisión subjetiva del propietario; cambiar audio invalida cualquier aprobación del hash anterior.

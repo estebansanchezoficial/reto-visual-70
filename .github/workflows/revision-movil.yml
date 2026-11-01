@@ -19,4 +19,5 @@ jobs:
       - name: Registrar decision del propietario sin publicar
         env:
           GH_TOKEN: ${{ github.token }}
+          RV70_BUFFER_ENABLED: ${{ vars.RV70_BUFFER_ENABLED }}
         run: python3 daily/cloud.py comment

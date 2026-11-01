@@ -19,6 +19,8 @@ jobs:
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
+      - name: Comprobar limites de aprobacion y envio
+        run: python3 -m unittest discover -s tests -p test_buffer.py
       - name: Validar aprobacion reservar y programar una vez
         env:
           GH_TOKEN: ${{ github.token }}

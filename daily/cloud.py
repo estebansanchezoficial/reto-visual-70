@@ -8,7 +8,7 @@ from urllib.parse import quote, urlsplit
 REPO='estebansanchezoficial/reto-visual-70'
 OWNER='estebansanchezoficial'
 PREFIX='rv70-review-'
-TERMINAL={'SCHEDULED_USER_REPORTED','SCHEDULED_VERIFIED_TIKTOK','SUPERSEDED'}
+TERMINAL={'SCHEDULED_USER_REPORTED','SCHEDULED_VERIFIED_TIKTOK','SUPERSEDED','SCHEDULED_VERIFIED_BUFFER','PUBLISHED_REPORTED_BUFFER','BUFFER_SENT_PENDING_URL'}
 ROOT=Path(__file__).resolve().parent.parent
 OUT=ROOT/'output/current'
 NOW=lambda:datetime.now(ZoneInfo('America/Mexico_City'))
@@ -183,7 +183,8 @@ def notify():
         record=state(release);tag=release['tag_name']
         if record['status'] in TERMINAL:continue
         existing=issue_for(tag) or next((i for i in issues() if i['number']==record.get('review_issue')),None)
-        refresh=existing and record['status']=='READY_FOR_REVIEW' and (record['sha256'] not in existing['body'] or '<!-- access-v2 -->' not in existing['body'])
+        auto_enabled=os.environ.get('RV70_BUFFER_ENABLED')=='true' and record.get('music_embedded')
+        refresh=existing and record['status']=='READY_FOR_REVIEW' and (record['sha256'] not in existing['body'] or '<!-- access-v2 -->' not in existing['body'] or (auto_enabled and '<!-- buffer-auto-v1 -->' not in existing['body']))
         marker=f'<!-- notice-{NOW().date().isoformat()} -->'
         if existing and record['status'] in ['FAILED_NEEDS_REVIEW','CORRECTION_NEEDS_MANUAL']:
             attention=f"<!-- attention-{tag}-{record['status']} -->"
@@ -201,9 +202,12 @@ def notify():
         if record['status']=='READY_FOR_REVIEW':
             sha=record['sha256']
             music_notice=('El MP4 ya incluye Cipher — Kevin MacLeod, CC BY 4.0, con crédito en la descripción. Revisa voz y música juntas; no añadas otra pista en TikTok. La mezcla usa -24 dB durante la voz y -20 dB en las pausas, con transiciones suaves.' if record.get('music_embedded') else 'La música nativa se añade en TikTok: Inside Algorithm — Cool Ember Sync, suave (-24 dB), entrada 1 s y salida 2 s. La disponibilidad de la canción debe comprobarse allí.')
+            automatic_notice=('Después de APROBAR se inicia la programación automática en Buffer para la fecha propuesta a las 19:00 Ciudad de México. Recibirás confirmación con ID y fecha tras comprobarla. Si queda menos de 15 minutos, el proceso se detiene para acordar otra fecha. Solo después de aprobar se crea una copia pública del MP4 aprobado para que Buffer pueda leerlo; el borrador de revisión permanece privado.' if os.environ.get('RV70_BUFFER_ENABLED')=='true' and record.get('music_embedded') else 'La conexión de publicación automática todavía no está activa.')
+            auto_marker='<!-- buffer-auto-v1 -->' if auto_enabled else ''
             body=f'''<!-- {tag} -->
 {marker}
 <!-- access-v2 -->
+{auto_marker}
 **Versión vigente: v{record.get('revision',1)} · Dinámica: { {'arithmetic':'cálculos','vowels':'vocales en palabras','pattern':'secuencias de figuras','color':'memoria de colores'}.get(record.get('family','color'),record.get('family'))}**
 
 **[ABRIR LA PÁGINA FIJA DEL VIDEO Y DESCARGAR]({url})**
@@ -226,13 +230,13 @@ La orden inicia una corrección en la nube en cuanto se recibe, sin esperar al a
 
 El corrector automático actual cambia el contenido y la dinámica del acertijo. Cambios de voz, avatar, animación o encuadre requieren intervención y generan un aviso; no se considerarán aplicados automáticamente.
 
-La aprobación registra tu decisión; **no significa que esté programado en TikTok**. {music_notice} Mantener activado «Creado por IA». La conexión de publicación automática todavía no está activa.
+La aprobación registra tu decisión; **no significa que esté programado en TikTok**. {music_notice} Mantener activado «Creado por IA». {automatic_notice}
 
 Después de programarlo realmente, registra el enlace de TikTok con:
 
 `REGISTRAR_PROGRAMADO {sha} https://www.tiktok.com/@retovisual70/video/ID`
 
-El sistema bloqueará otro video mientras esta entrega siga pendiente. Si la fecha ya pasó, hay que escoger otra fecha antes de programar. No se publica automáticamente.
+El sistema bloqueará otro video mientras esta entrega siga pendiente. Si la fecha ya pasó, hay que escoger otra fecha antes de programar. Nunca se envía un archivo sin la aprobación de su hash exacto.
 
 SHA-256: `{sha}`
 Ejecución: {record.get('run_url','')}
@@ -243,7 +247,7 @@ Ejecución: {record.get('run_url','')}
             body=f"<!-- {tag} -->\nEstado: {record['status']}. No se generará otro video ni se reintentará automáticamente. Revisa [Actions](https://github.com/{REPO}/actions) antes de intervenir."
         if refresh:
             gh('issue','edit',str(existing['number']),'-R',REPO,'--title',title,'--body',body)
-            change='Acceso de descarga actualizado; el archivo sigue siendo el mismo.' if record['sha256'] in existing['body'] else 'Nueva versión corregida y verificada.'
+            change=('Programación automática tras APROBAR configurada; el archivo sigue siendo el mismo y aún necesita tu aprobación.' if auto_enabled and '<!-- buffer-auto-v1 -->' not in existing['body'] else 'Acceso de descarga actualizado; el archivo sigue siendo el mismo.') if record['sha256'] in existing['body'] else 'Nueva versión corregida y verificada.'
             api(f"repos/{REPO}/issues/{existing['number']}/comments",{'body':f"{change} [Abre la página fija del video]({url}). El mensaje principal incluye la orden de aprobación con el hash exacto. No está programado ni publicado."})
             print('Review notification updated:',existing['number'])
         else:
@@ -269,7 +273,8 @@ def remind():
         comments=api(f"repos/{REPO}/issues/{issue['number']}/comments?per_page=100")
         if any(marker in c['body'] for c in comments):continue
         music_step=('La música autorizada ya está integrada; conserva su crédito y el aviso de IA.' if record.get('music_embedded') else 'Añade la música nativa y activa el aviso de IA.')
-        api(f"repos/{REPO}/issues/{issue['number']}/comments",{'body':f"{marker}\nAviso previo a las 19:00: este archivo está aprobado, pero falta completar la publicación/programación real. {music_step} [Abrir revisión vigente]({review_url(issue['number'])}). Verifica primero que no esté ya programado; no duplicar la carga. La conexión automática todavía no está activa. Si ya lo programaste, registra aquí el enlace con la orden indicada arriba."})
+        connection_step=('La automatización está habilitada, pero falta confirmar el resultado de esta entrega. Revisa Actions y Buffer; no hagas otra carga.' if os.environ.get('RV70_BUFFER_ENABLED')=='true' and record.get('music_embedded') else 'La conexión automática todavía no está activa. Si ya lo programaste, registra aquí el enlace con la orden indicada arriba.')
+        api(f"repos/{REPO}/issues/{issue['number']}/comments",{'body':f"{marker}\nAviso previo a las 19:00: este archivo está aprobado, pero falta completar la publicación/programación real. {music_step} [Abrir revisión vigente]({review_url(issue['number'])}). Verifica primero que no esté ya programado; no duplicar la carga. {connection_step}"})
 
 def comment():
     event=json.loads(Path(os.environ['GITHUB_EVENT_PATH']).read_text())
@@ -284,7 +289,8 @@ def comment():
         gh('release','download',tag,'-R',REPO,'--pattern','video.mp4','--dir',str(folder))
         assert hashlib.sha256((folder/'video.mp4').read_bytes()).hexdigest()==sha
         record.update(status='APPROVED_PENDING_TIKTOK',approval_comment=event['comment']['html_url'])
-        message=('Aprobación registrada para este SHA-256. El MP4 ya incluye la música autorizada. **Pendiente conectar y comprobar la programación automática**; conservar aviso de IA y crédito musical. Esta acción todavía no publica ni programa el video.' if record.get('music_embedded') else 'Aprobación registrada para este SHA-256. **Pendiente programar realmente en TikTok** con aviso de IA y música nativa. Esta acción no publica ni programa el video.')
+        enabled=os.environ.get('RV70_BUFFER_ENABLED')=='true' and record.get('music_embedded')
+        message=('Aprobación registrada para este SHA-256. Iniciaré la programación en Buffer con música integrada, crédito y aviso IA, para las 19:00 Ciudad de México. Recibirás confirmación con ID y fecha solo después de comprobarla; esta recepción todavía no confirma programación.' if enabled else ('Aprobación registrada para este SHA-256. El MP4 ya incluye la música autorizada. **Pendiente conectar y comprobar la programación automática**; conservar aviso de IA y crédito musical. Esta acción todavía no publica ni programa el video.' if record.get('music_embedded') else 'Aprobación registrada para este SHA-256. **Pendiente programar realmente en TikTok** con aviso de IA y música nativa. Esta acción no publica ni programa el video.'))
     elif text.startswith('CORREGIR:') and record['status'] in ['READY_FOR_REVIEW','APPROVED_PENDING_TIKTOK','CORRECTION_NEEDS_MANUAL']:
         record.update(status='CORRECTION_REQUESTED',correction_text=text,correction_request_id=event['comment']['id'],correction_source=event['comment']['html_url'],review_issue=event['issue']['number'])
         record.pop('approval_comment',None)
@@ -297,6 +303,11 @@ def comment():
     refreshed=api(f"repos/{REPO}/releases/{release['id']}")
     refresh_review_links(event['issue']['number'],release,refreshed)
     api(f"repos/{REPO}/issues/{event['issue']['number']}/comments",{'body':message})
+    if record['status']=='APPROVED_PENDING_TIKTOK' and os.environ.get('RV70_BUFFER_ENABLED')=='true' and record.get('music_embedded'):
+        try:gh('workflow','run','buffer-programar.yml','-R',REPO,'--ref','main','-f',f'review_tag={tag}')
+        except Exception:
+            api(f"repos/{REPO}/issues/{event['issue']['number']}/comments",{'body':'No se pudo iniciar la programación automática. La aprobación se conserva, pero no se confirmó una programación. Revisar Actions y Buffer antes de intervenir; no repetir la carga.'})
+            raise
     if record['status']=='CORRECTION_REQUESTED':
         try:gh('workflow','run','produccion-diaria.yml','-R',REPO,'--ref','main','-f','mode=correct','-f',f'correction_tag={tag}')
         except Exception:
