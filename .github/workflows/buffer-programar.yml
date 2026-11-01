@@ -1,0 +1,29 @@
+name: Reto Visual 70 - Programar archivo aprobado en Buffer
+on:
+  workflow_dispatch:
+    inputs:
+      review_tag:
+        description: Version privada cuyo hash aprobo el propietario
+        required: true
+        type: string
+permissions:
+  contents: write
+  issues: write
+concurrency:
+  group: rv70-cloud-review
+  cancel-in-progress: false
+jobs:
+  programar:
+    if: github.repository == 'estebansanchezoficial/reto-visual-70' && github.event.repository.private == false && vars.RV70_BUFFER_ENABLED == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validar aprobacion reservar y programar una vez
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BUFFER_API_KEY: ${{ secrets.BUFFER_API_KEY }}
+          RV70_BUFFER_ENABLED: ${{ vars.RV70_BUFFER_ENABLED }}
+          REVIEW_TAG: ${{ inputs.review_tag }}
+          RUN_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: python3 daily/publish.py

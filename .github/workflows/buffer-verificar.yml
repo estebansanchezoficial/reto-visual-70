@@ -1,11 +1,16 @@
 name: Reto Visual 70 - Verificar conexion Buffer sin publicar
 on:
   workflow_dispatch:
+    inputs:
+      mode:
+        type: choice
+        options: [preflight, technical-draft]
+        default: preflight
 permissions:
   contents: read
 jobs:
   verificar:
-    if: github.repository == 'estebansanchezoficial/reto-visual-70' && github.event.repository.private == false
+    if: inputs.mode != 'technical-draft' && github.repository == 'estebansanchezoficial/reto-visual-70' && github.event.repository.private == false
     runs-on: ubuntu-24.04
     timeout-minutes: 3
     steps:
@@ -14,3 +19,22 @@ jobs:
         env:
           BUFFER_API_KEY: ${{ secrets.BUFFER_API_KEY }}
         run: python3 daily/buffer_api.py
+  borrador-tecnico:
+    if: inputs.mode == 'technical-draft' && github.repository == 'estebansanchezoficial/reto-visual-70' && github.event.repository.private == false
+    permissions:
+      contents: write
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Instalar FFmpeg si falta
+        run: |
+          if ! command -v ffmpeg >/dev/null; then
+            sudo apt-get update -qq
+            sudo apt-get install -y --no-install-recommends ffmpeg
+          fi
+      - name: Crear solo un borrador tecnico sin publicar ni programar
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BUFFER_API_KEY: ${{ secrets.BUFFER_API_KEY }}
+        run: python3 daily/buffer_smoke.py
