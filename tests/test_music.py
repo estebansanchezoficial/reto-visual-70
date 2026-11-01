@@ -10,6 +10,19 @@ import music
 
 
 class MusicTests(unittest.TestCase):
+    def test_music_rises_only_in_long_pauses_and_never_covers_speech(self):
+        speech=[{'start':.25,'duration':2.24},{'start':3.1,'duration':2.624},
+                {'start':6.15,'duration':.92},{'start':14.15,'duration':1.43}]
+        gaps=music.pause_windows(speech,20)
+        self.assertIn((7.32,13.95),gaps)
+        for a,b in gaps:
+            self.assertGreaterEqual(b-a,1)
+            for s in speech:
+                self.assertTrue(b<=s['start'] or a>=s['start']+s['duration'])
+        data,_=music.checked_license()
+        expr=music.volume_expression(data,gaps)
+        self.assertIn('0.036904266',expr)
+
     def test_actual_music_matches_license_and_required_credit(self):
         data, track = music.checked_license()
         self.assertEqual(music.digest(track), data['sha256'])

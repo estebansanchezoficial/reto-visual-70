@@ -20,6 +20,26 @@ def checked_license():
     return data, track
 
 
+def pause_windows(sentences, duration):
+    """Protect speech plus a margin; raise only in gaps at least one second long."""
+    protected = sorted((max(0., s['start']-.2), min(duration, s['start']+s['duration']+.25)) for s in sentences)
+    cursor = 0.
+    gaps = []
+    for start, end in protected + [(duration, duration)]:
+        if start-cursor >= 1.:
+            gaps.append((round(cursor, 5), round(start, 5)))
+        cursor = max(cursor, end)
+    return gaps
+
+
+def volume_expression(data, gaps):
+    voice = 10**(data['volume_db']/20)
+    pause = 10**(data.get('pause_volume_db', data['volume_db'])/20)
+    transition = data.get('transition_seconds', .35)
+    ramps = [f'max(0,min(1,min((t-{a})/{transition},({b}-t)/{transition})))' for a,b in gaps]
+    return f"{voice:.9f}+{pause-voice:.9f}*({'+'.join(ramps) or '0'})"
+
+
 def mix(folder):
     import numpy as np
     folder = Path(folder)
@@ -33,8 +53,11 @@ def mix(folder):
         raise ValueError('Source video has not passed verification or changed')
     target = folder / 'video-con-musica.mp4'
     duration = float(qa['duration'])
+    narration = json.loads((folder/'narracion.json').read_text(encoding='utf-8'))
+    gaps = pause_windows(narration['sentences'], duration)
+    envelope = volume_expression(data, gaps)
     filt = (f"[1:a]atrim=duration={duration},asetpts=PTS-STARTPTS,"
-            f"volume={data['volume_db']}dB,afade=t=in:st=0:d=1,"
+            f"volume='{envelope}':eval=frame,afade=t=in:st=0:d=1,"
             f"afade=t=out:st={duration-2}:d=2[m];"
             "[0:a][m]amix=inputs=2:duration=first:dropout_transition=0:normalize=0,"
             "alimiter=limit=0.95:level=false:latency=true[a]")
@@ -73,6 +96,7 @@ def mix(folder):
     target.rename(source)
     qa.update(source_voice_only_sha256=qa['sha256'], sha256=digest(source), bytes=source.stat().st_size,
               music_embedded=True, music=data, audio_peak=peak, decoded_video_frames_unchanged=True,
+              music_pause_windows=gaps, music_volume_expression=envelope,
               scheduled=False, published=False)
     qa['voice_only_silence_checks'] = qa.pop('silence_checks', [])
     qa['limits'] += ' Music mixed after voice-only QA; final subjective balance requires new approval.'

@@ -200,7 +200,7 @@ def notify():
         url=review_page(release) if record['status']=='READY_FOR_REVIEW' else release['html_url']
         if record['status']=='READY_FOR_REVIEW':
             sha=record['sha256']
-            music_notice=('El MP4 ya incluye Cipher — Kevin MacLeod, CC BY 4.0, con crédito en la descripción. Revisa voz y música juntas; no añadas otra pista en TikTok.' if record.get('music_embedded') else 'La música nativa se añade en TikTok: Inside Algorithm — Cool Ember Sync, suave (-24 dB), entrada 1 s y salida 2 s. La disponibilidad de la canción debe comprobarse allí.')
+            music_notice=('El MP4 ya incluye Cipher — Kevin MacLeod, CC BY 4.0, con crédito en la descripción. Revisa voz y música juntas; no añadas otra pista en TikTok. La mezcla usa -24 dB durante la voz y -20 dB en las pausas, con transiciones suaves.' if record.get('music_embedded') else 'La música nativa se añade en TikTok: Inside Algorithm — Cool Ember Sync, suave (-24 dB), entrada 1 s y salida 2 s. La disponibilidad de la canción debe comprobarse allí.')
             body=f'''<!-- {tag} -->
 {marker}
 <!-- access-v2 -->

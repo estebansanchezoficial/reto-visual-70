@@ -10,6 +10,8 @@
   "verified_on": "2026-11-01",
   "attribution": "Música: Cipher — Kevin MacLeod (incompetech.com), CC BY 4.0 https://creativecommons.org/licenses/by/4.0/ . Adaptación: recorte, volumen y fundidos.",
   "volume_db": -24,
+  "pause_volume_db": -20,
+  "transition_seconds": 0.35,
   "fade_in_seconds": 1,
   "fade_out_seconds": 2
 }

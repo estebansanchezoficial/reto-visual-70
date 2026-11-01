@@ -9,3 +9,5 @@ Licencia: https://creativecommons.org/licenses/by/4.0/
 El archivo original conserva su hash en license.json. Incluir siempre la atribución en la descripción de cada publicación y señalar recorte, volumen y fundidos. Esta licencia corresponde exclusivamente a Cipher; no acredita derechos de Inside Algorithm. La voz Alex y los elementos visuales conservan sus condiciones previas.
 
 El usuario autorizó una pista gratuita alternativa el 1 noviembre 2026. Cada MP4 con música debe pasar una nueva revisión y aprobación por hash. No reutilizar la aprobación del archivo sin música.
+
+Mezcla vigente: -24 dB durante Alex; -20 dB en pausas de al menos un segundo. Se protegen 0.2 s antes y 0.25 s después de cada frase, con rampas de 0.35 s para evitar saltos. Se usan los tiempos reales de narracion.json, no un calendario fijo de frases.
