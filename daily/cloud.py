@@ -8,7 +8,7 @@ from urllib.parse import quote, urlsplit
 REPO='estebansanchezoficial/reto-visual-70'
 OWNER='estebansanchezoficial'
 PREFIX='rv70-review-'
-TERMINAL={'SCHEDULED_USER_REPORTED','SUPERSEDED'}
+TERMINAL={'SCHEDULED_USER_REPORTED','SCHEDULED_VERIFIED_TIKTOK','SUPERSEDED'}
 ROOT=Path(__file__).resolve().parent.parent
 OUT=ROOT/'output/current'
 NOW=lambda:datetime.now(ZoneInfo('America/Mexico_City'))
