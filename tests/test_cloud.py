@@ -59,6 +59,20 @@ class CloudTests(unittest.TestCase):
             self.assertNotIn('untagged-old',updated)
             self.assertIn('untagged-new',updated)
 
+    def test_download_link_authenticates_before_opening_private_asset(self):
+        asset=f'https://github.com/{cloud.REPO}/releases/download/untagged-old/video.mp4'
+        link=cloud.authenticated_asset_url(asset)
+        self.assertTrue(link.startswith('https://github.com/login?return_to='))
+        self.assertIn('%2Freleases%2Fdownload%2Funtagged-old%2Fvideo.mp4',link)
+        with self.assertRaises(AssertionError):cloud.authenticated_asset_url('https://untrusted.example/video.mp4')
+
+    def test_superseded_version_cannot_replace_the_current_review_page(self):
+        release={'body':json.dumps({'date':'2026-11-02','status':'SUPERSEDED'})}
+        with patch.object(cloud,'gh') as change,patch.object(cloud.subprocess,'run') as command:
+            link=cloud.review_page(release)
+            self.assertEqual(link,f'https://github.com/{cloud.REPO}/blob/main/reviews/video-005.md')
+            change.assert_not_called();command.assert_not_called()
+
     def test_correction_changes_mechanic_and_requires_new_approval(self):
         data=generate.plan('2026-11-01',revision=2,rejected_family='color')
         self.assertNotEqual(data['family'],'color');self.assertEqual(data['revision'],2)

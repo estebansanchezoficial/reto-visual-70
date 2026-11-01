@@ -2,7 +2,7 @@
 from datetime import datetime, timedelta, date
 from zoneinfo import ZoneInfo
 from pathlib import Path
-import hashlib, json, os, re, subprocess, sys
+import base64, hashlib, json, os, re, subprocess, sys
 from urllib.parse import quote, urlsplit
 
 REPO='estebansanchezoficial/reto-visual-70'
@@ -38,6 +38,43 @@ def issue_for(tag):
 def review_url(number):
     return f'https://github.com/{REPO}/issues/{number}'
 
+def authenticated_asset_url(url):
+    parsed=urlsplit(url)
+    assert parsed.scheme=='https' and parsed.netloc=='github.com'
+    assert parsed.path.startswith(f'/{REPO}/releases/download/')
+    return 'https://github.com/login?return_to='+quote(parsed.path,safe='')
+
+def review_page(release):
+    """Stable entry point in notifications; private media is never published."""
+    record=state(release)
+    episode=4+(date.fromisoformat(record['date'])-date(2026,11,1)).days
+    assert episode>=4
+    path=f'reviews/video-{episode:03d}.md'
+    url=f'https://github.com/{REPO}/blob/main/{path}'
+    if record['status']=='SUPERSEDED':return url
+    assets={a['name']:a for a in release.get('assets',[])}
+    assert 'video.mp4' in assets and record.get('sha256'), 'Do not notify a delivery without verified video'
+    lines=[f"# Video {episode:03d} · versión {record.get('revision',1)}",'',f"Estado: **{record['status']}** · Fecha propuesta: **{record['date']}, 19:00 Ciudad de México**.",'',
+        f"**[VER O DESCARGAR EL VIDEO CON VOZ]({authenticated_asset_url(assets['video.mp4']['browser_download_url'])})**",'',
+        'El video está en una entrega privada de revisión. El botón pasa por GitHub para iniciar sesión antes de descargar. Usa **estebansanchezoficial** en Chrome o Safari; estar conectado en GitHub Mobile no conecta automáticamente ese navegador. Si la app intenta abrir el enlace y falla, usa su opción «Abrir en el navegador». No hace falta publicar el borrador ni crear otra cuenta.', '',
+        'Si aparece «404», no cambies permisos ni vuelvas a generar el video: comprueba que ese navegador tiene la cuenta propietaria. El archivo descargado se llama video.mp4; esta página indica su versión y hash para distinguirlo de descargas anteriores.','']
+    for name,label in [('portada.jpg','Descargar portada'),('descripcion.txt','Descargar descripción')]:
+        if name in assets:lines += [f"[{label}]({authenticated_asset_url(assets[name]['browser_download_url'])})",'']
+    lines += [f"SHA-256 del MP4: `{record['sha256']}`",'', 'Vuelve al aviso de revisión para copiar su orden APROBAR o pedir CORREGIR. La descarga no aprueba, programa ni publica el video.','']
+    body='\n'.join(lines)
+    current=subprocess.run(['gh','api',f'repos/{REPO}/contents/{path}'],text=True,capture_output=True)
+    payload={'message':f'Update private review access for video {episode:03d}','content':base64.b64encode(body.encode()).decode()}
+    if current.returncode==0:
+        existing=json.loads(current.stdout)
+        if base64.b64decode(existing['content']).decode()==body:return url
+        payload['sha']=existing['sha']
+    elif '404' not in current.stderr:raise RuntimeError('Could not read review access page')
+    gh('api',f'repos/{REPO}/contents/{path}','--method','PUT','--input','-',payload=payload)
+    # Read back the durable page before linking it in a notification.
+    saved=api(f'repos/{REPO}/contents/{path}')
+    assert base64.b64decode(saved['content']).decode()==body
+    return url
+
 def refresh_review_links(number,before,after):
     """Draft URLs may change when notes/state change; keep the review current."""
     issue=json.loads(gh('issue','view',str(number),'-R',REPO,'--json','body'))
@@ -46,6 +83,7 @@ def refresh_review_links(number,before,after):
     old_video=next((a['browser_download_url'] for a in before.get('assets',[]) if a['name']=='video.mp4'),None)
     new_video=next((a['browser_download_url'] for a in after.get('assets',[]) if a['name']=='video.mp4'),None)
     if old_video and new_video:updated=updated.replace(old_video,new_video)
+    if '<!-- access-v2 -->' in body:review_page(after)
     if updated!=body:gh('issue','edit',str(number),'-R',REPO,'--body',updated)
 
 def target_date():
@@ -145,7 +183,7 @@ def notify():
         record=state(release);tag=release['tag_name']
         if record['status'] in TERMINAL:continue
         existing=issue_for(tag) or next((i for i in issues() if i['number']==record.get('review_issue')),None)
-        refresh=existing and record['status']=='READY_FOR_REVIEW' and record['sha256'] not in existing['body']
+        refresh=existing and record['status']=='READY_FOR_REVIEW' and (record['sha256'] not in existing['body'] or '<!-- access-v2 -->' not in existing['body'])
         marker=f'<!-- notice-{NOW().date().isoformat()} -->'
         if existing and record['status'] in ['FAILED_NEEDS_REVIEW','CORRECTION_NEEDS_MANUAL']:
             attention=f"<!-- attention-{tag}-{record['status']} -->"
@@ -159,24 +197,19 @@ def notify():
             if marker in existing['body'] or any(marker in c['body'] for c in comments):continue
             api(f"repos/{REPO}/issues/{existing['number']}/comments",{'body':f"{marker}\nRevisión diaria 09:00: esta entrega sigue en {record['status']}. [Abrir revisión vigente y video]({review_url(existing['number'])}). Fecha propuesta: {record['date']}, 19:00 Ciudad de México. Si ya venció, hace falta otra fecha antes de programar. No se ha creado otro video ni se ha publicado."})
             continue
-        url=release['html_url']
-        login_url='https://github.com/login?return_to='+quote(urlsplit(url).path,safe='')
-        video_url=next((a['browser_download_url'] for a in release['assets'] if a['name']=='video.mp4'),url)
+        url=review_page(release) if record['status']=='READY_FOR_REVIEW' else release['html_url']
         if record['status']=='READY_FOR_REVIEW':
             sha=record['sha256']
             body=f'''<!-- {tag} -->
 {marker}
+<!-- access-v2 -->
 **Versión vigente: v{record.get('revision',1)} · Dinámica: { {'arithmetic':'cálculos','vowels':'vocales en palabras','pattern':'secuencias de figuras','color':'memoria de colores'}.get(record.get('family','color'),record.get('family'))}**
 
-Video listo para revisar desde el teléfono. La entrega está en borrador: abre el enlace en Chrome o Safari e inicia sesión como **estebansanchezoficial en ese navegador**. La sesión de GitHub Mobile no garantiza la sesión del navegador. Si «Entregas» aparece vacío o muestra 404, comprueba primero esa cuenta; los archivos no se han borrado.
+**[ABRIR LA PÁGINA FIJA DEL VIDEO Y DESCARGAR]({url})**
 
-**[Iniciar sesión y abrir la entrega]({login_url})** · **[Abrir o descargar video.mp4 con voz]({video_url})**
+El enlace de esta notificación siempre abre la página del episodio, con la versión vigente y botones para video, portada y descripción. La descarga del MP4 pasa por el inicio de sesión de GitHub para evitar abrir directamente un borrador sin acceso. Usa **estebansanchezoficial en Chrome o Safari**. Desde GitHub Mobile, elige «Abrir en el navegador» si el enlace no se abre correctamente. No hay que buscar entre lanzamientos.
 
-Dentro de la entrega abre **Assets / Recursos** si aparece plegado. Descarga también portada.jpg y descripcion.txt si vas a publicarlo.
-
-**[Abrir entrega y video]({url})** · Fecha propuesta: **{record['date']} a las 19:00, Ciudad de México**.
-
-Si GitHub cambia el enlace del borrador tras actualizar su estado, [abre Entregas](https://github.com/{REPO}/releases) y elige «Revisión {record['date']}».
+Fecha propuesta: **{record['date']} a las 19:00, Ciudad de México**.
 
 70 s · 1080 × 1920 · 30 FPS · avatar abrazando el acertijo · prueba técnica y descarga verificadas.
 
@@ -209,7 +242,8 @@ Ejecución: {record.get('run_url','')}
             body=f"<!-- {tag} -->\nEstado: {record['status']}. No se generará otro video ni se reintentará automáticamente. Revisa [Actions](https://github.com/{REPO}/actions) antes de intervenir."
         if refresh:
             gh('issue','edit',str(existing['number']),'-R',REPO,'--title',title,'--body',body)
-            api(f"repos/{REPO}/issues/{existing['number']}/comments",{'body':f"Preparación corregida y verificada. [Abre la revisión vigente y su video]({review_url(existing['number'])}). El mensaje principal contiene el acceso al MP4 y la orden de aprobación con el hash exacto. No está programado ni publicado."})
+            change='Acceso de descarga actualizado; el archivo sigue siendo el mismo.' if record['sha256'] in existing['body'] else 'Nueva versión corregida y verificada.'
+            api(f"repos/{REPO}/issues/{existing['number']}/comments",{'body':f"{change} [Abre la página fija del video]({url}). El mensaje principal incluye la orden de aprobación con el hash exacto. No está programado ni publicado."})
             print('Review notification updated:',existing['number'])
         else:
             result=api(f'repos/{REPO}/issues',{'title':title,'body':body,'assignees':[OWNER]})
