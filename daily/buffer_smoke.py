@@ -1,5 +1,5 @@
 """One technical draft, never a scheduled or published TikTok post."""
-import hashlib, json, subprocess, urllib.request
+import hashlib, json, subprocess, urllib.request, os
 from pathlib import Path
 import buffer_api as buffer
 import cloud
@@ -37,4 +37,22 @@ def main():
     print(json.dumps(record))
 
 
-if __name__=='__main__':main()
+def cleanup():
+    release=json.loads(cloud.gh('release','view',TAG,'-R',cloud.REPO,'--json','body'))
+    record=json.loads(release['body'])
+    if record['status']=='BUFFER_TECHNICAL_DRAFT_REMOVED':
+        print('Technical draft already removed; no action.');return
+    if record['status']!='BUFFER_DRAFT_TRANSPORT_VERIFIED' or record['buffer_post_id']!='6ae790131e69de2cfc10913e':
+        raise ValueError('Only the exact verified technical draft can be cleaned up')
+    post=buffer.read_post(record['buffer_post_id'])
+    if post['status']!='draft' or post['channelId']!=buffer.CHANNEL_ID or not post['text'].startswith('PRUEBA TECNICA. NO PUBLICAR.'):
+        raise ValueError('Do not remove a real or scheduled post')
+    result=buffer.query('mutation($input:DeletePostInput!) { deletePost(input:$input) { __typename ... on MutationError { message } } }',{'input':{'id':post['id']}})['deletePost']
+    if result['__typename']!='DeletePostSuccess':raise ValueError('Technical draft cleanup not confirmed')
+    record.update(status='BUFFER_TECHNICAL_DRAFT_REMOVED',removed_from_buffer=True,scheduled=False,published=False)
+    cloud.gh('release','edit',TAG,'-R',cloud.REPO,'--notes',json.dumps(record))
+    print(json.dumps(record))
+
+
+if __name__=='__main__':
+    cleanup() if os.environ.get('BUFFER_TEST_MODE')=='cleanup' else main()

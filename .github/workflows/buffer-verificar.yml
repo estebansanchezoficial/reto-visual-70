@@ -4,13 +4,13 @@ on:
     inputs:
       mode:
         type: choice
-        options: [preflight, technical-draft]
+        options: [preflight, technical-draft, cleanup]
         default: preflight
 permissions:
   contents: read
 jobs:
   verificar:
-    if: inputs.mode != 'technical-draft' && github.repository == 'estebansanchezoficial/reto-visual-70' && github.event.repository.private == false
+    if: inputs.mode == 'preflight' && github.repository == 'estebansanchezoficial/reto-visual-70' && github.event.repository.private == false
     runs-on: ubuntu-24.04
     timeout-minutes: 3
     steps:
@@ -22,7 +22,7 @@ jobs:
           BUFFER_API_KEY: ${{ secrets.BUFFER_API_KEY }}
         run: python3 daily/buffer_api.py
   borrador-tecnico:
-    if: inputs.mode == 'technical-draft' && github.repository == 'estebansanchezoficial/reto-visual-70' && github.event.repository.private == false
+    if: (inputs.mode == 'technical-draft' || inputs.mode == 'cleanup') && github.repository == 'estebansanchezoficial/reto-visual-70' && github.event.repository.private == false
     permissions:
       contents: write
     runs-on: ubuntu-24.04
@@ -30,6 +30,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Instalar FFmpeg si falta
+        if: inputs.mode == 'technical-draft'
         run: |
           if ! command -v ffmpeg >/dev/null; then
             sudo apt-get update -qq
@@ -39,4 +40,5 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           BUFFER_API_KEY: ${{ secrets.BUFFER_API_KEY }}
+          BUFFER_TEST_MODE: ${{ inputs.mode }}
         run: python3 daily/buffer_smoke.py
