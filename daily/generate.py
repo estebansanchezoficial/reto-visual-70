@@ -66,6 +66,8 @@ def main(day,revision=1,history_path=None,rejected_family=None,requested_family=
     (out/'comparison.json').write_text(json.dumps(comparison,ensure_ascii=False,indent=2),encoding='utf-8')
     caption=f"{ {'arithmetic':'Tres cálculos, tres oportunidades.','vowels':'Cuenta las vocales: cada aparición cuenta.','pattern':'Descubre la regla de cada secuencia.','color':'¿Detectas los tres cambios de color?'}[data['family']]} ¿Cuántas acertaste? #RetoVisual70 #RetoVisual #Acertijos #EntrenaTuMente"
     (out/'descripcion.txt').write_text(caption+'\n',encoding='utf-8')
+    import music
+    music.mix(out)
     return data
 
 if __name__=='__main__':

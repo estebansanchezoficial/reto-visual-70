@@ -1,4 +1,18 @@
-# Objetivo autorizado: aprobar desde teléfono y programar con música nativa
+# Música y publicación después de aprobar
+
+## Decisión vigente — 1 noviembre 2026
+
+El usuario autorizó una pista gratuita alternativa con licencia comprobable al no acreditarse una fuente autorizada para integrar Inside Algorithm. Se descargó Cipher — Kevin MacLeod, ISRC USUAN1100844, desde el compositor. Su ficha indica CC BY 4.0; archivo y atribución constan en assets/music/license.json. La licencia permite copia y adaptación comercial con crédito, vínculo a la licencia y declaración de cambios. No atribuir esta licencia a la canción anterior.
+
+La generación futura mezcla automáticamente Cipher a -24 dB, entrada 1 s y salida 2 s, después de verificar el máster de voz. Verifica decodificación, duración, imágenes idénticas, presencia de voz y pico sin saturación. El hash final corresponde al MP4 con música. La descripción incorpora el crédito obligatorio. La mezcla necesita revisión subjetiva del propietario; cambiar audio invalida cualquier aprobación del hash anterior.
+
+Buffer Free vuelve a ser una ruta candidata: publicación automática de MP4, API incluida y hasta 10 publicaciones pendientes por canal; se libera un espacio por publicación. Falta iniciar sesión/crear cuenta Free, autorizar exclusivamente @retovisual70, crear/guardar una clave de API en secretos y comprobar la conexión. Su API exige una URL HTTPS pública y estable hasta publicar: los borradores privados GitHub no sirven. Definir una distribución de archivos aprobados antes de habilitar envíos; nunca publicar archivos pendientes de revisión para resolver ese requisito.
+
+La conexión de publicación **no está activa**. APROBAR sigue registrando la decisión, sin enviar a Buffer. Antes de activarla: verificar identidad del canal y plan Free, exacto hash/fecha19:00, aviso IA, crédito, reserva por hash antes del envío, reconciliación ante respuestas ambiguas sin reintento ciego y consulta posterior del estado/URL real. No reutilizar sesiones locales ni depender del equipo encendido. Presupuesto adicional $0 MXN; no tarjeta, prueba de pago ni recarga automática.
+
+Fuentes: https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100844 ; https://creativecommons.org/licenses/by/4.0/ ; https://buffer.com/pricing ; https://developers.buffer.com/guides/hosting-media ; https://support.buffer.com/articles/using-tiktok-with-buffer-oGEroY9Of2
+
+## Investigación anterior: música nativa (conservada como antecedente)
 
 Decisión explícita del usuario, 1 noviembre 2026: «Quiero conservar la musica de TikTok pero que todo quede automatizado». Mantener Inside Algorithm — Cool Ember Sync desde la biblioteca nativa, -24 dB, fundidos 1/2 s, voz Alex, etiqueta IA y 19:00 America/Mexico_City. No sustituir por música original, descargar/reutilizar la pista fuera de TikTok, cambiar el tipo de cuenta ni publicar sin revisión exacta. Presupuesto adicional vigente: $0 MXN.
 

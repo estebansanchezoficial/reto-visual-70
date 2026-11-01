@@ -163,14 +163,14 @@ def deliver(tag,record,history,rejected_family=None):
         subprocess.run(args,check=True)
         qa=json.loads((OUT/'verificacion-final.json').read_text())
         assert qa['status']=='PASS_PENDING_USER_APPROVAL'
-        names=['video.mp4','portada.jpg','descripcion.txt','verificacion-final.json','manifest.json','plan.json','revision.jpg','narracion.json','comparison.json']
+        names=['video.mp4','portada.jpg','descripcion.txt','verificacion-final.json','manifest.json','plan.json','revision.jpg','narracion.json','comparison.json','music.json','verificacion-sin-musica.json']
         gh('release','upload',tag,*[str(OUT/n) for n in names],'-R',REPO)
         # Verify remote bytes, not only upload exit status.
         verify=ROOT/'output/download-check';verify.mkdir(exist_ok=True,parents=True)
         gh('release','download',tag,'-R',REPO,'--pattern','video.mp4','--dir',str(verify))
         assert hashlib.sha256((verify/'video.mp4').read_bytes()).hexdigest()==qa['sha256']
         plan=json.loads((OUT/'plan.json').read_text(encoding='utf-8'))
-        record.update(family=plan['family'],revision=plan['revision'],status='READY_FOR_REVIEW',sha256=qa['sha256'],bytes=qa['bytes'],run_url=os.environ.get('RUN_URL'))
+        record.update(family=plan['family'],revision=plan['revision'],status='READY_FOR_REVIEW',sha256=qa['sha256'],bytes=qa['bytes'],music_embedded=qa.get('music_embedded',False),music=qa.get('music'),run_url=os.environ.get('RUN_URL'))
         gh('release','edit',tag,'-R',REPO,'--notes',json.dumps(record))
         print(json.dumps(record))
     except Exception:
@@ -200,6 +200,7 @@ def notify():
         url=review_page(release) if record['status']=='READY_FOR_REVIEW' else release['html_url']
         if record['status']=='READY_FOR_REVIEW':
             sha=record['sha256']
+            music_notice=('El MP4 ya incluye Cipher — Kevin MacLeod, CC BY 4.0, con crédito en la descripción. Revisa voz y música juntas; no añadas otra pista en TikTok.' if record.get('music_embedded') else 'La música nativa se añade en TikTok: Inside Algorithm — Cool Ember Sync, suave (-24 dB), entrada 1 s y salida 2 s. La disponibilidad de la canción debe comprobarse allí.')
             body=f'''<!-- {tag} -->
 {marker}
 <!-- access-v2 -->
@@ -225,7 +226,7 @@ La orden inicia una corrección en la nube en cuanto se recibe, sin esperar al a
 
 El corrector automático actual cambia el contenido y la dinámica del acertijo. Cambios de voz, avatar, animación o encuadre requieren intervención y generan un aviso; no se considerarán aplicados automáticamente.
 
-La aprobación registra tu decisión; **no significa que esté programado en TikTok**. La música nativa se añade en TikTok: Inside Algorithm — Cool Ember Sync, suave (-24 dB), entrada 1 s y salida 2 s. Mantener activado «Creado por IA». La disponibilidad de la canción debe comprobarse allí.
+La aprobación registra tu decisión; **no significa que esté programado en TikTok**. {music_notice} Mantener activado «Creado por IA». La conexión de publicación automática todavía no está activa.
 
 Después de programarlo realmente, registra el enlace de TikTok con:
 
@@ -267,7 +268,8 @@ def remind():
         marker=f"<!-- publish-reminder-{record['date']} -->"
         comments=api(f"repos/{REPO}/issues/{issue['number']}/comments?per_page=100")
         if any(marker in c['body'] for c in comments):continue
-        api(f"repos/{REPO}/issues/{issue['number']}/comments",{'body':f"{marker}\nAviso previo a las 19:00: este archivo está aprobado, pero falta completar la publicación/programación en TikTok desde tu teléfono, con la música nativa y el aviso de IA activado. [Abrir revisión vigente]({review_url(issue['number'])}). Verifica primero que no esté ya programado; no duplicar la carga. Si ya lo programaste, registra aquí el enlace con la orden indicada arriba."})
+        music_step=('La música autorizada ya está integrada; conserva su crédito y el aviso de IA.' if record.get('music_embedded') else 'Añade la música nativa y activa el aviso de IA.')
+        api(f"repos/{REPO}/issues/{issue['number']}/comments",{'body':f"{marker}\nAviso previo a las 19:00: este archivo está aprobado, pero falta completar la publicación/programación real. {music_step} [Abrir revisión vigente]({review_url(issue['number'])}). Verifica primero que no esté ya programado; no duplicar la carga. La conexión automática todavía no está activa. Si ya lo programaste, registra aquí el enlace con la orden indicada arriba."})
 
 def comment():
     event=json.loads(Path(os.environ['GITHUB_EVENT_PATH']).read_text())
@@ -282,7 +284,7 @@ def comment():
         gh('release','download',tag,'-R',REPO,'--pattern','video.mp4','--dir',str(folder))
         assert hashlib.sha256((folder/'video.mp4').read_bytes()).hexdigest()==sha
         record.update(status='APPROVED_PENDING_TIKTOK',approval_comment=event['comment']['html_url'])
-        message='Aprobación registrada para este SHA-256. **Pendiente programar realmente en TikTok** con aviso de IA y música nativa. Esta acción no publica ni programa el video.'
+        message=('Aprobación registrada para este SHA-256. El MP4 ya incluye la música autorizada. **Pendiente conectar y comprobar la programación automática**; conservar aviso de IA y crédito musical. Esta acción todavía no publica ni programa el video.' if record.get('music_embedded') else 'Aprobación registrada para este SHA-256. **Pendiente programar realmente en TikTok** con aviso de IA y música nativa. Esta acción no publica ni programa el video.')
     elif text.startswith('CORREGIR:') and record['status'] in ['READY_FOR_REVIEW','APPROVED_PENDING_TIKTOK','CORRECTION_NEEDS_MANUAL']:
         record.update(status='CORRECTION_REQUESTED',correction_text=text,correction_request_id=event['comment']['id'],correction_source=event['comment']['html_url'],review_issue=event['issue']['number'])
         record.pop('approval_comment',None)
