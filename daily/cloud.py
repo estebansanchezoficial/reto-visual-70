@@ -14,7 +14,7 @@ OUT=ROOT/'output/current'
 NOW=lambda:datetime.now(ZoneInfo('America/Mexico_City'))
 
 def gh(*args, payload=None):
-    p=subprocess.run(['gh',*args],input=json.dumps(payload) if payload is not None else None,text=True,capture_output=True)
+    p=subprocess.run(['gh',*args],input=json.dumps(payload) if payload is not None else None,text=True,encoding='utf-8',capture_output=True)
     if p.returncode:raise RuntimeError(f'GitHub operation failed ({args[0]}): {p.stderr[:500]}')
     return p.stdout
 
@@ -62,7 +62,7 @@ def review_page(release):
         if name in assets:lines += [f"[{label}]({authenticated_asset_url(assets[name]['browser_download_url'])})",'']
     lines += [f"SHA-256 del MP4: `{record['sha256']}`",'', 'Vuelve al aviso de revisión para copiar su orden APROBAR o pedir CORREGIR. La descarga no aprueba, programa ni publica el video.','']
     body='\n'.join(lines)
-    current=subprocess.run(['gh','api',f'repos/{REPO}/contents/{path}'],text=True,capture_output=True)
+    current=subprocess.run(['gh','api',f'repos/{REPO}/contents/{path}'],text=True,encoding='utf-8',capture_output=True)
     payload={'message':f'Update private review access for video {episode:03d}','content':base64.b64encode(body.encode()).decode()}
     if current.returncode==0:
         existing=json.loads(current.stdout)
