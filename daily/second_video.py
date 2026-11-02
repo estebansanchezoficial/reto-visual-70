@@ -23,6 +23,8 @@ ROUNDS=[
 PANEL=(154,615,567,945)
 BASE=None
 EPISODE=4
+DURATION=70
+SAMPLE_TIMES=None
 
 @lru_cache(maxsize=32)
 def font(n):return ImageFont.truetype(str(ROOT/'assets/fonts/Barlow-Bold.ttf'),n)
@@ -167,15 +169,15 @@ def main(filename='reto-visual-70-video-002-color-v1-final.mp4'):
     m01=Morph(ref.crop(mouthbox),slight);m12=Morph(slight,intermediate)
     eyes=Morph(ref.crop(eyebox),old[3].crop(eyebox));brows=Morph(ref.crop(browbox),old[2].crop(browbox))
     masks={b:feather((b[2]-b[0],b[3]-b[1])) for b in [mouthbox,eyebox,browbox]}
-    wav=OUT/'narracion-final.wav';wave,rate=sf.read(wav,dtype='float32');assert rate==24000 and len(wave)==70*rate
+    wav=OUT/'narracion-final.wav';wave,rate=sf.read(wav,dtype='float32');assert rate==24000 and len(wave)==DURATION*rate
     narration=json.loads((OUT/'narracion.json').read_text(encoding='utf-8'))
-    motion.N=2100;rows=motion.controls(wave,narration['sentences'])
+    motion.N=DURATION*30;rows=motion.controls(wave,narration['sentences'])
     for row in rows:
-        t=row['t'];row['blink']=max(pulse(t,c) for c in [1.27,4.34,8.36,12.4,17.3,22.7,28.4,32.6,37.2,42.5,48.4,52.6,57.8,63.4,68.2])
+        t=row['t'];row['blink']=max(pulse(t,c) for c in [1.27,4.34,8.36,12.4,17.3,22.7,28.4,32.6,37.2,42.5,48.4,52.6,57.8,63.4,68.2]+[73.4,78.2,83.4,88.2,93.4,98.2,103.4] if c<DURATION)
         row['brow']=sum(.23*math.exp(-.5*((t-c)/.35)**2) for c in [1.,14.5,20.5,34.5,40.5,55.5,61.5,67.])
     started=time.monotonic();round_cache={};face_cache={};saved=[]
-    proc=subprocess.Popen(['ffmpeg','-v','error','-n','-f','rawvideo','-pix_fmt','rgb24','-s','720x1280','-r','30','-i','pipe:0','-i',str(wav),'-vf','scale=1080:1920:flags=lanczos,setsar=1','-c:v','libx264','-threads','2','-preset','veryfast','-crf','18','-pix_fmt','yuv420p','-c:a','aac','-b:a','128k','-t','70','-movflags','+faststart',str(dest)],stdin=subprocess.PIPE)
-    sample_times=[2,8,13.5,16,22,27,33.5,36,42,48,54.5,57,63,68]
+    proc=subprocess.Popen(['ffmpeg','-v','error','-n','-f','rawvideo','-pix_fmt','rgb24','-s','720x1280','-r','30','-i','pipe:0','-i',str(wav),'-vf','scale=1080:1920:flags=lanczos,setsar=1','-c:v','libx264','-threads','2','-preset','veryfast','-crf','18','-pix_fmt','yuv420p','-c:a','aac','-b:a','128k','-t',str(DURATION),'-movflags','+faststart',str(dest)],stdin=subprocess.PIPE)
+    sample_times=SAMPLE_TIMES or [2,8,13.5,16,22,27,33.5,36,42,48,54.5,57,63,68]
     try:
         for n,row in enumerate(rows):
             t=n/30;i,phase,end=state(t);count=max(1,math.ceil(end-t))
@@ -200,10 +202,10 @@ def main(filename='reto-visual-70-video-002-color-v1-final.mp4'):
             rgb=im.convert('RGB');proc.stdin.write(rgb.tobytes())
             if any(n==round(st*30) for st in sample_times):
                 filename=f'frame-disenado-{n:04d}.png';rgb.resize((1080,1920),Image.Resampling.LANCZOS).save(OUT/filename);saved.append({'frame':n,'t':t,'state':[i,phase,count],'path':filename})
-            if n%300==0:print(f'Render {n}/2100',flush=True)
+            if n%300==0:print(f'Render {n}/{DURATION*30}',flush=True)
     finally:proc.stdin.close()
     assert proc.wait()==0
-    record={'status':'GENERATED_PENDING_FULL_QA','seconds':70,'fps':30,'frames':2100,'size':[1080,1920],'voice':'em_alex .96; new narration','mouth':'Approved v4 range and optical-flow calibration; new audio-driven curves','pose':'Approved v5 hugging panel','music':False,'rounds':ROUNDS,'samples':saved,'render_seconds':round(time.monotonic()-started,2),'sha256':hashlib.sha256(dest.read_bytes()).hexdigest(),'publication':False,'scheduled':False}
+    record={'status':'GENERATED_PENDING_FULL_QA','seconds':DURATION,'fps':30,'frames':DURATION*30,'size':[1080,1920],'voice':'em_alex .96; new narration','mouth':'Approved v4 range and optical-flow calibration; new audio-driven curves','pose':'Approved v5 hugging panel','music':False,'rounds':ROUNDS,'samples':saved,'render_seconds':round(time.monotonic()-started,2),'sha256':hashlib.sha256(dest.read_bytes()).hexdigest(),'publication':False,'scheduled':False}
     (OUT/'manifest.json').write_text(json.dumps(record,ensure_ascii=False,indent=2),encoding='utf-8')
     (OUT/'controles.json').write_text(json.dumps(rows),encoding='utf-8')
     print(json.dumps(record,ensure_ascii=False),flush=True)

@@ -5,6 +5,7 @@ from PIL import ImageDraw
 import numpy as np
 import second_video as video
 import catalog
+import procedure
 
 FAMILIES=['arithmetic','vowels','color','pattern']
 WORDS=['CAMINO','VENTANA','MARIPOSA','BIBLIOTECA','TELÉFONO','CARACOL','UNIVERSO','PRIMAVERA','ELEFANTE','CHOCOLATE','MURCIÉLAGO','CUADERNO','ESTRELLA','PLANETA','SEMILLA','GIRASOL','ESCUELA','AEROPUERTO','AVENTURA','NATURALEZA','CARRETERA','MONEDA','ESTUDIANTE','ROMPECABEZAS']
@@ -79,14 +80,23 @@ def validate(data):
             expected=r['pattern'][len(r['sequence'])%len(r['pattern'])]
         else:raise ValueError(data['family'])
         assert r['next']==expected and r['choices'][r['correct']]==expected
-        assert len(set(r['choices']))==3 and r['end']-r['answer']==5
+        assert len(set(r['choices']))==3 and r.get('procedure_start',r['end'])-r['answer']==5
+        if data.get('procedure_version'):
+            assert r['procedure_steps']==procedure.worked(r)
+            assert r['end']-r['procedure_start']==procedure.SECONDS
+    if data.get('procedure_version'):
+        assert data['duration_seconds']==106 and data['rounds'][-1]['end']==102
+        assert all(a['end']==b['start'] for a,b in zip(data['rounds'],data['rounds'][1:]))
 
 def state(t):
     if t<6:return -1,'intro',6
     for i,r in enumerate(DATA['rounds']):
         if r['start']<=t<r['answer']:return i,'puzzle',r['answer']
-        if r['answer']<=t<r['end']:return i,'answer',r['end']
-    return 3,'outro',70
+        if r['answer']<=t<r.get('procedure_start',r['end']):return i,'answer',r.get('procedure_start',r['end'])
+        if 'procedure_start' in r and r['procedure_start']<=t<r['end']:
+            step=min(2,int((t-r['procedure_start'])//procedure.STEP_SECONDS))
+            return i,f'procedure{step+1}',r['procedure_start']+(step+1)*procedure.STEP_SECONDS
+    return 3,'outro',DATA.get('duration_seconds',70)
 
 def fit(d,xy,text,size,width=490,color='white'):
     while video.font(size).getlength(text)>width:size-=1
@@ -120,6 +130,14 @@ def board(i,phase,count):
         video.text(d,(360,800),'0 · 1 · 2 · 3',58,'#ffdb36')
         video.text(d,(360,884),'¿CUÁNTAS ACERTASTE?',26)
         video.text(d,(360,991),'Escribe tu resultado en comentarios.',27)
+    elif phase.startswith('procedure'):
+        r=DATA['rounds'][i];step=int(phase[-1])-1;worked=r['procedure_steps'][step]
+        fit(d,(360,632),f"NIVEL {i+1} · {r['difficulty']}",22,width=380,color='#ffdb36')
+        fit(d,(360,674),procedure.TITLE,25,width=380)
+        video.text(d,(360,722),f'PASO {step+1} DE 3',24,'#48dce2')
+        for line_no,line in enumerate(worked['lines']):fit(d,(360,767+30*line_no),line,27,width=380)
+        fit(d,(360,878),worked['calculation'],36,width=380,color='#ffdb36')
+        fit(d,(360,991),f"ASÍ LLEGAMOS A: {r['next']}",28,width=470,color='#ffdb36')
     else:
         r=DATA['rounds'][i];answer=phase=='answer'
         label=f"NIVEL {i+1} · {r['difficulty']}" if DATA.get('catalog_version') else f'RONDA {i+1}'
@@ -156,7 +174,8 @@ def board(i,phase,count):
 
 def verify_rendered(actual,data):
     checks=[]
-    for i,(before,after) in enumerate([(8.,22.),(27.,42.),(48.,63.)]):
+    times=[(float(r['start']+2),float(r['answer']+2)) for r in data['rounds']] if data.get('procedure_version') else [(8.,22.),(27.,42.),(48.,63.)]
+    for i,(before,after) in enumerate(times):
         diffs=[]
         for x in [245,360,475]:
             box=tuple(round(v*1.5) for v in (x-46,817,x+46,934))
@@ -165,4 +184,11 @@ def verify_rendered(actual,data):
         changed=[j for j,e in enumerate(diffs) if e>4]
         assert changed==[data['rounds'][i]['correct']],diffs
         checks.append({'round':i+1,'highlighted_answer':'ABC'[changed[0]],'choice_differences':diffs,'answer_seconds':5})
+        if data.get('procedure_version'):
+            r=data['rounds'][i]
+            frames=[actual[float(r['procedure_start']+j*procedure.STEP_SECONDS+2)] for j in range(3)]
+            box=tuple(round(v*1.5) for v in (166,720,555,930))
+            differences=[float(np.abs(np.asarray(a.crop(box),dtype=float)-np.asarray(b.crop(box),dtype=float)).mean()) for a,b in zip(frames,frames[1:])]
+            assert all(delta>1 for delta in differences),'Worked steps did not change on screen'
+            checks[-1].update(procedure_steps_verified=3,procedure_seconds=procedure.SECONDS,procedure_frame_differences=differences)
     return checks

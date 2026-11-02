@@ -14,6 +14,7 @@ import espeakng_loader
 ROOT=Path(__file__).resolve().parent.parent
 OUT=ROOT/'output/current'
 OUT.mkdir(exist_ok=True,parents=True)
+DURATION=70
 PHRASES={
  'hook':('¿Qué objeto cambió de color?',.25,2.5),
  'rules':('Memoriza, y encuentra el cambio.',2.85,2.9),
@@ -35,7 +36,7 @@ def main():
         with p.open('rb') as f:assert hashlib.file_digest(f,'sha256').hexdigest()==sha
     EspeakWrapper.set_library(espeakng_loader.get_library_path())
     engine=Kokoro(str(model),str(voices));g2p=EspeakG2P(language='es')
-    rate=24000;full=np.zeros(70*rate,np.float32);events=[];started=time.monotonic()
+    rate=24000;full=np.zeros(DURATION*rate,np.float32);events=[];started=time.monotonic()
     for ident,(text,start,limit) in PHRASES.items():
         saved=OUT/f'voz-{ident}.wav';meta=OUT/f'voz-{ident}.json'
         if saved.exists():
@@ -56,7 +57,7 @@ def main():
         print(json.dumps({'voice_clip':ident,'seconds':round(entry['duration'],3),'text':text},ensure_ascii=False),flush=True)
     sf.write(OUT/'narracion-70s.wav',full,rate,subtype='PCM_16')
     subprocess.run(['ffmpeg','-v','error','-n','-i',str(OUT/'narracion-70s.wav'),'-af','loudnorm=I=-16:TP=-1.5:LRA=7','-ar','24000','-c:a','pcm_s16le',str(OUT/'narracion-final.wav')],check=True)
-    rec={'voice':'em_alex','speed':.96,'language':'es','duration':70,'sentences':sorted(events,key=lambda e:e['start']),'generation_seconds':round(time.monotonic()-started,2),'music':False}
+    rec={'voice':'em_alex','speed':.96,'language':'es','duration':DURATION,'sentences':sorted(events,key=lambda e:e['start']),'generation_seconds':round(time.monotonic()-started,2),'music':False}
     (OUT/'narracion.json').write_text(json.dumps(rec,ensure_ascii=False,indent=2),encoding='utf-8')
     print('Narration complete',flush=True)
 

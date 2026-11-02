@@ -17,6 +17,7 @@ Los planteamientos, parámetros y explicaciones son originales. El libro *Amusem
 - Compara cada ejercicio con **todos** los planes históricos, incluyendo versiones rechazadas/sustituidas. No basta un hash nuevo del video o un cambio de orden/opciones/ID.
 - Resuelve con aritmética exacta y valida opciones, respuesta y texto antes del render.
 - Presenta cada solución durante cinco segundos al final de su nivel, con resultado narrado y explicación en pantalla.
+- Desde la instrucción del 2 noviembre, las nuevas generaciones añaden después de cada respuesta **«Este es el procedimiento»**, tres pasos de cuatro segundos. El formato pasa a 106 segundos; los videos anteriores ya aprobados no se regeneran. [Instrucción permanente](instrucciones-generacion.md).
 - Conserva avatar, voz, música autorizada y aviso de IA. Cada nuevo MP4 necesita aprobación de su propio SHA-256.
 - El catálogo es finito. Al agotarse o no encontrar un tema distinto, se detiene y avisa; no recicla ni inventa ejercicios sin revisar. Las correcciones consumen selecciones, por lo que 30 selecciones no garantizan 30 días.
 

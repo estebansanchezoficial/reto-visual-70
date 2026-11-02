@@ -181,6 +181,7 @@ def deliver(tag,record,history,rejected_family=None):
         record.update(family=plan['family'],revision=plan['revision'],status='READY_FOR_REVIEW',sha256=qa['sha256'],bytes=qa['bytes'],music_embedded=qa.get('music_embedded',False),music=qa.get('music'),run_url=os.environ.get('RUN_URL'))
         if plan.get('catalog_version'):
             record.update(catalog_version=plan['catalog_version'],pack_id=plan['pack_id'],topic_title=plan['topic_title'],catalog_ids=[r['catalog_id'] for r in plan['rounds']])
+        record.update(duration_seconds=qa['duration'],procedure_version=plan.get('procedure_version',0))
         gh('release','edit',tag,'-R',REPO,'--notes',json.dumps(record))
         print(json.dumps(record))
     except Exception as error:
@@ -229,7 +230,9 @@ El enlace de esta notificación siempre abre la página del episodio, con la ver
 
 Fecha propuesta: **{record['date']} a las 19:00, Ciudad de México**.
 
-70 s · 1080 × 1920 · 30 FPS · avatar abrazando el acertijo · prueba técnica y descarga verificadas.
+{record.get('duration_seconds',70)} s · 1080 × 1920 · 30 FPS · avatar abrazando el acertijo · prueba técnica y descarga verificadas.
+
+{('Incluye «Este es el procedimiento» después de cada respuesta: tres pasos de cuatro segundos por nivel, con operaciones para llegar al resultado.') if record.get('procedure_version') else ''}
 
 Para aprobar este archivo exacto, comenta esta línea (puedes copiarla desde el teléfono):
 
