@@ -1,0 +1,2769 @@
+{
+  "version": 1,
+  "language": "es-MX",
+  "rights": "original_project_text_and_parameters",
+  "source_note": "Redacción, datos y soluciones originales del proyecto. Dudeney se consultó como referencia temática; no se copiaron textos, traducciones ni ilustraciones.",
+  "reference_url": "https://www.gutenberg.org/ebooks/16713",
+  "difficulty_note": "Tres niveles relativos dentro de cada tema; base de secundaria y preparatoria. No certifica un programa escolar.",
+  "packs": [
+    {
+      "pack_id": "algebra-01",
+      "topic": "algebra",
+      "title": "Despeja la incógnita",
+      "rounds": [
+        {
+          "catalog_id": "algebra-01-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "linear",
+          "params": {
+            "a": 3,
+            "b": 19,
+            "c": 4
+          },
+          "question": "3x + 4 = 19. ¿Cuánto vale x?",
+          "question_lines": [
+            "3x + 4 = 19. ¿Cuánto vale x?"
+          ],
+          "next": "5",
+          "choices": [
+            "6",
+            "4",
+            "5"
+          ],
+          "correct": 2,
+          "explanation": "3x = 15; x = 5.",
+          "solution_lines": [
+            "3x = 15; x = 5."
+          ],
+          "spoken_answer": "Equis vale 5."
+        },
+        {
+          "catalog_id": "algebra-01-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "linear",
+          "params": {
+            "a": 4,
+            "b": 16,
+            "c": -8
+          },
+          "question": "4(x - 2) = 16. Halla x.",
+          "question_lines": [
+            "4(x - 2) = 16. Halla x."
+          ],
+          "next": "6",
+          "choices": [
+            "5",
+            "6",
+            "7"
+          ],
+          "correct": 1,
+          "explanation": "4x = 24; x = 6.",
+          "solution_lines": [
+            "4x = 24; x = 6."
+          ],
+          "spoken_answer": "Equis vale 6."
+        },
+        {
+          "catalog_id": "algebra-01-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "quadratic",
+          "params": {
+            "a": 5,
+            "constant": 36
+          },
+          "question": "x² - 5x = 36. Halla x positivo.",
+          "question_lines": [
+            "x² - 5x = 36. Halla x positivo."
+          ],
+          "next": "9",
+          "choices": [
+            "9",
+            "10",
+            "8"
+          ],
+          "correct": 0,
+          "explanation": "(x - 9)(x + 4) = 0; x = 9.",
+          "solution_lines": [
+            "(x - 9)(x + 4) = 0; x = 9."
+          ],
+          "spoken_answer": "Equis vale 9."
+        }
+      ]
+    },
+    {
+      "pack_id": "porcentajes-01",
+      "topic": "porcentajes",
+      "title": "Cambios porcentuales",
+      "rounds": [
+        {
+          "catalog_id": "porcentajes-01-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "percent",
+          "params": {
+            "base": 200,
+            "first": -20,
+            "second": 0
+          },
+          "question": "Precio: 200. Descuento: 20%. ¿Precio final?",
+          "question_lines": [
+            "Precio: 200. Descuento: 20%.",
+            "¿Precio final?"
+          ],
+          "next": "160",
+          "choices": [
+            "161",
+            "159",
+            "160"
+          ],
+          "correct": 2,
+          "explanation": "200 x 80/100 x 100/100 = 160.",
+          "solution_lines": [
+            "200 x 80/100 x 100/100 = 160."
+          ],
+          "spoken_answer": "El resultado es 160."
+        },
+        {
+          "catalog_id": "porcentajes-01-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "percent",
+          "params": {
+            "base": 200,
+            "first": 20,
+            "second": -20
+          },
+          "question": "Precio: 200. Sube 20% y baja 20%. ¿Final?",
+          "question_lines": [
+            "Precio: 200. Sube 20% y baja",
+            "20%. ¿Final?"
+          ],
+          "next": "192",
+          "choices": [
+            "191",
+            "192",
+            "193"
+          ],
+          "correct": 1,
+          "explanation": "200 x 120/100 x 80/100 = 192.",
+          "solution_lines": [
+            "200 x 120/100 x 80/100 = 192."
+          ],
+          "spoken_answer": "El resultado es 192."
+        },
+        {
+          "catalog_id": "porcentajes-01-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "percent",
+          "params": {
+            "base": 200,
+            "first": 25,
+            "second": -20
+          },
+          "question": "Precio: 200. Sube 25% y baja 20%. ¿Final?",
+          "question_lines": [
+            "Precio: 200. Sube 25% y baja",
+            "20%. ¿Final?"
+          ],
+          "next": "200",
+          "choices": [
+            "200",
+            "201",
+            "199"
+          ],
+          "correct": 0,
+          "explanation": "200 x 125/100 x 80/100 = 200.",
+          "solution_lines": [
+            "200 x 125/100 x 80/100 = 200."
+          ],
+          "spoken_answer": "El resultado es 200."
+        }
+      ]
+    },
+    {
+      "pack_id": "sucesiones-01",
+      "topic": "sucesiones",
+      "title": "Encuentra el término",
+      "rounds": [
+        {
+          "catalog_id": "sucesiones-01-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "sequence",
+          "params": {
+            "mode": "arithmetic",
+            "start": 3,
+            "step": 4,
+            "n": 6
+          },
+          "question": "Empieza en 3; suma 4. ¿Término 6?",
+          "question_lines": [
+            "Empieza en 3; suma 4. ¿Término",
+            "6?"
+          ],
+          "next": "23",
+          "choices": [
+            "24",
+            "22",
+            "23"
+          ],
+          "correct": 2,
+          "explanation": "3 + 5 x 4 = 23.",
+          "solution_lines": [
+            "3 + 5 x 4 = 23."
+          ],
+          "spoken_answer": "El resultado es 23."
+        },
+        {
+          "catalog_id": "sucesiones-01-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "sequence",
+          "params": {
+            "mode": "geometric",
+            "start": 2,
+            "step": 2,
+            "n": 5
+          },
+          "question": "Empieza en 2; multiplica por 2. ¿Término 5?",
+          "question_lines": [
+            "Empieza en 2; multiplica por 2.",
+            "¿Término 5?"
+          ],
+          "next": "32",
+          "choices": [
+            "31",
+            "32",
+            "33"
+          ],
+          "correct": 1,
+          "explanation": "2 x 2^4 = 32.",
+          "solution_lines": [
+            "2 x 2^4 = 32."
+          ],
+          "spoken_answer": "El resultado es 32."
+        },
+        {
+          "catalog_id": "sucesiones-01-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "sequence",
+          "params": {
+            "mode": "arithmetic",
+            "start": 5,
+            "step": 7,
+            "n": 20
+          },
+          "question": "Empieza en 5; suma 7. ¿Término 20?",
+          "question_lines": [
+            "Empieza en 5; suma 7. ¿Término",
+            "20?"
+          ],
+          "next": "138",
+          "choices": [
+            "138",
+            "139",
+            "137"
+          ],
+          "correct": 0,
+          "explanation": "5 + 19 x 7 = 138.",
+          "solution_lines": [
+            "5 + 19 x 7 = 138."
+          ],
+          "spoken_answer": "El resultado es 138."
+        }
+      ]
+    },
+    {
+      "pack_id": "geometria-01",
+      "topic": "geometria",
+      "title": "Medidas y figuras",
+      "rounds": [
+        {
+          "catalog_id": "geometria-01-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "geometry",
+          "params": {
+            "mode": "area",
+            "a": 6,
+            "b": 4
+          },
+          "question": "Rectángulo de 6 por 4. ¿Área?",
+          "question_lines": [
+            "Rectángulo de 6 por 4. ¿Área?"
+          ],
+          "next": "24",
+          "choices": [
+            "25",
+            "23",
+            "24"
+          ],
+          "correct": 2,
+          "explanation": "Área = base x altura = 24.",
+          "solution_lines": [
+            "Área = base x altura = 24."
+          ],
+          "spoken_answer": "El resultado es 24."
+        },
+        {
+          "catalog_id": "geometria-01-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "geometry",
+          "params": {
+            "mode": "hypotenuse",
+            "a": 3,
+            "b": 4
+          },
+          "question": "Triángulo rectángulo: catetos 3 y 4. ¿Hipotenusa?",
+          "question_lines": [
+            "Triángulo rectángulo: catetos 3",
+            "y 4. ¿Hipotenusa?"
+          ],
+          "next": "5",
+          "choices": [
+            "4",
+            "5",
+            "6"
+          ],
+          "correct": 1,
+          "explanation": "Pitágoras: c² = 25; c = 5.",
+          "solution_lines": [
+            "Pitágoras: c² = 25; c = 5."
+          ],
+          "spoken_answer": "El resultado es 5."
+        },
+        {
+          "catalog_id": "geometria-01-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "geometry",
+          "params": {
+            "mode": "base",
+            "area": 84,
+            "height": 6
+          },
+          "question": "Un triángulo tiene área 42 y altura 6. ¿Base?",
+          "question_lines": [
+            "Un triángulo tiene área 42 y",
+            "altura 6. ¿Base?"
+          ],
+          "next": "14",
+          "choices": [
+            "14",
+            "15",
+            "13"
+          ],
+          "correct": 0,
+          "explanation": "Base = 2 x área / 6 = 14.",
+          "solution_lines": [
+            "Base = 2 x área / 6 = 14."
+          ],
+          "spoken_answer": "El resultado es 14."
+        }
+      ]
+    },
+    {
+      "pack_id": "sistemas-01",
+      "topic": "sistemas",
+      "title": "Dos datos, una respuesta",
+      "rounds": [
+        {
+          "catalog_id": "sistemas-01-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "system",
+          "params": {
+            "mode": "sum",
+            "total": 12,
+            "difference": 6
+          },
+          "question": "x + y = 12; x - y = 6. Halla x.",
+          "question_lines": [
+            "x + y = 12; x - y = 6. Halla x."
+          ],
+          "next": "9",
+          "choices": [
+            "10",
+            "8",
+            "9"
+          ],
+          "correct": 2,
+          "explanation": "Suma las ecuaciones: 2x = 18; x = 9.",
+          "solution_lines": [
+            "Suma las ecuaciones: 2x = 18; x = 9."
+          ],
+          "spoken_answer": "La respuesta es 9."
+        },
+        {
+          "catalog_id": "sistemas-01-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "system",
+          "params": {
+            "mode": "sum",
+            "total": 13,
+            "difference": 7
+          },
+          "question": "Dos números suman 13. Difieren en 7. ¿El mayor?",
+          "question_lines": [
+            "Dos números suman 13. Difieren",
+            "en 7. ¿El mayor?"
+          ],
+          "next": "10",
+          "choices": [
+            "9",
+            "10",
+            "11"
+          ],
+          "correct": 1,
+          "explanation": "Suma las ecuaciones: 2x = 20; x = 10.",
+          "solution_lines": [
+            "Suma las ecuaciones: 2x = 20; x = 10."
+          ],
+          "spoken_answer": "La respuesta es 10."
+        },
+        {
+          "catalog_id": "sistemas-01-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "system",
+          "params": {
+            "mode": "tickets",
+            "count": 15,
+            "cheap": 20,
+            "expensive": 35,
+            "cost": 465
+          },
+          "question": "15 boletos de 20 o 35 suman 465. ¿Cuántos de 35?",
+          "question_lines": [
+            "15 boletos de 20 o 35 suman 465.",
+            "¿Cuántos de 35?"
+          ],
+          "next": "11",
+          "choices": [
+            "11",
+            "12",
+            "10"
+          ],
+          "correct": 0,
+          "explanation": "15x = 465 - 300; x = 11.",
+          "solution_lines": [
+            "15x = 465 - 300; x = 11."
+          ],
+          "spoken_answer": "La respuesta es 11."
+        }
+      ]
+    },
+    {
+      "pack_id": "potencias-01",
+      "topic": "potencias",
+      "title": "Leyes de exponentes",
+      "rounds": [
+        {
+          "catalog_id": "potencias-01-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "power",
+          "params": {
+            "base": 2,
+            "a": 2,
+            "b": 1
+          },
+          "question": "2^2 x 2^1. ¿Resultado?",
+          "question_lines": [
+            "2^2 x 2^1. ¿Resultado?"
+          ],
+          "next": "8",
+          "choices": [
+            "9",
+            "7",
+            "8"
+          ],
+          "correct": 2,
+          "explanation": "Suma exponentes: 2^3 = 8.",
+          "solution_lines": [
+            "Suma exponentes: 2^3 = 8."
+          ],
+          "spoken_answer": "El resultado es 8."
+        },
+        {
+          "catalog_id": "potencias-01-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "power",
+          "params": {
+            "base": 2,
+            "a": 5,
+            "b": -3
+          },
+          "question": "2^5 x 2^-3. ¿Resultado?",
+          "question_lines": [
+            "2^5 x 2^-3. ¿Resultado?"
+          ],
+          "next": "4",
+          "choices": [
+            "3",
+            "4",
+            "5"
+          ],
+          "correct": 1,
+          "explanation": "Suma exponentes: 2^2 = 4.",
+          "solution_lines": [
+            "Suma exponentes: 2^2 = 4."
+          ],
+          "spoken_answer": "El resultado es 4."
+        },
+        {
+          "catalog_id": "potencias-01-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "power",
+          "params": {
+            "base": 2,
+            "a": -2,
+            "b": 3
+          },
+          "question": "2^-2 x 2^3. ¿Resultado?",
+          "question_lines": [
+            "2^-2 x 2^3. ¿Resultado?"
+          ],
+          "next": "2",
+          "choices": [
+            "2",
+            "3",
+            "1"
+          ],
+          "correct": 0,
+          "explanation": "Suma exponentes: 2^1 = 2.",
+          "solution_lines": [
+            "Suma exponentes: 2^1 = 2."
+          ],
+          "spoken_answer": "El resultado es 2."
+        }
+      ]
+    },
+    {
+      "pack_id": "funciones-01",
+      "topic": "funciones",
+      "title": "Evalúa la función",
+      "rounds": [
+        {
+          "catalog_id": "funciones-01-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "function",
+          "params": {
+            "a": 0,
+            "b": 2,
+            "c": 3,
+            "x": 4
+          },
+          "question": "f(x) = 2x + 3. ¿f(4)?",
+          "question_lines": [
+            "f(x) = 2x + 3. ¿f(4)?"
+          ],
+          "next": "11",
+          "choices": [
+            "12",
+            "10",
+            "11"
+          ],
+          "correct": 2,
+          "explanation": "Sustituye x por 4: f(4) = 11.",
+          "solution_lines": [
+            "Sustituye x por 4: f(4) = 11."
+          ],
+          "spoken_answer": "El resultado es 11."
+        },
+        {
+          "catalog_id": "funciones-01-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "function",
+          "params": {
+            "a": 1,
+            "b": 0,
+            "c": -3,
+            "x": 5
+          },
+          "question": "f(x) = x² - 3. ¿f(5)?",
+          "question_lines": [
+            "f(x) = x² - 3. ¿f(5)?"
+          ],
+          "next": "22",
+          "choices": [
+            "21",
+            "22",
+            "23"
+          ],
+          "correct": 1,
+          "explanation": "Sustituye x por 5: f(5) = 22.",
+          "solution_lines": [
+            "Sustituye x por 5: f(5) = 22."
+          ],
+          "spoken_answer": "El resultado es 22."
+        },
+        {
+          "catalog_id": "funciones-01-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "function",
+          "params": {
+            "a": 1,
+            "b": -3,
+            "c": 2,
+            "x": -2
+          },
+          "question": "f(x) = x² - 3x + 2. ¿f(-2)?",
+          "question_lines": [
+            "f(x) = x² - 3x + 2. ¿f(-2)?"
+          ],
+          "next": "12",
+          "choices": [
+            "12",
+            "13",
+            "11"
+          ],
+          "correct": 0,
+          "explanation": "Sustituye x por -2: f(-2) = 12.",
+          "solution_lines": [
+            "Sustituye x por -2: f(-2) = 12."
+          ],
+          "spoken_answer": "El resultado es 12."
+        }
+      ]
+    },
+    {
+      "pack_id": "probabilidad-01",
+      "topic": "probabilidad",
+      "title": "Azar sin reemplazo",
+      "rounds": [
+        {
+          "catalog_id": "probabilidad-01-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "probability",
+          "params": {
+            "red": 3,
+            "blue": 2,
+            "draws": 1
+          },
+          "question": "3 rojas y 2 azules. Sacas 1 sin devolver. ¿P(todas rojas)?",
+          "question_lines": [
+            "3 rojas y 2 azules. Sacas 1 sin",
+            "devolver. ¿P(todas rojas)?"
+          ],
+          "next": "3/5",
+          "choices": [
+            "2/5",
+            "1/2",
+            "3/5"
+          ],
+          "correct": 2,
+          "explanation": "3/5 = 3/5. Casos favorables / total.",
+          "solution_lines": [
+            "3/5 = 3/5. Casos favorables / total."
+          ],
+          "spoken_answer": "La probabilidad es 3/5."
+        },
+        {
+          "catalog_id": "probabilidad-01-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "probability",
+          "params": {
+            "red": 4,
+            "blue": 3,
+            "draws": 2
+          },
+          "question": "4 rojas y 3 azules. Sacas 2 sin devolver. ¿P(todas rojas)?",
+          "question_lines": [
+            "4 rojas y 3 azules. Sacas 2 sin",
+            "devolver. ¿P(todas rojas)?"
+          ],
+          "next": "2/7",
+          "choices": [
+            "5/7",
+            "2/7",
+            "4/7"
+          ],
+          "correct": 1,
+          "explanation": "6/21 = 2/7. Casos favorables / total.",
+          "solution_lines": [
+            "6/21 = 2/7. Casos favorables / total."
+          ],
+          "spoken_answer": "La probabilidad es 2/7."
+        },
+        {
+          "catalog_id": "probabilidad-01-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "probability",
+          "params": {
+            "red": 5,
+            "blue": 3,
+            "draws": 3
+          },
+          "question": "5 rojas y 3 azules. Sacas 3 sin devolver. ¿P(todas rojas)?",
+          "question_lines": [
+            "5 rojas y 3 azules. Sacas 3 sin",
+            "devolver. ¿P(todas rojas)?"
+          ],
+          "next": "5/28",
+          "choices": [
+            "5/28",
+            "5/8",
+            "23/28"
+          ],
+          "correct": 0,
+          "explanation": "10/56 = 5/28. Casos favorables / total.",
+          "solution_lines": [
+            "10/56 = 5/28. Casos favorables /",
+            "total."
+          ],
+          "spoken_answer": "La probabilidad es 5/28."
+        }
+      ]
+    },
+    {
+      "pack_id": "combinatoria-01",
+      "topic": "combinatoria",
+      "title": "Cuenta las posibilidades",
+      "rounds": [
+        {
+          "catalog_id": "combinatoria-01-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "counting",
+          "params": {
+            "mode": "product",
+            "a": 3,
+            "b": 4
+          },
+          "question": "3 camisas y 4 pantalones. ¿Cuántos conjuntos?",
+          "question_lines": [
+            "3 camisas y 4 pantalones.",
+            "¿Cuántos conjuntos?"
+          ],
+          "next": "12",
+          "choices": [
+            "13",
+            "11",
+            "12"
+          ],
+          "correct": 2,
+          "explanation": "3 x 4 = 12 conjuntos.",
+          "solution_lines": [
+            "3 x 4 = 12 conjuntos."
+          ],
+          "spoken_answer": "El resultado es 12."
+        },
+        {
+          "catalog_id": "combinatoria-01-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "counting",
+          "params": {
+            "mode": "choose",
+            "a": 5,
+            "b": 2
+          },
+          "question": "Elige 2 de 5 personas. No importa el orden. ¿Grupos?",
+          "question_lines": [
+            "Elige 2 de 5 personas. No",
+            "importa el orden. ¿Grupos?"
+          ],
+          "next": "10",
+          "choices": [
+            "9",
+            "10",
+            "11"
+          ],
+          "correct": 1,
+          "explanation": "C(5,2) = 10. Sin repetir personas.",
+          "solution_lines": [
+            "C(5,2) = 10. Sin repetir personas."
+          ],
+          "spoken_answer": "El resultado es 10."
+        },
+        {
+          "catalog_id": "combinatoria-01-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "counting",
+          "params": {
+            "mode": "ordered",
+            "a": 5,
+            "b": 3
+          },
+          "question": "De 5 personas, elige 3 cargos distintos. ¿Formas?",
+          "question_lines": [
+            "De 5 personas, elige 3 cargos",
+            "distintos. ¿Formas?"
+          ],
+          "next": "60",
+          "choices": [
+            "60",
+            "61",
+            "59"
+          ],
+          "correct": 0,
+          "explanation": "5 x 4 x 3 = 60. Sí importa el orden.",
+          "solution_lines": [
+            "5 x 4 x 3 = 60. Sí importa el orden."
+          ],
+          "spoken_answer": "El resultado es 60."
+        }
+      ]
+    },
+    {
+      "pack_id": "promedios-01",
+      "topic": "promedios",
+      "title": "El dato que falta",
+      "rounds": [
+        {
+          "catalog_id": "promedios-01-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "average",
+          "params": {
+            "known": [
+              6,
+              8
+            ],
+            "target": 8,
+            "count": 3
+          },
+          "question": "Datos: 6, 8 y x. Promedio: 8. ¿x?",
+          "question_lines": [
+            "Datos: 6, 8 y x. Promedio: 8.",
+            "¿x?"
+          ],
+          "next": "10",
+          "choices": [
+            "11",
+            "9",
+            "10"
+          ],
+          "correct": 2,
+          "explanation": "Total = 8 x 3; x = 10.",
+          "solution_lines": [
+            "Total = 8 x 3; x = 10."
+          ],
+          "spoken_answer": "El dato faltante es 10."
+        },
+        {
+          "catalog_id": "promedios-01-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "average",
+          "params": {
+            "known": [
+              7,
+              8,
+              9
+            ],
+            "target": 9,
+            "count": 4
+          },
+          "question": "Datos: 7, 8, 9 y x. Promedio: 9. ¿x?",
+          "question_lines": [
+            "Datos: 7, 8, 9 y x. Promedio: 9.",
+            "¿x?"
+          ],
+          "next": "12",
+          "choices": [
+            "11",
+            "12",
+            "13"
+          ],
+          "correct": 1,
+          "explanation": "Total = 9 x 4; x = 12.",
+          "solution_lines": [
+            "Total = 9 x 4; x = 12."
+          ],
+          "spoken_answer": "El dato faltante es 12."
+        },
+        {
+          "catalog_id": "promedios-01-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "average",
+          "params": {
+            "known": [
+              6,
+              7,
+              8,
+              9
+            ],
+            "target": 9,
+            "count": 5
+          },
+          "question": "Datos: 6, 7, 8, 9 y x. Promedio: 9. ¿x?",
+          "question_lines": [
+            "Datos: 6, 7, 8, 9 y x. Promedio:",
+            "9. ¿x?"
+          ],
+          "next": "15",
+          "choices": [
+            "15",
+            "16",
+            "14"
+          ],
+          "correct": 0,
+          "explanation": "Total = 9 x 5; x = 15.",
+          "solution_lines": [
+            "Total = 9 x 5; x = 15."
+          ],
+          "spoken_answer": "El dato faltante es 15."
+        }
+      ]
+    },
+    {
+      "pack_id": "algebra-02",
+      "topic": "algebra",
+      "title": "Despeja la incógnita",
+      "rounds": [
+        {
+          "catalog_id": "algebra-02-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "linear",
+          "params": {
+            "a": 4,
+            "b": 28,
+            "c": 4
+          },
+          "question": "4x + 4 = 28. ¿Cuánto vale x?",
+          "question_lines": [
+            "4x + 4 = 28. ¿Cuánto vale x?"
+          ],
+          "next": "6",
+          "choices": [
+            "5",
+            "6",
+            "7"
+          ],
+          "correct": 1,
+          "explanation": "4x = 24; x = 6.",
+          "solution_lines": [
+            "4x = 24; x = 6."
+          ],
+          "spoken_answer": "Equis vale 6."
+        },
+        {
+          "catalog_id": "algebra-02-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "linear",
+          "params": {
+            "a": 5,
+            "b": 25,
+            "c": -10
+          },
+          "question": "5(x - 2) = 25. Halla x.",
+          "question_lines": [
+            "5(x - 2) = 25. Halla x."
+          ],
+          "next": "7",
+          "choices": [
+            "7",
+            "8",
+            "6"
+          ],
+          "correct": 0,
+          "explanation": "5x = 35; x = 7.",
+          "solution_lines": [
+            "5x = 35; x = 7."
+          ],
+          "spoken_answer": "Equis vale 7."
+        },
+        {
+          "catalog_id": "algebra-02-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "quadratic",
+          "params": {
+            "a": 6,
+            "constant": 40
+          },
+          "question": "x² - 6x = 40. Halla x positivo.",
+          "question_lines": [
+            "x² - 6x = 40. Halla x positivo."
+          ],
+          "next": "10",
+          "choices": [
+            "11",
+            "9",
+            "10"
+          ],
+          "correct": 2,
+          "explanation": "(x - 10)(x + 4) = 0; x = 10.",
+          "solution_lines": [
+            "(x - 10)(x + 4) = 0; x = 10."
+          ],
+          "spoken_answer": "Equis vale 10."
+        }
+      ]
+    },
+    {
+      "pack_id": "porcentajes-02",
+      "topic": "porcentajes",
+      "title": "Cambios porcentuales",
+      "rounds": [
+        {
+          "catalog_id": "porcentajes-02-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "percent",
+          "params": {
+            "base": 300,
+            "first": -20,
+            "second": 0
+          },
+          "question": "Precio: 300. Descuento: 20%. ¿Precio final?",
+          "question_lines": [
+            "Precio: 300. Descuento: 20%.",
+            "¿Precio final?"
+          ],
+          "next": "240",
+          "choices": [
+            "239",
+            "240",
+            "241"
+          ],
+          "correct": 1,
+          "explanation": "300 x 80/100 x 100/100 = 240.",
+          "solution_lines": [
+            "300 x 80/100 x 100/100 = 240."
+          ],
+          "spoken_answer": "El resultado es 240."
+        },
+        {
+          "catalog_id": "porcentajes-02-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "percent",
+          "params": {
+            "base": 300,
+            "first": 20,
+            "second": -20
+          },
+          "question": "Precio: 300. Sube 20% y baja 20%. ¿Final?",
+          "question_lines": [
+            "Precio: 300. Sube 20% y baja",
+            "20%. ¿Final?"
+          ],
+          "next": "288",
+          "choices": [
+            "288",
+            "289",
+            "287"
+          ],
+          "correct": 0,
+          "explanation": "300 x 120/100 x 80/100 = 288.",
+          "solution_lines": [
+            "300 x 120/100 x 80/100 = 288."
+          ],
+          "spoken_answer": "El resultado es 288."
+        },
+        {
+          "catalog_id": "porcentajes-02-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "percent",
+          "params": {
+            "base": 300,
+            "first": 25,
+            "second": -20
+          },
+          "question": "Precio: 300. Sube 25% y baja 20%. ¿Final?",
+          "question_lines": [
+            "Precio: 300. Sube 25% y baja",
+            "20%. ¿Final?"
+          ],
+          "next": "300",
+          "choices": [
+            "301",
+            "299",
+            "300"
+          ],
+          "correct": 2,
+          "explanation": "300 x 125/100 x 80/100 = 300.",
+          "solution_lines": [
+            "300 x 125/100 x 80/100 = 300."
+          ],
+          "spoken_answer": "El resultado es 300."
+        }
+      ]
+    },
+    {
+      "pack_id": "sucesiones-02",
+      "topic": "sucesiones",
+      "title": "Encuentra el término",
+      "rounds": [
+        {
+          "catalog_id": "sucesiones-02-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "sequence",
+          "params": {
+            "mode": "arithmetic",
+            "start": 4,
+            "step": 4,
+            "n": 6
+          },
+          "question": "Empieza en 4; suma 4. ¿Término 6?",
+          "question_lines": [
+            "Empieza en 4; suma 4. ¿Término",
+            "6?"
+          ],
+          "next": "24",
+          "choices": [
+            "23",
+            "24",
+            "25"
+          ],
+          "correct": 1,
+          "explanation": "4 + 5 x 4 = 24.",
+          "solution_lines": [
+            "4 + 5 x 4 = 24."
+          ],
+          "spoken_answer": "El resultado es 24."
+        },
+        {
+          "catalog_id": "sucesiones-02-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "sequence",
+          "params": {
+            "mode": "geometric",
+            "start": 3,
+            "step": 2,
+            "n": 5
+          },
+          "question": "Empieza en 3; multiplica por 2. ¿Término 5?",
+          "question_lines": [
+            "Empieza en 3; multiplica por 2.",
+            "¿Término 5?"
+          ],
+          "next": "48",
+          "choices": [
+            "48",
+            "49",
+            "47"
+          ],
+          "correct": 0,
+          "explanation": "3 x 2^4 = 48.",
+          "solution_lines": [
+            "3 x 2^4 = 48."
+          ],
+          "spoken_answer": "El resultado es 48."
+        },
+        {
+          "catalog_id": "sucesiones-02-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "sequence",
+          "params": {
+            "mode": "arithmetic",
+            "start": 6,
+            "step": 7,
+            "n": 20
+          },
+          "question": "Empieza en 6; suma 7. ¿Término 20?",
+          "question_lines": [
+            "Empieza en 6; suma 7. ¿Término",
+            "20?"
+          ],
+          "next": "139",
+          "choices": [
+            "140",
+            "138",
+            "139"
+          ],
+          "correct": 2,
+          "explanation": "6 + 19 x 7 = 139.",
+          "solution_lines": [
+            "6 + 19 x 7 = 139."
+          ],
+          "spoken_answer": "El resultado es 139."
+        }
+      ]
+    },
+    {
+      "pack_id": "geometria-02",
+      "topic": "geometria",
+      "title": "Medidas y figuras",
+      "rounds": [
+        {
+          "catalog_id": "geometria-02-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "geometry",
+          "params": {
+            "mode": "area",
+            "a": 7,
+            "b": 4
+          },
+          "question": "Rectángulo de 7 por 4. ¿Área?",
+          "question_lines": [
+            "Rectángulo de 7 por 4. ¿Área?"
+          ],
+          "next": "28",
+          "choices": [
+            "27",
+            "28",
+            "29"
+          ],
+          "correct": 1,
+          "explanation": "Área = base x altura = 28.",
+          "solution_lines": [
+            "Área = base x altura = 28."
+          ],
+          "spoken_answer": "El resultado es 28."
+        },
+        {
+          "catalog_id": "geometria-02-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "geometry",
+          "params": {
+            "mode": "hypotenuse",
+            "a": 6,
+            "b": 8
+          },
+          "question": "Triángulo rectángulo: catetos 6 y 8. ¿Hipotenusa?",
+          "question_lines": [
+            "Triángulo rectángulo: catetos 6",
+            "y 8. ¿Hipotenusa?"
+          ],
+          "next": "10",
+          "choices": [
+            "10",
+            "11",
+            "9"
+          ],
+          "correct": 0,
+          "explanation": "Pitágoras: c² = 100; c = 10.",
+          "solution_lines": [
+            "Pitágoras: c² = 100; c = 10."
+          ],
+          "spoken_answer": "El resultado es 10."
+        },
+        {
+          "catalog_id": "geometria-02-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "geometry",
+          "params": {
+            "mode": "base",
+            "area": 96,
+            "height": 6
+          },
+          "question": "Un triángulo tiene área 48 y altura 6. ¿Base?",
+          "question_lines": [
+            "Un triángulo tiene área 48 y",
+            "altura 6. ¿Base?"
+          ],
+          "next": "16",
+          "choices": [
+            "17",
+            "15",
+            "16"
+          ],
+          "correct": 2,
+          "explanation": "Base = 2 x área / 6 = 16.",
+          "solution_lines": [
+            "Base = 2 x área / 6 = 16."
+          ],
+          "spoken_answer": "El resultado es 16."
+        }
+      ]
+    },
+    {
+      "pack_id": "sistemas-02",
+      "topic": "sistemas",
+      "title": "Dos datos, una respuesta",
+      "rounds": [
+        {
+          "catalog_id": "sistemas-02-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "system",
+          "params": {
+            "mode": "sum",
+            "total": 14,
+            "difference": 6
+          },
+          "question": "x + y = 14; x - y = 6. Halla x.",
+          "question_lines": [
+            "x + y = 14; x - y = 6. Halla x."
+          ],
+          "next": "10",
+          "choices": [
+            "9",
+            "10",
+            "11"
+          ],
+          "correct": 1,
+          "explanation": "Suma las ecuaciones: 2x = 20; x = 10.",
+          "solution_lines": [
+            "Suma las ecuaciones: 2x = 20; x = 10."
+          ],
+          "spoken_answer": "La respuesta es 10."
+        },
+        {
+          "catalog_id": "sistemas-02-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "system",
+          "params": {
+            "mode": "sum",
+            "total": 15,
+            "difference": 7
+          },
+          "question": "Dos números suman 15. Difieren en 7. ¿El mayor?",
+          "question_lines": [
+            "Dos números suman 15. Difieren",
+            "en 7. ¿El mayor?"
+          ],
+          "next": "11",
+          "choices": [
+            "11",
+            "12",
+            "10"
+          ],
+          "correct": 0,
+          "explanation": "Suma las ecuaciones: 2x = 22; x = 11.",
+          "solution_lines": [
+            "Suma las ecuaciones: 2x = 22; x = 11."
+          ],
+          "spoken_answer": "La respuesta es 11."
+        },
+        {
+          "catalog_id": "sistemas-02-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "system",
+          "params": {
+            "mode": "tickets",
+            "count": 16,
+            "cheap": 20,
+            "expensive": 35,
+            "cost": 500
+          },
+          "question": "16 boletos de 20 o 35 suman 500. ¿Cuántos de 35?",
+          "question_lines": [
+            "16 boletos de 20 o 35 suman 500.",
+            "¿Cuántos de 35?"
+          ],
+          "next": "12",
+          "choices": [
+            "13",
+            "11",
+            "12"
+          ],
+          "correct": 2,
+          "explanation": "15x = 500 - 320; x = 12.",
+          "solution_lines": [
+            "15x = 500 - 320; x = 12."
+          ],
+          "spoken_answer": "La respuesta es 12."
+        }
+      ]
+    },
+    {
+      "pack_id": "potencias-02",
+      "topic": "potencias",
+      "title": "Leyes de exponentes",
+      "rounds": [
+        {
+          "catalog_id": "potencias-02-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "power",
+          "params": {
+            "base": 3,
+            "a": 2,
+            "b": 1
+          },
+          "question": "3^2 x 3^1. ¿Resultado?",
+          "question_lines": [
+            "3^2 x 3^1. ¿Resultado?"
+          ],
+          "next": "27",
+          "choices": [
+            "26",
+            "27",
+            "28"
+          ],
+          "correct": 1,
+          "explanation": "Suma exponentes: 3^3 = 27.",
+          "solution_lines": [
+            "Suma exponentes: 3^3 = 27."
+          ],
+          "spoken_answer": "El resultado es 27."
+        },
+        {
+          "catalog_id": "potencias-02-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "power",
+          "params": {
+            "base": 3,
+            "a": 5,
+            "b": -3
+          },
+          "question": "3^5 x 3^-3. ¿Resultado?",
+          "question_lines": [
+            "3^5 x 3^-3. ¿Resultado?"
+          ],
+          "next": "9",
+          "choices": [
+            "9",
+            "10",
+            "8"
+          ],
+          "correct": 0,
+          "explanation": "Suma exponentes: 3^2 = 9.",
+          "solution_lines": [
+            "Suma exponentes: 3^2 = 9."
+          ],
+          "spoken_answer": "El resultado es 9."
+        },
+        {
+          "catalog_id": "potencias-02-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "power",
+          "params": {
+            "base": 3,
+            "a": -2,
+            "b": 3
+          },
+          "question": "3^-2 x 3^3. ¿Resultado?",
+          "question_lines": [
+            "3^-2 x 3^3. ¿Resultado?"
+          ],
+          "next": "3",
+          "choices": [
+            "4",
+            "2",
+            "3"
+          ],
+          "correct": 2,
+          "explanation": "Suma exponentes: 3^1 = 3.",
+          "solution_lines": [
+            "Suma exponentes: 3^1 = 3."
+          ],
+          "spoken_answer": "El resultado es 3."
+        }
+      ]
+    },
+    {
+      "pack_id": "funciones-02",
+      "topic": "funciones",
+      "title": "Evalúa la función",
+      "rounds": [
+        {
+          "catalog_id": "funciones-02-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "function",
+          "params": {
+            "a": 0,
+            "b": 3,
+            "c": 3,
+            "x": 4
+          },
+          "question": "f(x) = 3x + 3. ¿f(4)?",
+          "question_lines": [
+            "f(x) = 3x + 3. ¿f(4)?"
+          ],
+          "next": "15",
+          "choices": [
+            "14",
+            "15",
+            "16"
+          ],
+          "correct": 1,
+          "explanation": "Sustituye x por 4: f(4) = 15.",
+          "solution_lines": [
+            "Sustituye x por 4: f(4) = 15."
+          ],
+          "spoken_answer": "El resultado es 15."
+        },
+        {
+          "catalog_id": "funciones-02-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "function",
+          "params": {
+            "a": 1,
+            "b": 0,
+            "c": -4,
+            "x": 5
+          },
+          "question": "f(x) = x² - 4. ¿f(5)?",
+          "question_lines": [
+            "f(x) = x² - 4. ¿f(5)?"
+          ],
+          "next": "21",
+          "choices": [
+            "21",
+            "22",
+            "20"
+          ],
+          "correct": 0,
+          "explanation": "Sustituye x por 5: f(5) = 21.",
+          "solution_lines": [
+            "Sustituye x por 5: f(5) = 21."
+          ],
+          "spoken_answer": "El resultado es 21."
+        },
+        {
+          "catalog_id": "funciones-02-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "function",
+          "params": {
+            "a": 1,
+            "b": -4,
+            "c": 2,
+            "x": -2
+          },
+          "question": "f(x) = x² - 4x + 2. ¿f(-2)?",
+          "question_lines": [
+            "f(x) = x² - 4x + 2. ¿f(-2)?"
+          ],
+          "next": "14",
+          "choices": [
+            "15",
+            "13",
+            "14"
+          ],
+          "correct": 2,
+          "explanation": "Sustituye x por -2: f(-2) = 14.",
+          "solution_lines": [
+            "Sustituye x por -2: f(-2) = 14."
+          ],
+          "spoken_answer": "El resultado es 14."
+        }
+      ]
+    },
+    {
+      "pack_id": "probabilidad-02",
+      "topic": "probabilidad",
+      "title": "Azar sin reemplazo",
+      "rounds": [
+        {
+          "catalog_id": "probabilidad-02-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "probability",
+          "params": {
+            "red": 4,
+            "blue": 2,
+            "draws": 1
+          },
+          "question": "4 rojas y 2 azules. Sacas 1 sin devolver. ¿P(todas rojas)?",
+          "question_lines": [
+            "4 rojas y 2 azules. Sacas 1 sin",
+            "devolver. ¿P(todas rojas)?"
+          ],
+          "next": "2/3",
+          "choices": [
+            "4/7",
+            "2/3",
+            "1/3"
+          ],
+          "correct": 1,
+          "explanation": "4/6 = 2/3. Casos favorables / total.",
+          "solution_lines": [
+            "4/6 = 2/3. Casos favorables / total."
+          ],
+          "spoken_answer": "La probabilidad es 2/3."
+        },
+        {
+          "catalog_id": "probabilidad-02-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "probability",
+          "params": {
+            "red": 5,
+            "blue": 3,
+            "draws": 2
+          },
+          "question": "5 rojas y 3 azules. Sacas 2 sin devolver. ¿P(todas rojas)?",
+          "question_lines": [
+            "5 rojas y 3 azules. Sacas 2 sin",
+            "devolver. ¿P(todas rojas)?"
+          ],
+          "next": "5/14",
+          "choices": [
+            "5/14",
+            "5/8",
+            "9/14"
+          ],
+          "correct": 0,
+          "explanation": "10/28 = 5/14. Casos favorables / total.",
+          "solution_lines": [
+            "10/28 = 5/14. Casos favorables /",
+            "total."
+          ],
+          "spoken_answer": "La probabilidad es 5/14."
+        },
+        {
+          "catalog_id": "probabilidad-02-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "probability",
+          "params": {
+            "red": 6,
+            "blue": 3,
+            "draws": 3
+          },
+          "question": "6 rojas y 3 azules. Sacas 3 sin devolver. ¿P(todas rojas)?",
+          "question_lines": [
+            "6 rojas y 3 azules. Sacas 3 sin",
+            "devolver. ¿P(todas rojas)?"
+          ],
+          "next": "5/21",
+          "choices": [
+            "2/3",
+            "16/21",
+            "5/21"
+          ],
+          "correct": 2,
+          "explanation": "20/84 = 5/21. Casos favorables / total.",
+          "solution_lines": [
+            "20/84 = 5/21. Casos favorables /",
+            "total."
+          ],
+          "spoken_answer": "La probabilidad es 5/21."
+        }
+      ]
+    },
+    {
+      "pack_id": "combinatoria-02",
+      "topic": "combinatoria",
+      "title": "Cuenta las posibilidades",
+      "rounds": [
+        {
+          "catalog_id": "combinatoria-02-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "counting",
+          "params": {
+            "mode": "product",
+            "a": 4,
+            "b": 4
+          },
+          "question": "4 camisas y 4 pantalones. ¿Cuántos conjuntos?",
+          "question_lines": [
+            "4 camisas y 4 pantalones.",
+            "¿Cuántos conjuntos?"
+          ],
+          "next": "16",
+          "choices": [
+            "15",
+            "16",
+            "17"
+          ],
+          "correct": 1,
+          "explanation": "4 x 4 = 16 conjuntos.",
+          "solution_lines": [
+            "4 x 4 = 16 conjuntos."
+          ],
+          "spoken_answer": "El resultado es 16."
+        },
+        {
+          "catalog_id": "combinatoria-02-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "counting",
+          "params": {
+            "mode": "choose",
+            "a": 6,
+            "b": 2
+          },
+          "question": "Elige 2 de 6 personas. No importa el orden. ¿Grupos?",
+          "question_lines": [
+            "Elige 2 de 6 personas. No",
+            "importa el orden. ¿Grupos?"
+          ],
+          "next": "15",
+          "choices": [
+            "15",
+            "16",
+            "14"
+          ],
+          "correct": 0,
+          "explanation": "C(6,2) = 15. Sin repetir personas.",
+          "solution_lines": [
+            "C(6,2) = 15. Sin repetir personas."
+          ],
+          "spoken_answer": "El resultado es 15."
+        },
+        {
+          "catalog_id": "combinatoria-02-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "counting",
+          "params": {
+            "mode": "ordered",
+            "a": 6,
+            "b": 3
+          },
+          "question": "De 6 personas, elige 3 cargos distintos. ¿Formas?",
+          "question_lines": [
+            "De 6 personas, elige 3 cargos",
+            "distintos. ¿Formas?"
+          ],
+          "next": "120",
+          "choices": [
+            "121",
+            "119",
+            "120"
+          ],
+          "correct": 2,
+          "explanation": "6 x 5 x 4 = 120. Sí importa el orden.",
+          "solution_lines": [
+            "6 x 5 x 4 = 120. Sí importa el orden."
+          ],
+          "spoken_answer": "El resultado es 120."
+        }
+      ]
+    },
+    {
+      "pack_id": "promedios-02",
+      "topic": "promedios",
+      "title": "El dato que falta",
+      "rounds": [
+        {
+          "catalog_id": "promedios-02-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "average",
+          "params": {
+            "known": [
+              7,
+              8
+            ],
+            "target": 8,
+            "count": 3
+          },
+          "question": "Datos: 7, 8 y x. Promedio: 8. ¿x?",
+          "question_lines": [
+            "Datos: 7, 8 y x. Promedio: 8.",
+            "¿x?"
+          ],
+          "next": "9",
+          "choices": [
+            "8",
+            "9",
+            "10"
+          ],
+          "correct": 1,
+          "explanation": "Total = 8 x 3; x = 9.",
+          "solution_lines": [
+            "Total = 8 x 3; x = 9."
+          ],
+          "spoken_answer": "El dato faltante es 9."
+        },
+        {
+          "catalog_id": "promedios-02-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "average",
+          "params": {
+            "known": [
+              8,
+              8,
+              9
+            ],
+            "target": 9,
+            "count": 4
+          },
+          "question": "Datos: 8, 8, 9 y x. Promedio: 9. ¿x?",
+          "question_lines": [
+            "Datos: 8, 8, 9 y x. Promedio: 9.",
+            "¿x?"
+          ],
+          "next": "11",
+          "choices": [
+            "11",
+            "12",
+            "10"
+          ],
+          "correct": 0,
+          "explanation": "Total = 9 x 4; x = 11.",
+          "solution_lines": [
+            "Total = 9 x 4; x = 11."
+          ],
+          "spoken_answer": "El dato faltante es 11."
+        },
+        {
+          "catalog_id": "promedios-02-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "average",
+          "params": {
+            "known": [
+              7,
+              7,
+              8,
+              9
+            ],
+            "target": 9,
+            "count": 5
+          },
+          "question": "Datos: 7, 7, 8, 9 y x. Promedio: 9. ¿x?",
+          "question_lines": [
+            "Datos: 7, 7, 8, 9 y x. Promedio:",
+            "9. ¿x?"
+          ],
+          "next": "14",
+          "choices": [
+            "15",
+            "13",
+            "14"
+          ],
+          "correct": 2,
+          "explanation": "Total = 9 x 5; x = 14.",
+          "solution_lines": [
+            "Total = 9 x 5; x = 14."
+          ],
+          "spoken_answer": "El dato faltante es 14."
+        }
+      ]
+    },
+    {
+      "pack_id": "algebra-03",
+      "topic": "algebra",
+      "title": "Despeja la incógnita",
+      "rounds": [
+        {
+          "catalog_id": "algebra-03-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "linear",
+          "params": {
+            "a": 5,
+            "b": 39,
+            "c": 4
+          },
+          "question": "5x + 4 = 39. ¿Cuánto vale x?",
+          "question_lines": [
+            "5x + 4 = 39. ¿Cuánto vale x?"
+          ],
+          "next": "7",
+          "choices": [
+            "7",
+            "8",
+            "6"
+          ],
+          "correct": 0,
+          "explanation": "5x = 35; x = 7.",
+          "solution_lines": [
+            "5x = 35; x = 7."
+          ],
+          "spoken_answer": "Equis vale 7."
+        },
+        {
+          "catalog_id": "algebra-03-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "linear",
+          "params": {
+            "a": 6,
+            "b": 36,
+            "c": -12
+          },
+          "question": "6(x - 2) = 36. Halla x.",
+          "question_lines": [
+            "6(x - 2) = 36. Halla x."
+          ],
+          "next": "8",
+          "choices": [
+            "9",
+            "7",
+            "8"
+          ],
+          "correct": 2,
+          "explanation": "6x = 48; x = 8.",
+          "solution_lines": [
+            "6x = 48; x = 8."
+          ],
+          "spoken_answer": "Equis vale 8."
+        },
+        {
+          "catalog_id": "algebra-03-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "quadratic",
+          "params": {
+            "a": 7,
+            "constant": 44
+          },
+          "question": "x² - 7x = 44. Halla x positivo.",
+          "question_lines": [
+            "x² - 7x = 44. Halla x positivo."
+          ],
+          "next": "11",
+          "choices": [
+            "10",
+            "11",
+            "12"
+          ],
+          "correct": 1,
+          "explanation": "(x - 11)(x + 4) = 0; x = 11.",
+          "solution_lines": [
+            "(x - 11)(x + 4) = 0; x = 11."
+          ],
+          "spoken_answer": "Equis vale 11."
+        }
+      ]
+    },
+    {
+      "pack_id": "porcentajes-03",
+      "topic": "porcentajes",
+      "title": "Cambios porcentuales",
+      "rounds": [
+        {
+          "catalog_id": "porcentajes-03-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "percent",
+          "params": {
+            "base": 400,
+            "first": -20,
+            "second": 0
+          },
+          "question": "Precio: 400. Descuento: 20%. ¿Precio final?",
+          "question_lines": [
+            "Precio: 400. Descuento: 20%.",
+            "¿Precio final?"
+          ],
+          "next": "320",
+          "choices": [
+            "320",
+            "321",
+            "319"
+          ],
+          "correct": 0,
+          "explanation": "400 x 80/100 x 100/100 = 320.",
+          "solution_lines": [
+            "400 x 80/100 x 100/100 = 320."
+          ],
+          "spoken_answer": "El resultado es 320."
+        },
+        {
+          "catalog_id": "porcentajes-03-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "percent",
+          "params": {
+            "base": 400,
+            "first": 20,
+            "second": -20
+          },
+          "question": "Precio: 400. Sube 20% y baja 20%. ¿Final?",
+          "question_lines": [
+            "Precio: 400. Sube 20% y baja",
+            "20%. ¿Final?"
+          ],
+          "next": "384",
+          "choices": [
+            "385",
+            "383",
+            "384"
+          ],
+          "correct": 2,
+          "explanation": "400 x 120/100 x 80/100 = 384.",
+          "solution_lines": [
+            "400 x 120/100 x 80/100 = 384."
+          ],
+          "spoken_answer": "El resultado es 384."
+        },
+        {
+          "catalog_id": "porcentajes-03-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "percent",
+          "params": {
+            "base": 400,
+            "first": 25,
+            "second": -20
+          },
+          "question": "Precio: 400. Sube 25% y baja 20%. ¿Final?",
+          "question_lines": [
+            "Precio: 400. Sube 25% y baja",
+            "20%. ¿Final?"
+          ],
+          "next": "400",
+          "choices": [
+            "399",
+            "400",
+            "401"
+          ],
+          "correct": 1,
+          "explanation": "400 x 125/100 x 80/100 = 400.",
+          "solution_lines": [
+            "400 x 125/100 x 80/100 = 400."
+          ],
+          "spoken_answer": "El resultado es 400."
+        }
+      ]
+    },
+    {
+      "pack_id": "sucesiones-03",
+      "topic": "sucesiones",
+      "title": "Encuentra el término",
+      "rounds": [
+        {
+          "catalog_id": "sucesiones-03-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "sequence",
+          "params": {
+            "mode": "arithmetic",
+            "start": 5,
+            "step": 4,
+            "n": 6
+          },
+          "question": "Empieza en 5; suma 4. ¿Término 6?",
+          "question_lines": [
+            "Empieza en 5; suma 4. ¿Término",
+            "6?"
+          ],
+          "next": "25",
+          "choices": [
+            "25",
+            "26",
+            "24"
+          ],
+          "correct": 0,
+          "explanation": "5 + 5 x 4 = 25.",
+          "solution_lines": [
+            "5 + 5 x 4 = 25."
+          ],
+          "spoken_answer": "El resultado es 25."
+        },
+        {
+          "catalog_id": "sucesiones-03-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "sequence",
+          "params": {
+            "mode": "geometric",
+            "start": 4,
+            "step": 2,
+            "n": 5
+          },
+          "question": "Empieza en 4; multiplica por 2. ¿Término 5?",
+          "question_lines": [
+            "Empieza en 4; multiplica por 2.",
+            "¿Término 5?"
+          ],
+          "next": "64",
+          "choices": [
+            "65",
+            "63",
+            "64"
+          ],
+          "correct": 2,
+          "explanation": "4 x 2^4 = 64.",
+          "solution_lines": [
+            "4 x 2^4 = 64."
+          ],
+          "spoken_answer": "El resultado es 64."
+        },
+        {
+          "catalog_id": "sucesiones-03-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "sequence",
+          "params": {
+            "mode": "arithmetic",
+            "start": 7,
+            "step": 7,
+            "n": 20
+          },
+          "question": "Empieza en 7; suma 7. ¿Término 20?",
+          "question_lines": [
+            "Empieza en 7; suma 7. ¿Término",
+            "20?"
+          ],
+          "next": "140",
+          "choices": [
+            "139",
+            "140",
+            "141"
+          ],
+          "correct": 1,
+          "explanation": "7 + 19 x 7 = 140.",
+          "solution_lines": [
+            "7 + 19 x 7 = 140."
+          ],
+          "spoken_answer": "El resultado es 140."
+        }
+      ]
+    },
+    {
+      "pack_id": "geometria-03",
+      "topic": "geometria",
+      "title": "Medidas y figuras",
+      "rounds": [
+        {
+          "catalog_id": "geometria-03-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "geometry",
+          "params": {
+            "mode": "area",
+            "a": 8,
+            "b": 4
+          },
+          "question": "Rectángulo de 8 por 4. ¿Área?",
+          "question_lines": [
+            "Rectángulo de 8 por 4. ¿Área?"
+          ],
+          "next": "32",
+          "choices": [
+            "32",
+            "33",
+            "31"
+          ],
+          "correct": 0,
+          "explanation": "Área = base x altura = 32.",
+          "solution_lines": [
+            "Área = base x altura = 32."
+          ],
+          "spoken_answer": "El resultado es 32."
+        },
+        {
+          "catalog_id": "geometria-03-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "geometry",
+          "params": {
+            "mode": "hypotenuse",
+            "a": 9,
+            "b": 12
+          },
+          "question": "Triángulo rectángulo: catetos 9 y 12. ¿Hipotenusa?",
+          "question_lines": [
+            "Triángulo rectángulo: catetos 9",
+            "y 12. ¿Hipotenusa?"
+          ],
+          "next": "15",
+          "choices": [
+            "16",
+            "14",
+            "15"
+          ],
+          "correct": 2,
+          "explanation": "Pitágoras: c² = 225; c = 15.",
+          "solution_lines": [
+            "Pitágoras: c² = 225; c = 15."
+          ],
+          "spoken_answer": "El resultado es 15."
+        },
+        {
+          "catalog_id": "geometria-03-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "geometry",
+          "params": {
+            "mode": "base",
+            "area": 108,
+            "height": 6
+          },
+          "question": "Un triángulo tiene área 54 y altura 6. ¿Base?",
+          "question_lines": [
+            "Un triángulo tiene área 54 y",
+            "altura 6. ¿Base?"
+          ],
+          "next": "18",
+          "choices": [
+            "17",
+            "18",
+            "19"
+          ],
+          "correct": 1,
+          "explanation": "Base = 2 x área / 6 = 18.",
+          "solution_lines": [
+            "Base = 2 x área / 6 = 18."
+          ],
+          "spoken_answer": "El resultado es 18."
+        }
+      ]
+    },
+    {
+      "pack_id": "sistemas-03",
+      "topic": "sistemas",
+      "title": "Dos datos, una respuesta",
+      "rounds": [
+        {
+          "catalog_id": "sistemas-03-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "system",
+          "params": {
+            "mode": "sum",
+            "total": 16,
+            "difference": 6
+          },
+          "question": "x + y = 16; x - y = 6. Halla x.",
+          "question_lines": [
+            "x + y = 16; x - y = 6. Halla x."
+          ],
+          "next": "11",
+          "choices": [
+            "11",
+            "12",
+            "10"
+          ],
+          "correct": 0,
+          "explanation": "Suma las ecuaciones: 2x = 22; x = 11.",
+          "solution_lines": [
+            "Suma las ecuaciones: 2x = 22; x = 11."
+          ],
+          "spoken_answer": "La respuesta es 11."
+        },
+        {
+          "catalog_id": "sistemas-03-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "system",
+          "params": {
+            "mode": "sum",
+            "total": 17,
+            "difference": 7
+          },
+          "question": "Dos números suman 17. Difieren en 7. ¿El mayor?",
+          "question_lines": [
+            "Dos números suman 17. Difieren",
+            "en 7. ¿El mayor?"
+          ],
+          "next": "12",
+          "choices": [
+            "13",
+            "11",
+            "12"
+          ],
+          "correct": 2,
+          "explanation": "Suma las ecuaciones: 2x = 24; x = 12.",
+          "solution_lines": [
+            "Suma las ecuaciones: 2x = 24; x = 12."
+          ],
+          "spoken_answer": "La respuesta es 12."
+        },
+        {
+          "catalog_id": "sistemas-03-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "system",
+          "params": {
+            "mode": "tickets",
+            "count": 17,
+            "cheap": 20,
+            "expensive": 35,
+            "cost": 535
+          },
+          "question": "17 boletos de 20 o 35 suman 535. ¿Cuántos de 35?",
+          "question_lines": [
+            "17 boletos de 20 o 35 suman 535.",
+            "¿Cuántos de 35?"
+          ],
+          "next": "13",
+          "choices": [
+            "12",
+            "13",
+            "14"
+          ],
+          "correct": 1,
+          "explanation": "15x = 535 - 340; x = 13.",
+          "solution_lines": [
+            "15x = 535 - 340; x = 13."
+          ],
+          "spoken_answer": "La respuesta es 13."
+        }
+      ]
+    },
+    {
+      "pack_id": "potencias-03",
+      "topic": "potencias",
+      "title": "Leyes de exponentes",
+      "rounds": [
+        {
+          "catalog_id": "potencias-03-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "power",
+          "params": {
+            "base": 4,
+            "a": 2,
+            "b": 1
+          },
+          "question": "4^2 x 4^1. ¿Resultado?",
+          "question_lines": [
+            "4^2 x 4^1. ¿Resultado?"
+          ],
+          "next": "64",
+          "choices": [
+            "64",
+            "65",
+            "63"
+          ],
+          "correct": 0,
+          "explanation": "Suma exponentes: 4^3 = 64.",
+          "solution_lines": [
+            "Suma exponentes: 4^3 = 64."
+          ],
+          "spoken_answer": "El resultado es 64."
+        },
+        {
+          "catalog_id": "potencias-03-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "power",
+          "params": {
+            "base": 4,
+            "a": 5,
+            "b": -3
+          },
+          "question": "4^5 x 4^-3. ¿Resultado?",
+          "question_lines": [
+            "4^5 x 4^-3. ¿Resultado?"
+          ],
+          "next": "16",
+          "choices": [
+            "17",
+            "15",
+            "16"
+          ],
+          "correct": 2,
+          "explanation": "Suma exponentes: 4^2 = 16.",
+          "solution_lines": [
+            "Suma exponentes: 4^2 = 16."
+          ],
+          "spoken_answer": "El resultado es 16."
+        },
+        {
+          "catalog_id": "potencias-03-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "power",
+          "params": {
+            "base": 4,
+            "a": -2,
+            "b": 3
+          },
+          "question": "4^-2 x 4^3. ¿Resultado?",
+          "question_lines": [
+            "4^-2 x 4^3. ¿Resultado?"
+          ],
+          "next": "4",
+          "choices": [
+            "3",
+            "4",
+            "5"
+          ],
+          "correct": 1,
+          "explanation": "Suma exponentes: 4^1 = 4.",
+          "solution_lines": [
+            "Suma exponentes: 4^1 = 4."
+          ],
+          "spoken_answer": "El resultado es 4."
+        }
+      ]
+    },
+    {
+      "pack_id": "funciones-03",
+      "topic": "funciones",
+      "title": "Evalúa la función",
+      "rounds": [
+        {
+          "catalog_id": "funciones-03-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "function",
+          "params": {
+            "a": 0,
+            "b": 4,
+            "c": 3,
+            "x": 4
+          },
+          "question": "f(x) = 4x + 3. ¿f(4)?",
+          "question_lines": [
+            "f(x) = 4x + 3. ¿f(4)?"
+          ],
+          "next": "19",
+          "choices": [
+            "19",
+            "20",
+            "18"
+          ],
+          "correct": 0,
+          "explanation": "Sustituye x por 4: f(4) = 19.",
+          "solution_lines": [
+            "Sustituye x por 4: f(4) = 19."
+          ],
+          "spoken_answer": "El resultado es 19."
+        },
+        {
+          "catalog_id": "funciones-03-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "function",
+          "params": {
+            "a": 1,
+            "b": 0,
+            "c": -5,
+            "x": 5
+          },
+          "question": "f(x) = x² - 5. ¿f(5)?",
+          "question_lines": [
+            "f(x) = x² - 5. ¿f(5)?"
+          ],
+          "next": "20",
+          "choices": [
+            "21",
+            "19",
+            "20"
+          ],
+          "correct": 2,
+          "explanation": "Sustituye x por 5: f(5) = 20.",
+          "solution_lines": [
+            "Sustituye x por 5: f(5) = 20."
+          ],
+          "spoken_answer": "El resultado es 20."
+        },
+        {
+          "catalog_id": "funciones-03-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "function",
+          "params": {
+            "a": 1,
+            "b": -5,
+            "c": 2,
+            "x": -2
+          },
+          "question": "f(x) = x² - 5x + 2. ¿f(-2)?",
+          "question_lines": [
+            "f(x) = x² - 5x + 2. ¿f(-2)?"
+          ],
+          "next": "16",
+          "choices": [
+            "15",
+            "16",
+            "17"
+          ],
+          "correct": 1,
+          "explanation": "Sustituye x por -2: f(-2) = 16.",
+          "solution_lines": [
+            "Sustituye x por -2: f(-2) = 16."
+          ],
+          "spoken_answer": "El resultado es 16."
+        }
+      ]
+    },
+    {
+      "pack_id": "probabilidad-03",
+      "topic": "probabilidad",
+      "title": "Azar sin reemplazo",
+      "rounds": [
+        {
+          "catalog_id": "probabilidad-03-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "probability",
+          "params": {
+            "red": 5,
+            "blue": 2,
+            "draws": 1
+          },
+          "question": "5 rojas y 2 azules. Sacas 1 sin devolver. ¿P(todas rojas)?",
+          "question_lines": [
+            "5 rojas y 2 azules. Sacas 1 sin",
+            "devolver. ¿P(todas rojas)?"
+          ],
+          "next": "5/7",
+          "choices": [
+            "5/7",
+            "2/7",
+            "5/8"
+          ],
+          "correct": 0,
+          "explanation": "5/7 = 5/7. Casos favorables / total.",
+          "solution_lines": [
+            "5/7 = 5/7. Casos favorables / total."
+          ],
+          "spoken_answer": "La probabilidad es 5/7."
+        },
+        {
+          "catalog_id": "probabilidad-03-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "probability",
+          "params": {
+            "red": 6,
+            "blue": 3,
+            "draws": 2
+          },
+          "question": "6 rojas y 3 azules. Sacas 2 sin devolver. ¿P(todas rojas)?",
+          "question_lines": [
+            "6 rojas y 3 azules. Sacas 2 sin",
+            "devolver. ¿P(todas rojas)?"
+          ],
+          "next": "5/12",
+          "choices": [
+            "2/3",
+            "7/12",
+            "5/12"
+          ],
+          "correct": 2,
+          "explanation": "15/36 = 5/12. Casos favorables / total.",
+          "solution_lines": [
+            "15/36 = 5/12. Casos favorables /",
+            "total."
+          ],
+          "spoken_answer": "La probabilidad es 5/12."
+        },
+        {
+          "catalog_id": "probabilidad-03-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "probability",
+          "params": {
+            "red": 7,
+            "blue": 3,
+            "draws": 3
+          },
+          "question": "7 rojas y 3 azules. Sacas 3 sin devolver. ¿P(todas rojas)?",
+          "question_lines": [
+            "7 rojas y 3 azules. Sacas 3 sin",
+            "devolver. ¿P(todas rojas)?"
+          ],
+          "next": "7/24",
+          "choices": [
+            "17/24",
+            "7/24",
+            "7/10"
+          ],
+          "correct": 1,
+          "explanation": "35/120 = 7/24. Casos favorables / total.",
+          "solution_lines": [
+            "35/120 = 7/24. Casos favorables /",
+            "total."
+          ],
+          "spoken_answer": "La probabilidad es 7/24."
+        }
+      ]
+    },
+    {
+      "pack_id": "combinatoria-03",
+      "topic": "combinatoria",
+      "title": "Cuenta las posibilidades",
+      "rounds": [
+        {
+          "catalog_id": "combinatoria-03-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "counting",
+          "params": {
+            "mode": "product",
+            "a": 5,
+            "b": 4
+          },
+          "question": "5 camisas y 4 pantalones. ¿Cuántos conjuntos?",
+          "question_lines": [
+            "5 camisas y 4 pantalones.",
+            "¿Cuántos conjuntos?"
+          ],
+          "next": "20",
+          "choices": [
+            "20",
+            "21",
+            "19"
+          ],
+          "correct": 0,
+          "explanation": "5 x 4 = 20 conjuntos.",
+          "solution_lines": [
+            "5 x 4 = 20 conjuntos."
+          ],
+          "spoken_answer": "El resultado es 20."
+        },
+        {
+          "catalog_id": "combinatoria-03-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "counting",
+          "params": {
+            "mode": "choose",
+            "a": 7,
+            "b": 2
+          },
+          "question": "Elige 2 de 7 personas. No importa el orden. ¿Grupos?",
+          "question_lines": [
+            "Elige 2 de 7 personas. No",
+            "importa el orden. ¿Grupos?"
+          ],
+          "next": "21",
+          "choices": [
+            "22",
+            "20",
+            "21"
+          ],
+          "correct": 2,
+          "explanation": "C(7,2) = 21. Sin repetir personas.",
+          "solution_lines": [
+            "C(7,2) = 21. Sin repetir personas."
+          ],
+          "spoken_answer": "El resultado es 21."
+        },
+        {
+          "catalog_id": "combinatoria-03-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "counting",
+          "params": {
+            "mode": "ordered",
+            "a": 7,
+            "b": 3
+          },
+          "question": "De 7 personas, elige 3 cargos distintos. ¿Formas?",
+          "question_lines": [
+            "De 7 personas, elige 3 cargos",
+            "distintos. ¿Formas?"
+          ],
+          "next": "210",
+          "choices": [
+            "209",
+            "210",
+            "211"
+          ],
+          "correct": 1,
+          "explanation": "7 x 6 x 5 = 210. Sí importa el orden.",
+          "solution_lines": [
+            "7 x 6 x 5 = 210. Sí importa el orden."
+          ],
+          "spoken_answer": "El resultado es 210."
+        }
+      ]
+    },
+    {
+      "pack_id": "promedios-03",
+      "topic": "promedios",
+      "title": "El dato que falta",
+      "rounds": [
+        {
+          "catalog_id": "promedios-03-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "average",
+          "params": {
+            "known": [
+              8,
+              8
+            ],
+            "target": 8,
+            "count": 3
+          },
+          "question": "Datos: 8, 8 y x. Promedio: 8. ¿x?",
+          "question_lines": [
+            "Datos: 8, 8 y x. Promedio: 8.",
+            "¿x?"
+          ],
+          "next": "8",
+          "choices": [
+            "8",
+            "9",
+            "7"
+          ],
+          "correct": 0,
+          "explanation": "Total = 8 x 3; x = 8.",
+          "solution_lines": [
+            "Total = 8 x 3; x = 8."
+          ],
+          "spoken_answer": "El dato faltante es 8."
+        },
+        {
+          "catalog_id": "promedios-03-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "average",
+          "params": {
+            "known": [
+              9,
+              8,
+              9
+            ],
+            "target": 9,
+            "count": 4
+          },
+          "question": "Datos: 9, 8, 9 y x. Promedio: 9. ¿x?",
+          "question_lines": [
+            "Datos: 9, 8, 9 y x. Promedio: 9.",
+            "¿x?"
+          ],
+          "next": "10",
+          "choices": [
+            "11",
+            "9",
+            "10"
+          ],
+          "correct": 2,
+          "explanation": "Total = 9 x 4; x = 10.",
+          "solution_lines": [
+            "Total = 9 x 4; x = 10."
+          ],
+          "spoken_answer": "El dato faltante es 10."
+        },
+        {
+          "catalog_id": "promedios-03-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "average",
+          "params": {
+            "known": [
+              8,
+              7,
+              8,
+              9
+            ],
+            "target": 9,
+            "count": 5
+          },
+          "question": "Datos: 8, 7, 8, 9 y x. Promedio: 9. ¿x?",
+          "question_lines": [
+            "Datos: 8, 7, 8, 9 y x. Promedio:",
+            "9. ¿x?"
+          ],
+          "next": "13",
+          "choices": [
+            "12",
+            "13",
+            "14"
+          ],
+          "correct": 1,
+          "explanation": "Total = 9 x 5; x = 13.",
+          "solution_lines": [
+            "Total = 9 x 5; x = 13."
+          ],
+          "spoken_answer": "El dato faltante es 13."
+        }
+      ]
+    }
+  ]
+}

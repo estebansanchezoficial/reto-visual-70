@@ -117,7 +117,10 @@ def correct():
     # Supported automatic corrections change puzzle content/mechanic. Never claim
     # to have applied arbitrary animation, layout, audio or licensing instructions.
     unsupported=re.search(r'boca|manos|avatar|volumen|m[uú]sica|voz|arriba|abajo|grande|peque[nñ]|tama[nñ]|posici[oó]n|velocidad|subt[ií]tulo',text,re.I)
-    supported=re.search(r'repit|repet|igual|parecid|distint|otro|acertijo|reto|din[aá]mica|contenido|c[aá]lculo|vocal|patr[oó]n',text,re.I)
+    supported=re.search(r'repit|repet|igual|parecid|distint|otro|acertijo|reto|din[aá]mica|contenido|c[aá]lculo|vocal|patr[oó]n|matem[aá]tic|cat[aá]logo|pdf',text,re.I)
+    requested_math=bool(re.search(r'matem[aá]tic|preparatoria|cat[aá]logo|pdf',text,re.I))
+    # Finite bank supports mathematics. Do not silently substitute color/vowels.
+    if re.search(r'vocal|colores|patr[oó]n|l[oó]gica verbal',text,re.I) and not requested_math:unsupported=True
     if unsupported or not supported:
         record.update(status='CORRECTION_NEEDS_MANUAL',correction_block_reason='El cambio solicitado no está implementado en el corrector automático de contenido. Se necesita intervención; no se generó una supuesta corrección.')
         gh('release','edit',tag,'-R',REPO,'--notes',json.dumps(record));notify();return
@@ -127,6 +130,7 @@ def correct():
     gh('release','edit',tag,'-R',REPO,'--notes',json.dumps(record))
     replacement={'status':'PREPARING','date':record['date'],'revision':revision,'scheduled':False,'published':False,'parent_tag':tag,'review_issue':record['review_issue'],'correction_text':text,'correction_source':record['correction_source'],'correction_request_id':record['correction_request_id']}
     gh('release','create',newtag,'-R',REPO,'--draft','--target','main','--title',f"Reto Visual 70 — revisión {record['date']} v{revision}",'--notes',json.dumps(replacement))
+    replacement['requested_family']='catalog_math'
     deliver(newtag,replacement,history,rejected_family=original.get('family','color'))
     record.update(status='SUPERSEDED',replacement_tag=newtag)
     gh('release','edit',tag,'-R',REPO,'--notes',json.dumps(record))
@@ -160,6 +164,7 @@ def deliver(tag,record,history,rejected_family=None):
         subprocess.run([sys.executable,str(ROOT/'daily/prepare_models.py')],check=True)
         args=[sys.executable,str(ROOT/'daily/generate.py'),'--date',record['date'],'--revision',str(record.get('revision',1)),'--history',str(history_path)]
         if rejected_family:args+=['--rejected-family',rejected_family]
+        if record.get('requested_family'):args+=['--family',record['requested_family']]
         subprocess.run(args,check=True)
         qa=json.loads((OUT/'verificacion-final.json').read_text())
         assert qa['status']=='PASS_PENDING_USER_APPROVAL'
@@ -171,6 +176,8 @@ def deliver(tag,record,history,rejected_family=None):
         assert hashlib.sha256((verify/'video.mp4').read_bytes()).hexdigest()==qa['sha256']
         plan=json.loads((OUT/'plan.json').read_text(encoding='utf-8'))
         record.update(family=plan['family'],revision=plan['revision'],status='READY_FOR_REVIEW',sha256=qa['sha256'],bytes=qa['bytes'],music_embedded=qa.get('music_embedded',False),music=qa.get('music'),run_url=os.environ.get('RUN_URL'))
+        if plan.get('catalog_version'):
+            record.update(catalog_version=plan['catalog_version'],pack_id=plan['pack_id'],topic_title=plan['topic_title'],catalog_ids=[r['catalog_id'] for r in plan['rounds']])
         gh('release','edit',tag,'-R',REPO,'--notes',json.dumps(record))
         print(json.dumps(record))
     except Exception:
@@ -208,7 +215,9 @@ def notify():
 {marker}
 <!-- access-v2 -->
 {auto_marker}
-**Versión vigente: v{record.get('revision',1)} · Dinámica: { {'arithmetic':'cálculos','vowels':'vocales en palabras','pattern':'secuencias de figuras','color':'memoria de colores'}.get(record.get('family','color'),record.get('family'))}**
+**Versión vigente: v{record.get('revision',1)} · Dinámica: {record.get('topic_title') or {'arithmetic':'cálculos','vowels':'vocales en palabras','pattern':'secuencias de figuras','color':'memoria de colores'}.get(record.get('family','color'),record.get('family'))}**
+
+{('Catálogo original en español · niveles básico, intermedio y avanzado · respuesta y explicación al final de cada nivel · ejercicios: '+', '.join(record['catalog_ids'])) if record.get('catalog_version') else ''}
 
 **[ABRIR LA PÁGINA FIJA DEL VIDEO Y DESCARGAR]({url})**
 
@@ -228,7 +237,7 @@ Para pedir cambios, copia y completa:
 
 La orden inicia una corrección en la nube en cuanto se recibe, sin esperar al aviso de las 09:00. La nueva versión pasa comparación con videos anteriores, render y verificación antes de avisarte en este mismo hilo. La aprobación anterior queda anulada. Si la ejecución falla o el cambio necesita intervención, recibirás el aviso de bloqueo ese mismo día; no se marcará como corregido sin evidencia.
 
-El corrector automático actual cambia el contenido y la dinámica del acertijo. Cambios de voz, avatar, animación o encuadre requieren intervención y generan un aviso; no se considerarán aplicados automáticamente.
+El corrector selecciona ejercicios matemáticos nuevos del catálogo, con tres niveles y soluciones. Compara también las versiones rechazadas; si no hay una selección válida, bloquea la entrega. Otros temas, cambios de voz, avatar, animación o encuadre requieren intervención y generan un aviso.
 
 La aprobación registra tu decisión; **no significa que esté programado en TikTok**. {music_notice} Mantener activado «Creado por IA». {automatic_notice}
 

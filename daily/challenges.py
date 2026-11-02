@@ -4,6 +4,7 @@ import hashlib,json
 from PIL import ImageDraw
 import numpy as np
 import second_video as video
+import catalog
 
 FAMILIES=['arithmetic','vowels','color','pattern']
 WORDS=['CAMINO','VENTANA','MARIPOSA','BIBLIOTECA','TELÉFONO','CARACOL','UNIVERSO','PRIMAVERA','ELEFANTE','CHOCOLATE','MURCIÉLAGO','CUADERNO','ESTRELLA','PLANETA','SEMILLA','GIRASOL','ESCUELA','AEROPUERTO','AVENTURA','NATURALEZA','CARRETERA','MONEDA','ESTUDIANTE','ROMPECABEZAS']
@@ -13,7 +14,8 @@ DATA=None
 
 def fingerprint(data):
     family=data.get('family','color')
-    if family=='arithmetic':content=[(sorted([r['a'],r['b']]) if r['op']=='+' else [r['a'],r['b']],r['op']) for r in data['rounds']]
+    if data.get('catalog_version'):content=[catalog.exercise_key(r) for r in data['rounds']]
+    elif family=='arithmetic':content=[(sorted([r['a'],r['b']]) if r['op']=='+' else [r['a'],r['b']],r['op']) for r in data['rounds']]
     elif family=='vowels':content=[r['word'] for r in data['rounds']]
     elif family=='pattern':
         names={'circle':'CÍRCULO','triangle':'TRIÁNGULO','square':'CUADRADO'}
@@ -36,7 +38,10 @@ def compare(data,history,rejected_family=None):
     assert data['family']!=rejected_family, 'Correction must change the rejected challenge mechanic'
     signature=fingerprint(data)
     assert signature not in [fingerprint(h) for h in history], 'Repeated puzzle content'
-    return {'status':'PASS','policy':'Different mechanic from previous two episodes and rejected version; no identical canonical puzzles or MP4 SHA-256. Presenter/voice template may repeat.','family':data['family'],'recent_families':recent,'content_sha256':signature,'compared':[{'episode':h.get('episode'),'revision':h.get('revision',1),'family':h.get('family','color'),'sha256':h.get('sha256'),'content_sha256':fingerprint(h)} for h in history]}
+    used={catalog.exercise_key(r) for h in history for r in h.get('rounds',[])}
+    keys=[catalog.exercise_key(r) for r in data['rounds']]
+    assert len(set(keys))==len(keys) and not set(keys)&used, 'Individual exercise already presented, including rejected versions'
+    return {'status':'PASS','policy':'No reused individual exercise, including rejected versions; different recent topic; finite catalog stops when exhausted. Presenter/voice template may repeat.','family':data['family'],'recent_families':recent,'content_sha256':signature,'exercise_keys':keys,'catalog_ids':[r.get('catalog_id') for r in data['rounds']],'compared':[{'episode':h.get('episode'),'revision':h.get('revision',1),'family':h.get('family','color'),'sha256':h.get('sha256'),'content_sha256':fingerprint(h)} for h in history]}
 
 def make_rounds(family,rng):
     rounds=[];used_words=rng.sample(WORDS,3)
@@ -65,7 +70,9 @@ def make_rounds(family,rng):
 
 def validate(data):
     for r in data['rounds']:
-        if data['family']=='arithmetic':expected=r['a']+r['b'] if r['op']=='+' else r['a']-r['b']
+        if data.get('catalog_version'):
+            catalog.validate_round(r);expected=catalog.value(catalog.solve(r['kind'],r['params']))
+        elif data['family']=='arithmetic':expected=r['a']+r['b'] if r['op']=='+' else r['a']-r['b']
         elif data['family']=='vowels':expected=sum(c in VOWELS for c in r['word'])
         elif data['family']=='pattern':
             assert r['sequence']==[r['pattern'][i%len(r['pattern'])] for i in range(len(r['sequence']))]
@@ -96,13 +103,14 @@ def board(i,phase,count):
     im=video.BASE.copy();d=ImageDraw.Draw(im);family=DATA['family']
     d.rectangle((0,0,720,173),fill='#062552')
     fit(d,(360,22),f"RETO VISUAL 70 · RETO {DATA['episode']:03d}",29,color='#ffdb36')
-    fit(d,(360,73),TITLES[family],43,width=650)
+    title=DATA['topic_title'].upper() if DATA.get('catalog_version') else TITLES[family]
+    fit(d,(360,73),title,40,width=650)
     video.text(d,(360,126),'3 RONDAS · ELIGE A, B O C',28,'#cfdfef')
     d.rounded_rectangle(video.PANEL,radius=15,fill='#12335b')
     d.rounded_rectangle((103,976,619,1116 if phase=='answer' else 1049),radius=17,fill='#062552')
     if phase=='intro':
         video.text(d,(360,642),'ACEPTA EL RETO',30,'#ffdb36')
-        fit(d,(360,735),{'arithmetic':'NÚMEROS EN ACCIÓN','vowels':'OBSERVA CADA PALABRA','pattern':'DESCUBRE EL PATRÓN'}[family],31,width=380)
+        fit(d,(360,735),'TRES NIVELES DE DIFICULTAD' if DATA.get('catalog_version') else {'arithmetic':'NÚMEROS EN ACCIÓN','vowels':'OBSERVA CADA PALABRA','pattern':'DESCUBRE EL PATRÓN'}[family],31,width=380)
         video.text(d,(360,809),'PIENSA · ELIGE · COMPRUEBA',23)
         video.text(d,(360,875),'A · B · C',43,'#ffdb36')
         video.text(d,(360,991),'Cada solución se explica completa.',26)
@@ -114,10 +122,13 @@ def board(i,phase,count):
         video.text(d,(360,991),'Escribe tu resultado en comentarios.',27)
     else:
         r=DATA['rounds'][i];answer=phase=='answer'
-        video.text(d,(171,632),f'RONDA {i+1}',23,'#ffdb36','lt')
+        label=f"NIVEL {i+1} · {r['difficulty']}" if DATA.get('catalog_version') else f'RONDA {i+1}'
+        video.text(d,(171,632),label,20,'#ffdb36','lt')
         if not answer:video.text(d,(550,630),str(count),27,'#ffdb36','rt')
-        video.text(d,(360,669),'SOLUCIÓN' if answer else TITLES[family],25)
-        if family=='arithmetic':
+        video.text(d,(360,669),'SOLUCIÓN' if answer else ('HALLA LA RESPUESTA' if DATA.get('catalog_version') else TITLES[family]),25)
+        if DATA.get('catalog_version'):
+            for line_no,line in enumerate(r['question_lines']):fit(d,(360,707+25*line_no),line,27,width=380)
+        elif family=='arithmetic':
             fit(d,(360,724),f"{r['a']} {r['op']} {r['b']} = {r['next'] if answer else '?'}",57,width=380)
         elif family=='vowels':fit(d,(360,729),r['word'],45,width=380,color='#48dce2')
         else:
@@ -130,11 +141,13 @@ def board(i,phase,count):
             good=answer and k==r['correct']
             d.rounded_rectangle((x-46,817,x+46,934),radius=10,fill='#163e68',outline='#ffdb36' if good else '#315778',width=4 if good else 1)
             if family=='pattern':shape(im,value,x,857,43)
-            else:video.text(d,(x,827),str(value),45)
+            else:fit(d,(x,827),str(value),45,width=82)
             video.text(d,(x,901),'ABC'[k],25,'#ffdb36' if good else 'white')
         if answer:
             fit(d,(360,985),f"RESPUESTA {'ABC'[r['correct']]} · {r['next']}",28,color='#ffdb36')
-            fit(d,(360,1032),r['explanation'],26)
+            if DATA.get('catalog_version'):
+                for line_no,line in enumerate(r['solution_lines']):fit(d,(360,1030+36*line_no),line,25,width=470)
+            else:fit(d,(360,1032),r['explanation'],26)
             if family=='vowels':video.text(d,(360,1075),'Cada aparición de A, E, I, O, U cuenta.',23)
             elif family=='pattern':video.text(d,(360,1075),'Este grupo se repite en orden.',25)
         else:video.text(d,(360,991),'Piensa y elige antes de la solución.',27)

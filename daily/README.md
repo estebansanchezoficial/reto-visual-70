@@ -1,5 +1,7 @@
 # Operación diaria en nube y publicación tras aprobar
 
+Actualización 2 noviembre 2026: el generador usa [un catálogo original de 90 ejercicios en español](../docs/catalogo-acertijos.md), con 30 selecciones de tres niveles y soluciones. Compara ejercicios individuales contra todas las revisiones, incluidas las rechazadas; alterna diez temas matemáticos y se detiene al agotar selecciones. No genera automáticamente otra variante de colores/vocales. La aprobación exacta y el transporte de Buffer conservan sus controles.
+
 Estado del 1 noviembre2026: Buffer Free conectado exclusivamente a @retovisual70, correo verificado y clave en GitHub Secrets. RV70_BUFFER_ENABLED=true habilita el envío condicionado a aprobación. Presupuesto adicional0MXN. YouTube y sus tareas permanecen separados.
 
 ## Revisión desde el teléfono

@@ -4,6 +4,7 @@ from pathlib import Path
 import argparse, hashlib, json, random
 import second_video as video
 import challenges
+import catalog
 
 ARTICLES={'mug':'La taza','key':'La llave','heart':'El corazón','umbrella':'El paraguas','star':'La estrella','leaf':'La hoja','gift':'El regalo','clock':'El reloj'}
 
@@ -12,6 +13,19 @@ def plan(day,revision=1,history=None,rejected_family=None,requested_family=None)
     assert day>=date(2026,11,1), 'Videos 001–003 are protected'
     episode=4+(day-date(2026,11,1)).days
     history=history if history is not None else json.loads((video.ROOT/'daily/content-history.json').read_text(encoding='utf-8'))
+    if requested_family is None or requested_family=='catalog_math':
+        pack=catalog.select(history,rejected_family)
+        rounds=pack['rounds']
+        for r,timing in zip(rounds,[(6,20,25),(25,40,45),(45,61,66)]):
+            r.update(zip(['start','answer','end'],timing))
+        answers=[f"La {'ABC'[r['correct']]}. {r['spoken_answer']}" for r in rounds]
+        data={'date':day.isoformat(),'episode':episode,'revision':revision,'family':'catalog_'+pack['topic'],
+              'catalog_version':1,'pack_id':pack['pack_id'],'topic_title':pack['title'],'rounds':rounds,
+              'answer_texts':answers,'scheduled':False,'published':False,'ai_label':True,
+              'music':'Cipher — Kevin MacLeod; CC BY 4.0; embedded after voice QA',
+              'publication_target':f'{day.isoformat()} 19:00 America/Mexico_City'}
+        challenges.compare(data,history,rejected_family);challenges.validate(data)
+        return data
     forbidden=set(challenges.recent_families(history,episode))|{rejected_family}
     order=challenges.FAMILIES[(episode-4)%4:]+challenges.FAMILIES[:(episode-4)%4]
     family=requested_family or next(f for f in order if f not in forbidden)
@@ -54,7 +68,8 @@ def main(day,revision=1,history_path=None,rejected_family=None,requested_family=
         key=f'answer{i+1}';_,start,limit=voice.PHRASES[key]
         voice.PHRASES[key]=(data['answer_texts'][i],start,limit)
     if data['family']!='color':
-        voice.PHRASES.update(hook=({'arithmetic':'¿Puedes resolver estos cálculos?','vowels':'¿Cuántas vocales tiene cada palabra?','pattern':'¿Qué figura sigue?'}[data['family']],.25,2.8),rules=('Elige A, B o C. Comprueba tu respuesta.',3.1,2.8),round1=('Ronda uno.',6.15,3.2),round2=('Ronda dos.',25.15,3.2),round3=('Última ronda.',45.15,3.2),find=('Elige tu respuesta.',14.15,2.0))
+        hook='Tres niveles de matemáticas.' if data.get('catalog_version') else {'arithmetic':'¿Puedes resolver estos cálculos?','vowels':'¿Cuántas vocales tiene cada palabra?','pattern':'¿Qué figura sigue?'}[data['family']]
+        voice.PHRASES.update(hook=(hook,.25,2.8),rules=('Elige A, B o C. Comprueba tu respuesta.',3.1,2.8),round1=('Nivel básico.',6.15,3.2),round2=('Nivel intermedio.',25.15,3.2),round3=('Nivel avanzado.',45.15,3.2),find=('Elige tu respuesta.',14.15,2.0))
         challenges.DATA=data;challenges.board.cache_clear()
         video.state=challenges.state;video.board=challenges.board;video.validate_logic=lambda:challenges.validate(data)
     voice.main()
@@ -64,7 +79,8 @@ def main(day,revision=1,history_path=None,rejected_family=None,requested_family=
     assert sha not in [h.get('sha256') for h in history], 'Exact video already exists'
     comparison['video_sha256']=sha;comparison['exact_video_duplicate']=False
     (out/'comparison.json').write_text(json.dumps(comparison,ensure_ascii=False,indent=2),encoding='utf-8')
-    caption=f"{ {'arithmetic':'Tres cálculos, tres oportunidades.','vowels':'Cuenta las vocales: cada aparición cuenta.','pattern':'Descubre la regla de cada secuencia.','color':'¿Detectas los tres cambios de color?'}[data['family']]} ¿Cuántas acertaste? #RetoVisual70 #RetoVisual #Acertijos #EntrenaTuMente"
+    lead=(data['topic_title']+': básico, intermedio y avanzado.') if data.get('catalog_version') else {'arithmetic':'Tres cálculos, tres oportunidades.','vowels':'Cuenta las vocales: cada aparición cuenta.','pattern':'Descubre la regla de cada secuencia.','color':'¿Detectas los tres cambios de color?'}[data['family']]
+    caption=f"{lead} ¿Cuántas acertaste? #RetoVisual70 #RetoVisual #Acertijos #EntrenaTuMente"
     (out/'descripcion.txt').write_text(caption+'\n',encoding='utf-8')
     import music
     music.mix(out)
