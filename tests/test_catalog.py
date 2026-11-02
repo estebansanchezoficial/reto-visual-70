@@ -1,9 +1,11 @@
 """Independent correctness, exhaustion, history and layout checks for the bank."""
-import sys, unittest, copy, itertools
+import sys, unittest, copy, itertools, tempfile
+from unittest.mock import patch
 from pathlib import Path
 from fractions import Fraction
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'daily'))
 import catalog, generate, challenges
+import cloud
 
 class CatalogTests(unittest.TestCase):
     def test_full_catalog_has_three_tiers_and_exact_answers(self):
@@ -57,5 +59,16 @@ class CatalogTests(unittest.TestCase):
         data=generate.plan('2026-11-03',history=[],requested_family='catalog_math',rejected_family='color')
         self.assertTrue(data['family'].startswith('catalog_'))
         self.assertEqual([r['difficulty'] for r in data['rounds']],catalog.LEVELS)
+
+    def test_exhaustion_stops_before_downloading_models_and_notifies_reason(self):
+        history=[{'episode':i,'revision':1,'family':'catalog_'+p['topic'],'rounds':p['rounds']} for i,p in enumerate(catalog.load()['packs'])]
+        record={'date':'2026-12-01'}
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);(root/'output').mkdir()
+            with patch.object(cloud,'ROOT',root),patch.object(cloud,'OUT',root/'output/current'),patch.object(cloud,'gh'),patch.object(cloud.subprocess,'run') as run:
+                with self.assertRaisesRegex(ValueError,'Catálogo agotado'):cloud.deliver('test',record,history)
+                run.assert_not_called()
+        self.assertEqual(record['status'],'FAILED_NEEDS_REVIEW')
+        self.assertIn('Catálogo agotado',record['correction_block_reason'])
 
 if __name__=='__main__':unittest.main()

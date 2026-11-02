@@ -161,6 +161,9 @@ def deliver(tag,record,history,rejected_family=None):
     history_path=ROOT/'output/content-history.json'
     history_path.write_text(json.dumps(history,ensure_ascii=False),encoding='utf-8')
     try:
+        # Reject an exhausted/reused catalog before model downloads or synthesis.
+        import catalog
+        catalog.select(history,rejected_family)
         subprocess.run([sys.executable,str(ROOT/'daily/prepare_models.py')],check=True)
         args=[sys.executable,str(ROOT/'daily/generate.py'),'--date',record['date'],'--revision',str(record.get('revision',1)),'--history',str(history_path)]
         if rejected_family:args+=['--rejected-family',rejected_family]
@@ -180,8 +183,9 @@ def deliver(tag,record,history,rejected_family=None):
             record.update(catalog_version=plan['catalog_version'],pack_id=plan['pack_id'],topic_title=plan['topic_title'],catalog_ids=[r['catalog_id'] for r in plan['rounds']])
         gh('release','edit',tag,'-R',REPO,'--notes',json.dumps(record))
         print(json.dumps(record))
-    except Exception:
+    except Exception as error:
         record['status']='FAILED_NEEDS_REVIEW'
+        if isinstance(error,ValueError):record['correction_block_reason']=str(error)
         gh('release','edit',tag,'-R',REPO,'--notes',json.dumps(record))
         raise
 
