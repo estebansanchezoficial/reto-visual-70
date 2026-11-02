@@ -16,6 +16,15 @@ on:
         description: Reserva cuya correccion solicito el propietario
         type: string
         required: false
+      generation_date:
+        description: Fecha opcional para preparar con anticipacion (AAAA-MM-DD, proximos 7 dias)
+        type: string
+        required: false
+      notify_when_ready:
+        description: Enviar aviso al terminar la preparacion manual (no aprueba ni publica)
+        type: boolean
+        required: false
+        default: false
 permissions:
   contents: write
   issues: write
@@ -33,6 +42,7 @@ jobs:
       GITHUB_REPOSITORY: ${{ github.repository }}
       RUN_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
       CORRECTION_TAG: ${{ inputs.correction_tag }}
+      GENERATION_DATE: ${{ inputs.generation_date }}
       OMP_NUM_THREADS: '2'
       OPENBLAS_NUM_THREADS: '2'
     steps:
@@ -82,7 +92,7 @@ jobs:
         if: steps.mode.outputs.value == 'repair'
         run: python daily/cloud.py repair
       - name: Crear aviso de revision
-        if: steps.mode.outputs.value == 'notify'
+        if: steps.mode.outputs.value == 'notify' || (steps.mode.outputs.value == 'prepare' && steps.gate.outputs.allowed == 'true' && inputs.notify_when_ready == true)
         run: python daily/cloud.py notify
       - name: Corregir comparar y volver a avisar el mismo dia
         if: steps.mode.outputs.value == 'correct'

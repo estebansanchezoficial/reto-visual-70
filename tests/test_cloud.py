@@ -1,7 +1,7 @@
 """Safety gates and daily puzzle invariants, without external writes."""
 import sys, unittest, json, os, tempfile
 from pathlib import Path
-from datetime import date,timedelta
+from datetime import date,timedelta,datetime
 from unittest.mock import patch
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'daily'))
 import cloud
@@ -9,6 +9,14 @@ import generate
 import challenges
 
 class CloudTests(unittest.TestCase):
+    def test_manual_date_prepares_ahead_without_changing_daily_default(self):
+        with patch.object(cloud,'NOW',return_value=datetime(2026,11,2,13)):
+            with patch.dict(os.environ,{'GENERATION_DATE':''}):self.assertEqual(cloud.target_date(),'2026-11-03')
+            with patch.dict(os.environ,{'GENERATION_DATE':'2026-11-04'}):self.assertEqual(cloud.target_date(),'2026-11-04')
+            for invalid in ['2026-11-02','2026-11-10','wrong']:
+                with patch.dict(os.environ,{'GENERATION_DATE':invalid}):
+                    with self.assertRaises((AssertionError,ValueError)):cloud.target_date()
+
     def test_unique_daily_puzzles_and_solutions(self):
         previous=set()
         history=[]
