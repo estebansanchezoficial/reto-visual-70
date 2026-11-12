@@ -76,9 +76,15 @@ jobs:
         run: |
           set -euo pipefail
           if ! command -v ffmpeg >/dev/null || ! command -v ffprobe >/dev/null; then
-            timeout 180s sudo apt-get update -qq
-            timeout 180s sudo apt-get install -y --no-install-recommends ffmpeg
+            # El update inicial agotaba 180s (exit 124). Intentar primero
+            # con indices preinstalados en ubuntu-24.04; actualizar solo como respaldo.
+            if ! timeout 120s sudo env DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --no-install-recommends ffmpeg; then
+              timeout 90s sudo apt-get update -qq
+              timeout 120s sudo env DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --no-install-recommends ffmpeg
+            fi
           fi
+          command -v ffmpeg
+          command -v ffprobe
           ffmpeg -version
           ffprobe -version
           python -m pip install -r daily/requirements.txt
