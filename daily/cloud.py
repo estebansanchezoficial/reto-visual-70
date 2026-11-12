@@ -69,10 +69,12 @@ def review_page(release):
         if base64.b64decode(existing['content']).decode()==body:return url
         payload['sha']=existing['sha']
     elif '404' not in current.stderr:raise RuntimeError('Could not read review access page')
-    gh('api',f'repos/{REPO}/contents/{path}','--method','PUT','--input','-',payload=payload)
-    # Read back the durable page before linking it in a notification.
-    saved=api(f'repos/{REPO}/contents/{path}')
-    assert base64.b64decode(saved['content']).decode()==body
+    saved=json.loads(gh('api',f'repos/{REPO}/contents/{path}','--method','PUT','--input','-',payload=payload))
+    # Verify the written blob without relying on an immediate read from main.
+    content=body.encode()
+    expected=hashlib.sha1(f'blob {len(content)}\0'.encode()+content).hexdigest()
+    if saved['content']['sha']!=expected:
+        raise RuntimeError('Saved review page does not match the requested content')
     return url
 
 def refresh_review_links(number,before,after):
