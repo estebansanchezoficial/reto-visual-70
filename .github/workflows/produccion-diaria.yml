@@ -17,7 +17,7 @@ on:
         type: string
         required: false
       generation_date:
-        description: Fecha opcional para preparar con anticipacion (AAAA-MM-DD, proximos 7 dias)
+        description: Fecha opcional para preparar (AAAA-MM-DD, desde ayer hasta 7 dias adelante)
         type: string
         required: false
       notify_when_ready:

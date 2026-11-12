@@ -87,11 +87,16 @@ def refresh_review_links(number,before,after):
     if updated!=body:gh('issue','edit',str(number),'-R',REPO,'--body',updated)
 
 def target_date():
-    tomorrow=max(NOW().date()+timedelta(days=1),date(2026,11,1))
+    today=NOW().date()
+    first_day=date(2026,11,1)
+    tomorrow=max(today+timedelta(days=1),first_day)
     requested=os.environ.get('GENERATION_DATE','').strip()
     if not requested:return tomorrow.isoformat()
     selected=date.fromisoformat(requested)
-    assert selected.isoformat()==requested and tomorrow<=selected<=NOW().date()+timedelta(days=7), 'Manual preparation date must be within the next seven days'
+    earliest=max(today-timedelta(days=1),first_day)
+    assert selected.isoformat()==requested and earliest<=selected<=today+timedelta(days=7), (
+        'Manual preparation date must be between yesterday and seven days from today'
+    )
     return selected.isoformat()
 
 def gate():

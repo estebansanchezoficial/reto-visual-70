@@ -9,11 +9,13 @@ import generate
 import challenges
 
 class CloudTests(unittest.TestCase):
-    def test_manual_date_prepares_ahead_without_changing_daily_default(self):
+    def test_manual_date_allows_recent_recovery_without_changing_daily_default(self):
         with patch.object(cloud,'NOW',return_value=datetime(2026,11,2,13)):
             with patch.dict(os.environ,{'GENERATION_DATE':''}):self.assertEqual(cloud.target_date(),'2026-11-03')
             with patch.dict(os.environ,{'GENERATION_DATE':'2026-11-04'}):self.assertEqual(cloud.target_date(),'2026-11-04')
-            for invalid in ['2026-11-02','2026-11-10','wrong']:
+            for recovery in ['2026-11-01','2026-11-02']:
+                with patch.dict(os.environ,{'GENERATION_DATE':recovery}):self.assertEqual(cloud.target_date(),recovery)
+            for invalid in ['2026-10-31','2026-11-10','wrong']:
                 with patch.dict(os.environ,{'GENERATION_DATE':invalid}):
                     with self.assertRaises((AssertionError,ValueError)):cloud.target_date()
 
