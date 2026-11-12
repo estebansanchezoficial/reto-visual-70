@@ -93,7 +93,9 @@ def target_date():
     first_day=date(2026,11,1)
     tomorrow=max(today+timedelta(days=1),first_day)
     requested=os.environ.get('GENERATION_DATE','').strip()
-    if not requested:return tomorrow.isoformat()
+    if not requested:
+        if os.environ.get('GITHUB_EVENT_NAME')=='schedule':return max(today,first_day).isoformat()
+        return tomorrow.isoformat()
     selected=date.fromisoformat(requested)
     earliest=max(today-timedelta(days=1),first_day)
     assert selected.isoformat()==requested and earliest<=selected<=today+timedelta(days=7), (

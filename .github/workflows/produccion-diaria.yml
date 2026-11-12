@@ -98,8 +98,14 @@ jobs:
         if: steps.mode.outputs.value == 'repair'
         run: python daily/cloud.py repair
       - name: Crear aviso de revision
-        if: steps.mode.outputs.value == 'notify' || (steps.mode.outputs.value == 'prepare' && steps.gate.outputs.allowed == 'true' && inputs.notify_when_ready == true)
-        run: python daily/cloud.py notify
+        if: steps.mode.outputs.value == 'notify' || (steps.mode.outputs.value == 'prepare' && steps.gate.outputs.allowed == 'true' && (inputs.notify_when_ready == true || github.event_name == 'schedule'))
+        env:
+          REVIEW_MODE: ${{ steps.mode.outputs.value }}
+        run: |
+          if [[ "$GITHUB_EVENT_NAME" == 'schedule' && "$REVIEW_MODE" == 'prepare' && "$(TZ=America/Mexico_City date +%H)" < '09' ]]; then
+            exit 0
+          fi
+          python daily/cloud.py notify
       - name: Corregir comparar y volver a avisar el mismo dia
         if: steps.mode.outputs.value == 'correct'
         run: python daily/cloud.py correct

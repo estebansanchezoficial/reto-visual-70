@@ -9,8 +9,13 @@ import generate
 import challenges
 
 class CloudTests(unittest.TestCase):
-    def test_manual_date_allows_recent_recovery_without_changing_daily_default(self):
-        with patch.object(cloud,'NOW',return_value=datetime(2026,11,2,13)):
+    def test_scheduled_preparation_targets_today_for_the_morning_review(self):
+        with patch.object(cloud,'NOW',return_value=datetime(2026,11,13,8,7)):
+            with patch.dict(os.environ,{'GENERATION_DATE':'','GITHUB_EVENT_NAME':'schedule'}):
+                self.assertEqual(cloud.target_date(),'2026-11-13')
+
+    def test_manual_date_allows_recent_recovery_without_changing_manual_default(self):
+        with patch.object(cloud,'NOW',return_value=datetime(2026,11,2,13)), patch.dict(os.environ,{'GITHUB_EVENT_NAME':'workflow_dispatch'}):
             with patch.dict(os.environ,{'GENERATION_DATE':''}):self.assertEqual(cloud.target_date(),'2026-11-03')
             with patch.dict(os.environ,{'GENERATION_DATE':'2026-11-04'}):self.assertEqual(cloud.target_date(),'2026-11-04')
             for recovery in ['2026-11-01','2026-11-02']:
