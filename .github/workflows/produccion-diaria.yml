@@ -2,7 +2,11 @@ name: Reto Visual 70 - Produccion y revision en nube
 on:
   schedule:
     - cron: '17 3 * * *' # Preparar manana desde las 21:17 CDMX.
-    - cron: '7 14 * * *'
+    - cron: '23 8 * * *' # Respaldo 02:23 CDMX: solo si no hay reserva.
+    - cron: '23 12 * * *' # Respaldo 06:23 CDMX: solo si no hay reserva.
+    - cron: '7 14 * * *' # Ultimo respaldo de preparacion 08:07 CDMX.
+    - cron: '23 14 * * *' # Comprobar entrega antes de las 09:00.
+    - cron: '40 14 * * *' # Aviso principal 08:40 CDMX.
     - cron: '0 15 * * *'
     - cron: '23 15 * * *' # Respaldo de preparacion y aviso a las 09:23 CDMX
     - cron: '50 0 * * *'
@@ -11,7 +15,7 @@ on:
       mode:
         description: Preparar o enviar revision existente (no publica)
         type: choice
-        options: [prepare, notify, remind, repair, correct]
+        options: [prepare, notify, morning-check, remind, repair, correct]
         required: true
         default: prepare
       correction_tag:
@@ -60,7 +64,9 @@ jobs:
         run: |
           if [ "$CRON" = '50 0 * * *' ] || [ "$INPUT_MODE" = 'remind' ]; then
             echo 'value=remind' >> "$GITHUB_OUTPUT"
-          elif [ "$CRON" = '0 15 * * *' ] || [ "$INPUT_MODE" = 'notify' ]; then
+          elif [ "$CRON" = '23 14 * * *' ] || [ "$INPUT_MODE" = 'morning-check' ]; then
+            echo 'value=morning-check' >> "$GITHUB_OUTPUT"
+          elif [ "$CRON" = '40 14 * * *' ] || [ "$CRON" = '0 15 * * *' ] || [ "$INPUT_MODE" = 'notify' ]; then
             echo 'value=notify' >> "$GITHUB_OUTPUT"
           elif [ "$INPUT_MODE" = 'repair' ]; then
             echo 'value=repair' >> "$GITHUB_OUTPUT"
@@ -90,24 +96,24 @@ jobs:
           ffmpeg -version
           ffprobe -version
           python -m pip install -r daily/requirements.txt
-          python -m unittest discover -s tests -p test_cloud.py
-          python -m unittest discover -s tests -p test_catalog.py
-          python -m unittest discover -s tests -p test_procedure.py
-          python -m unittest discover -s tests -p test_visual_puzzles.py
+          python -m unittest discover -s tests
       - name: Preparar y verificar entrega
         if: steps.mode.outputs.value == 'prepare' && steps.gate.outputs.allowed == 'true'
         run: python daily/cloud.py prepare
       - name: Reparacion manual de reserva fallida sin archivos
         if: steps.mode.outputs.value == 'repair'
         run: python daily/cloud.py repair
+      - name: Comprobar entrega matutina validada
+        if: steps.mode.outputs.value == 'morning-check'
+        run: python daily/cloud.py morning-check
       - name: Crear aviso de revision
         if: steps.mode.outputs.value == 'notify' || (steps.mode.outputs.value == 'prepare' && (github.event_name == 'schedule' || (steps.gate.outputs.allowed == 'true' && inputs.notify_when_ready == true)))
         env:
           REVIEW_MODE: ${{ steps.mode.outputs.value }}
         run: |
           if [[ "$GITHUB_EVENT_NAME" == 'schedule' && "$REVIEW_MODE" == 'prepare' ]]; then
-            review_hour=$(TZ=America/Mexico_City date +%H)
-            if [[ "$review_hour" < '09' || "$review_hour" > '18' ]]; then
+            review_time=$(TZ=America/Mexico_City date +%H%M)
+            if [[ "$review_time" < '0840' || "$review_time" > '1859' ]]; then
               exit 0
             fi
           fi

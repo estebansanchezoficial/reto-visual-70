@@ -223,7 +223,7 @@ def notify():
             if record['status'] not in ['READY_FOR_REVIEW','APPROVED_PENDING_TIKTOK']:continue
             comments=api(f"repos/{REPO}/issues/{existing['number']}/comments?per_page=100")
             if marker in existing['body'] or any(marker in c['body'] for c in comments):continue
-            api(f"repos/{REPO}/issues/{existing['number']}/comments",{'body':f"{marker}\nRevisión diaria 09:00: esta entrega sigue en {record['status']}. [Abrir revisión vigente y video]({review_url(existing['number'])}). Fecha propuesta: {record['date']}, 19:00 Ciudad de México. Si ya venció, hace falta otra fecha antes de programar. No se ha creado otro video ni se ha publicado."})
+            api(f"repos/{REPO}/issues/{existing['number']}/comments",{'body':f"{marker}\nRevisión diaria matutina: esta entrega sigue en {record['status']}. [Abrir revisión vigente y video]({review_url(existing['number'])}). Fecha propuesta: {record['date']}, 19:00 Ciudad de México. Si ya venció, hace falta otra fecha antes de programar. No se ha creado otro video ni se ha publicado."})
             continue
         url=review_page(release) if record['status']=='READY_FOR_REVIEW' else release['html_url']
         if record['status']=='READY_FOR_REVIEW':
@@ -285,6 +285,21 @@ Ejecución: {record.get('run_url','')}
             result=api(f'repos/{REPO}/issues',{'title':title,'body':body,'assignees':[OWNER]})
             print('Review notification:',result['html_url'])
 
+def morning_check():
+    """Check persisted production QA before review; never generate or approve."""
+    day=NOW().date().isoformat()
+    current=[r for r in releases() if state(r)['date']==day and state(r)['status']!='SUPERSEDED']
+    assert len(current)==1, 'Morning check: missing or ambiguous delivery for '+day
+    release=current[0];record=state(release)
+    allowed={'READY_FOR_REVIEW','APPROVED_PENDING_TIKTOK'} | TERMINAL
+    assert record['status'] in allowed, 'Morning check: delivery blocked in '+record['status']
+    assert re.fullmatch(r'[0-9a-f]{64}',record.get('sha256','')), 'Morning check: missing verified hash'
+    assert record.get('duration_seconds')==106 and record.get('procedure_version')==1, 'Morning check: unexpected video format'
+    assert record.get('music_embedded') is True, 'Morning check: embedded music unverified'
+    required={'video.mp4','portada.jpg','descripcion.txt','verificacion-final.json','plan.json','comparison.json','music.json'}
+    assert required <= {a['name'] for a in release.get('assets',[])}, 'Morning check: incomplete production assets'
+    print('Morning delivery verified:',day,record['status'],record['sha256'])
+
 def failure_notice():
     # Also covers dependency/download failures before a release reservation exists.
     notify()
@@ -292,7 +307,7 @@ def failure_notice():
     marker=f'<!-- rv70-cloud-failure-{NOW().date().isoformat()} -->'
     if any(marker in i['body'] for i in issues()):return
     url=os.environ.get('RUN_URL',f'https://github.com/{REPO}/actions')
-    api(f'repos/{REPO}/issues',{'title':'Atención: fallo de producción en nube · Reto Visual 70','body':f'{marker}\nLa ejecución no terminó correctamente. [Revisar el fallo]({url}). No se reintentará automáticamente ni se programó un video. Reconciliar cualquier entrega existente antes de intervenir.','assignees':[OWNER]})
+    api(f'repos/{REPO}/issues',{'title':'Atención: fallo de producción en nube · Reto Visual 70','body':f'{marker}\nLa ejecución no terminó correctamente. [Revisar el fallo]({url}). No se programó un video. Los respaldos solo pueden preparar si no existe reserva ni otra entrega pendiente. Una reserva fallida requiere reconciliación antes de intervenir.','assignees':[OWNER]})
 
 def remind():
     for release in releases():
@@ -349,4 +364,4 @@ def comment():
 
 if __name__=='__main__':
     assert os.environ.get('GITHUB_REPOSITORY',REPO)==REPO
-    {'prepare':prepare,'gate':gate,'correct':correct,'repair':lambda:prepare(repair=True),'notify':notify,'comment':comment,'failure':failure_notice,'remind':remind}[sys.argv[1]]()
+    {'prepare':prepare,'gate':gate,'morning-check':morning_check,'correct':correct,'repair':lambda:prepare(repair=True),'notify':notify,'comment':comment,'failure':failure_notice,'remind':remind}[sys.argv[1]]()
