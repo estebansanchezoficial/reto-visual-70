@@ -80,9 +80,9 @@ jobs:
           if ! command -v ffmpeg >/dev/null || ! command -v ffprobe >/dev/null; then
             # El update inicial agotaba 180s (exit 124). Intentar primero
             # con indices preinstalados en ubuntu-24.04; actualizar solo como respaldo.
-            if ! timeout 120s sudo env DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --no-install-recommends ffmpeg; then
-              timeout 90s sudo apt-get update -qq
-              timeout 120s sudo env DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --no-install-recommends ffmpeg
+            if ! timeout 120s sudo env DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::Retries=1 -o Acquire::http::Timeout=15 -o Acquire::https::Timeout=15 install -y --no-install-recommends ffmpeg; then
+              timeout 90s sudo apt-get -o Acquire::Retries=1 -o Acquire::http::Timeout=15 -o Acquire::https::Timeout=15 update
+              timeout 120s sudo env DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::Retries=1 -o Acquire::http::Timeout=15 -o Acquire::https::Timeout=15 install -y --no-install-recommends ffmpeg
             fi
           fi
           command -v ffmpeg
