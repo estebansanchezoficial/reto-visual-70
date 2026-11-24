@@ -1,6 +1,7 @@
 name: Reto Visual 70 - Produccion y revision en nube
 on:
   schedule:
+    - cron: '17 3 * * *' # Preparar manana desde las 21:17 CDMX.
     - cron: '7 14 * * *'
     - cron: '0 15 * * *'
     - cron: '23 15 * * *' # Respaldo de preparacion y aviso a las 09:23 CDMX
@@ -103,8 +104,11 @@ jobs:
         env:
           REVIEW_MODE: ${{ steps.mode.outputs.value }}
         run: |
-          if [[ "$GITHUB_EVENT_NAME" == 'schedule' && "$REVIEW_MODE" == 'prepare' && "$(TZ=America/Mexico_City date +%H)" < '09' ]]; then
-            exit 0
+          if [[ "$GITHUB_EVENT_NAME" == 'schedule' && "$REVIEW_MODE" == 'prepare' ]]; then
+            review_hour=$(TZ=America/Mexico_City date +%H)
+            if [[ "$review_hour" < '09' || "$review_hour" > '18' ]]; then
+              exit 0
+            fi
           fi
           python daily/cloud.py notify
       - name: Corregir comparar y volver a avisar el mismo dia

@@ -9,6 +9,12 @@ import generate
 import challenges
 
 class CloudTests(unittest.TestCase):
+    def test_evening_preparation_targets_tomorrow(self):
+        with patch.dict(os.environ,{'GENERATION_DATE':'','GITHUB_EVENT_NAME':'schedule'}):
+            for hour in (20,21,23):
+                with patch.object(cloud,'NOW',return_value=datetime(2026,11,23,hour,17)):
+                    self.assertEqual(cloud.target_date(),'2026-11-24')
+
     def test_scheduled_preparation_targets_today_for_the_morning_review(self):
         with patch.object(cloud,'NOW',return_value=datetime(2026,11,13,8,7)):
             with patch.dict(os.environ,{'GENERATION_DATE':'','GITHUB_EVENT_NAME':'schedule'}):

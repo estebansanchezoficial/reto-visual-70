@@ -94,7 +94,8 @@ def target_date():
     tomorrow=max(today+timedelta(days=1),first_day)
     requested=os.environ.get('GENERATION_DATE','').strip()
     if not requested:
-        if os.environ.get('GITHUB_EVENT_NAME')=='schedule':return max(today,first_day).isoformat()
+        if os.environ.get('GITHUB_EVENT_NAME')=='schedule' and NOW().hour<20:
+            return max(today,first_day).isoformat()
         return tomorrow.isoformat()
     selected=date.fromisoformat(requested)
     earliest=max(today-timedelta(days=1),first_day)
