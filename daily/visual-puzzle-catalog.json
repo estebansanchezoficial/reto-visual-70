@@ -1,0 +1,4767 @@
+{
+  "version": 1,
+  "rights": "original_project_text_and_parameters",
+  "active_from": "2026-11-24",
+  "packs": [
+    {
+      "pack_id": "visual-balanzas-01",
+      "topic": "balanzas",
+      "title": "Equilibra las figuras",
+      "rounds": [
+        {
+          "catalog_id": "visual-balanzas-01-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "balance",
+          "params": {
+            "circle_count": 2,
+            "circle_total": 8,
+            "circle_multiplier": 1,
+            "pair_total": 12,
+            "mode": "triangle"
+          },
+          "question": "2 C = 8 1 C + T = 12 ¿T = ?",
+          "question_lines": [
+            "2 C = 8",
+            "1 C + T = 12",
+            "¿T = ?"
+          ],
+          "next": "8",
+          "choices": [
+            "9",
+            "7",
+            "8"
+          ],
+          "correct": 2,
+          "explanation": "La respuesta es 8. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 8."
+          ],
+          "spoken_answer": "El resultado es 8."
+        },
+        {
+          "catalog_id": "visual-balanzas-01-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "balance",
+          "params": {
+            "circle_count": 3,
+            "circle_total": 15,
+            "circle_multiplier": 2,
+            "pair_total": 19,
+            "mode": "sum"
+          },
+          "question": "3 C = 15 2 C + T = 19 ¿C + T = ?",
+          "question_lines": [
+            "3 C = 15",
+            "2 C + T = 19",
+            "¿C + T = ?"
+          ],
+          "next": "14",
+          "choices": [
+            "13",
+            "14",
+            "15"
+          ],
+          "correct": 1,
+          "explanation": "La respuesta es 14. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 14."
+          ],
+          "spoken_answer": "El resultado es 14."
+        },
+        {
+          "catalog_id": "visual-balanzas-01-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "balance",
+          "params": {
+            "circle_count": 4,
+            "circle_total": 24,
+            "circle_multiplier": 2,
+            "pair_total": 22,
+            "mode": "expression",
+            "square_total": 14
+          },
+          "question": "4 C = 24 2 C + T = 22 Q + T = 14 ¿Q x T + C = ?",
+          "question_lines": [
+            "4 C = 24",
+            "2 C + T = 22",
+            "Q + T = 14",
+            "¿Q x T + C = ?"
+          ],
+          "next": "46",
+          "choices": [
+            "46",
+            "47",
+            "45"
+          ],
+          "correct": 0,
+          "explanation": "La respuesta es 46. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 46."
+          ],
+          "spoken_answer": "El resultado es 46."
+        }
+      ]
+    },
+    {
+      "pack_id": "visual-digitos-01",
+      "topic": "digitos",
+      "title": "Encuentra el dígito",
+      "rounds": [
+        {
+          "catalog_id": "visual-digitos-01-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "missing_digit",
+          "params": {
+            "mode": "add",
+            "pattern": "2?",
+            "operand": 7,
+            "result": 29
+          },
+          "question": "Sustituye ? por un dígito. 2? + 7 = 29",
+          "question_lines": [
+            "Sustituye ? por un dígito.",
+            "2? + 7 = 29"
+          ],
+          "next": "2",
+          "choices": [
+            "3",
+            "1",
+            "2"
+          ],
+          "correct": 2,
+          "explanation": "La respuesta es 2. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 2."
+          ],
+          "spoken_answer": "El resultado es 2."
+        },
+        {
+          "catalog_id": "visual-digitos-01-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "missing_digit",
+          "params": {
+            "mode": "multiply",
+            "pattern": "?3",
+            "operand": 3,
+            "result": 69
+          },
+          "question": "Sustituye ? por un dígito. ?3 x 3 = 69",
+          "question_lines": [
+            "Sustituye ? por un dígito.",
+            "?3 x 3 = 69"
+          ],
+          "next": "2",
+          "choices": [
+            "1",
+            "2",
+            "3"
+          ],
+          "correct": 1,
+          "explanation": "La respuesta es 2. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 2."
+          ],
+          "spoken_answer": "El resultado es 2."
+        },
+        {
+          "catalog_id": "visual-digitos-01-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "missing_digit",
+          "params": {
+            "mode": "divisible",
+            "pattern": "11?3",
+            "divisor": 11
+          },
+          "question": "11?3 es divisible entre 11. ¿Qué dígito sustituye a ?",
+          "question_lines": [
+            "11?3 es divisible entre 11.",
+            "¿Qué dígito sustituye a ?"
+          ],
+          "next": "3",
+          "choices": [
+            "3",
+            "4",
+            "2"
+          ],
+          "correct": 0,
+          "explanation": "La respuesta es 3. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 3."
+          ],
+          "spoken_answer": "El resultado es 3."
+        }
+      ]
+    },
+    {
+      "pack_id": "visual-cuadrados-01",
+      "topic": "cuadrados",
+      "title": "Completa el cuadrado",
+      "rounds": [
+        {
+          "catalog_id": "visual-cuadrados-01-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "magic",
+          "params": {
+            "grid": [
+              null,
+              2,
+              7,
+              4,
+              6,
+              8,
+              5,
+              10,
+              3
+            ],
+            "values": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10
+            ],
+            "total": 18,
+            "target": 0
+          },
+          "question": "Filas, columnas y diagonales: 18. X   2   7 4   6   8 5   10   3",
+          "question_lines": [
+            "Filas, columnas y diagonales: 18.",
+            "X   2   7",
+            "4   6   8",
+            "5   10   3"
+          ],
+          "next": "9",
+          "choices": [
+            "10",
+            "8",
+            "9"
+          ],
+          "correct": 2,
+          "explanation": "La respuesta es 9. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 9."
+          ],
+          "spoken_answer": "El resultado es 9."
+        },
+        {
+          "catalog_id": "visual-cuadrados-01-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "magic",
+          "params": {
+            "grid": [
+              null,
+              null,
+              14,
+              8,
+              null,
+              16,
+              10,
+              20,
+              6
+            ],
+            "values": [
+              4,
+              6,
+              8,
+              10,
+              12,
+              14,
+              16,
+              18,
+              20
+            ],
+            "total": 36,
+            "target": 1
+          },
+          "question": "Filas, columnas y diagonales: 36. ?   X   14 8   ?   16 10   20   6",
+          "question_lines": [
+            "Filas, columnas y diagonales: 36.",
+            "?   X   14",
+            "8   ?   16",
+            "10   20   6"
+          ],
+          "next": "4",
+          "choices": [
+            "3",
+            "4",
+            "5"
+          ],
+          "correct": 1,
+          "explanation": "La respuesta es 4. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 4."
+          ],
+          "spoken_answer": "El resultado es 4."
+        },
+        {
+          "catalog_id": "visual-cuadrados-01-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "magic",
+          "params": {
+            "grid": [
+              null,
+              null,
+              21,
+              null,
+              null,
+              24,
+              15,
+              30,
+              9
+            ],
+            "values": [
+              6,
+              9,
+              12,
+              15,
+              18,
+              21,
+              24,
+              27,
+              30
+            ],
+            "total": 54,
+            "target": 0
+          },
+          "question": "Filas, columnas y diagonales: 54. X   ?   21 ?   ?   24 15   30   9",
+          "question_lines": [
+            "Filas, columnas y diagonales: 54.",
+            "X   ?   21",
+            "?   ?   24",
+            "15   30   9"
+          ],
+          "next": "27",
+          "choices": [
+            "27",
+            "28",
+            "26"
+          ],
+          "correct": 0,
+          "explanation": "La respuesta es 27. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 27."
+          ],
+          "spoken_answer": "El resultado es 27."
+        }
+      ]
+    },
+    {
+      "pack_id": "visual-residuos-01",
+      "topic": "residuos",
+      "title": "Descubre el número secreto",
+      "rounds": [
+        {
+          "catalog_id": "visual-residuos-01-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "remainder",
+          "params": {
+            "low": 10,
+            "high": 14,
+            "clues": [
+              [
+                5,
+                2
+              ]
+            ]
+          },
+          "question": "Entero entre 10 y 14, inclusive. Al dividir entre 5, sobra 2.",
+          "question_lines": [
+            "Entero entre 10 y 14, inclusive.",
+            "Al dividir entre 5, sobra 2."
+          ],
+          "next": "12",
+          "choices": [
+            "13",
+            "11",
+            "12"
+          ],
+          "correct": 2,
+          "explanation": "La respuesta es 12. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 12."
+          ],
+          "spoken_answer": "El resultado es 12."
+        },
+        {
+          "catalog_id": "visual-residuos-01-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "remainder",
+          "params": {
+            "low": 10,
+            "high": 24,
+            "clues": [
+              [
+                3,
+                0
+              ],
+              [
+                5,
+                2
+              ]
+            ]
+          },
+          "question": "Entero entre 10 y 24, inclusive. Al dividir entre 3, sobra 0. Al dividir entre 5, sobra 2.",
+          "question_lines": [
+            "Entero entre 10 y 24, inclusive.",
+            "Al dividir entre 3, sobra 0.",
+            "Al dividir entre 5, sobra 2."
+          ],
+          "next": "12",
+          "choices": [
+            "11",
+            "12",
+            "13"
+          ],
+          "correct": 1,
+          "explanation": "La respuesta es 12. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 12."
+          ],
+          "spoken_answer": "El resultado es 12."
+        },
+        {
+          "catalog_id": "visual-residuos-01-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "remainder",
+          "params": {
+            "low": 10,
+            "high": 69,
+            "clues": [
+              [
+                3,
+                0
+              ],
+              [
+                4,
+                0
+              ],
+              [
+                5,
+                2
+              ]
+            ]
+          },
+          "question": "Entero entre 10 y 69, inclusive. Al dividir entre 3, sobra 0. Al dividir entre 4, sobra 0. Al dividir entre 5, sobra 2.",
+          "question_lines": [
+            "Entero entre 10 y 69, inclusive.",
+            "Al dividir entre 3, sobra 0.",
+            "Al dividir entre 4, sobra 0.",
+            "Al dividir entre 5, sobra 2."
+          ],
+          "next": "12",
+          "choices": [
+            "12",
+            "13",
+            "11"
+          ],
+          "correct": 0,
+          "explanation": "La respuesta es 12. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 12."
+          ],
+          "spoken_answer": "El resultado es 12."
+        }
+      ]
+    },
+    {
+      "pack_id": "visual-balanzas-02",
+      "topic": "balanzas",
+      "title": "Equilibra las figuras",
+      "rounds": [
+        {
+          "catalog_id": "visual-balanzas-02-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "balance",
+          "params": {
+            "circle_count": 2,
+            "circle_total": 10,
+            "circle_multiplier": 1,
+            "pair_total": 15,
+            "mode": "triangle"
+          },
+          "question": "2 C = 10 1 C + T = 15 ¿T = ?",
+          "question_lines": [
+            "2 C = 10",
+            "1 C + T = 15",
+            "¿T = ?"
+          ],
+          "next": "10",
+          "choices": [
+            "9",
+            "10",
+            "11"
+          ],
+          "correct": 1,
+          "explanation": "La respuesta es 10. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 10."
+          ],
+          "spoken_answer": "El resultado es 10."
+        },
+        {
+          "catalog_id": "visual-balanzas-02-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "balance",
+          "params": {
+            "circle_count": 3,
+            "circle_total": 18,
+            "circle_multiplier": 2,
+            "pair_total": 23,
+            "mode": "sum"
+          },
+          "question": "3 C = 18 2 C + T = 23 ¿C + T = ?",
+          "question_lines": [
+            "3 C = 18",
+            "2 C + T = 23",
+            "¿C + T = ?"
+          ],
+          "next": "17",
+          "choices": [
+            "17",
+            "18",
+            "16"
+          ],
+          "correct": 0,
+          "explanation": "La respuesta es 17. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 17."
+          ],
+          "spoken_answer": "El resultado es 17."
+        },
+        {
+          "catalog_id": "visual-balanzas-02-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "balance",
+          "params": {
+            "circle_count": 4,
+            "circle_total": 28,
+            "circle_multiplier": 2,
+            "pair_total": 26,
+            "mode": "expression",
+            "square_total": 17
+          },
+          "question": "4 C = 28 2 C + T = 26 Q + T = 17 ¿Q x T + C = ?",
+          "question_lines": [
+            "4 C = 28",
+            "2 C + T = 26",
+            "Q + T = 17",
+            "¿Q x T + C = ?"
+          ],
+          "next": "67",
+          "choices": [
+            "68",
+            "66",
+            "67"
+          ],
+          "correct": 2,
+          "explanation": "La respuesta es 67. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 67."
+          ],
+          "spoken_answer": "El resultado es 67."
+        }
+      ]
+    },
+    {
+      "pack_id": "visual-digitos-02",
+      "topic": "digitos",
+      "title": "Encuentra el dígito",
+      "rounds": [
+        {
+          "catalog_id": "visual-digitos-02-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "missing_digit",
+          "params": {
+            "mode": "add",
+            "pattern": "2?",
+            "operand": 8,
+            "result": 33
+          },
+          "question": "Sustituye ? por un dígito. 2? + 8 = 33",
+          "question_lines": [
+            "Sustituye ? por un dígito.",
+            "2? + 8 = 33"
+          ],
+          "next": "5",
+          "choices": [
+            "4",
+            "5",
+            "6"
+          ],
+          "correct": 1,
+          "explanation": "La respuesta es 5. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 5."
+          ],
+          "spoken_answer": "El resultado es 5."
+        },
+        {
+          "catalog_id": "visual-digitos-02-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "missing_digit",
+          "params": {
+            "mode": "multiply",
+            "pattern": "?6",
+            "operand": 4,
+            "result": 104
+          },
+          "question": "Sustituye ? por un dígito. ?6 x 4 = 104",
+          "question_lines": [
+            "Sustituye ? por un dígito.",
+            "?6 x 4 = 104"
+          ],
+          "next": "2",
+          "choices": [
+            "2",
+            "3",
+            "1"
+          ],
+          "correct": 0,
+          "explanation": "La respuesta es 2. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 2."
+          ],
+          "spoken_answer": "El resultado es 2."
+        },
+        {
+          "catalog_id": "visual-digitos-02-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "missing_digit",
+          "params": {
+            "mode": "divisible",
+            "pattern": "12?0",
+            "divisor": 11
+          },
+          "question": "12?0 es divisible entre 11. ¿Qué dígito sustituye a ?",
+          "question_lines": [
+            "12?0 es divisible entre 11.",
+            "¿Qué dígito sustituye a ?"
+          ],
+          "next": "1",
+          "choices": [
+            "2",
+            "0",
+            "1"
+          ],
+          "correct": 2,
+          "explanation": "La respuesta es 1. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 1."
+          ],
+          "spoken_answer": "El resultado es 1."
+        }
+      ]
+    },
+    {
+      "pack_id": "visual-cuadrados-02",
+      "topic": "cuadrados",
+      "title": "Completa el cuadrado",
+      "rounds": [
+        {
+          "catalog_id": "visual-cuadrados-02-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "magic",
+          "params": {
+            "grid": [
+              null,
+              12,
+              17,
+              14,
+              16,
+              18,
+              15,
+              20,
+              13
+            ],
+            "values": [
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19,
+              20
+            ],
+            "total": 48,
+            "target": 0
+          },
+          "question": "Filas, columnas y diagonales: 48. X   12   17 14   16   18 15   20   13",
+          "question_lines": [
+            "Filas, columnas y diagonales: 48.",
+            "X   12   17",
+            "14   16   18",
+            "15   20   13"
+          ],
+          "next": "19",
+          "choices": [
+            "18",
+            "19",
+            "20"
+          ],
+          "correct": 1,
+          "explanation": "La respuesta es 19. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 19."
+          ],
+          "spoken_answer": "El resultado es 19."
+        },
+        {
+          "catalog_id": "visual-cuadrados-02-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "magic",
+          "params": {
+            "grid": [
+              null,
+              null,
+              24,
+              18,
+              null,
+              26,
+              20,
+              30,
+              16
+            ],
+            "values": [
+              14,
+              16,
+              18,
+              20,
+              22,
+              24,
+              26,
+              28,
+              30
+            ],
+            "total": 66,
+            "target": 1
+          },
+          "question": "Filas, columnas y diagonales: 66. ?   X   24 18   ?   26 20   30   16",
+          "question_lines": [
+            "Filas, columnas y diagonales: 66.",
+            "?   X   24",
+            "18   ?   26",
+            "20   30   16"
+          ],
+          "next": "14",
+          "choices": [
+            "14",
+            "15",
+            "13"
+          ],
+          "correct": 0,
+          "explanation": "La respuesta es 14. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 14."
+          ],
+          "spoken_answer": "El resultado es 14."
+        },
+        {
+          "catalog_id": "visual-cuadrados-02-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "magic",
+          "params": {
+            "grid": [
+              null,
+              null,
+              31,
+              null,
+              null,
+              34,
+              25,
+              40,
+              19
+            ],
+            "values": [
+              16,
+              19,
+              22,
+              25,
+              28,
+              31,
+              34,
+              37,
+              40
+            ],
+            "total": 84,
+            "target": 0
+          },
+          "question": "Filas, columnas y diagonales: 84. X   ?   31 ?   ?   34 25   40   19",
+          "question_lines": [
+            "Filas, columnas y diagonales: 84.",
+            "X   ?   31",
+            "?   ?   34",
+            "25   40   19"
+          ],
+          "next": "37",
+          "choices": [
+            "38",
+            "36",
+            "37"
+          ],
+          "correct": 2,
+          "explanation": "La respuesta es 37. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 37."
+          ],
+          "spoken_answer": "El resultado es 37."
+        }
+      ]
+    },
+    {
+      "pack_id": "visual-residuos-02",
+      "topic": "residuos",
+      "title": "Descubre el número secreto",
+      "rounds": [
+        {
+          "catalog_id": "visual-residuos-02-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "remainder",
+          "params": {
+            "low": 16,
+            "high": 21,
+            "clues": [
+              [
+                6,
+                1
+              ]
+            ]
+          },
+          "question": "Entero entre 16 y 21, inclusive. Al dividir entre 6, sobra 1.",
+          "question_lines": [
+            "Entero entre 16 y 21, inclusive.",
+            "Al dividir entre 6, sobra 1."
+          ],
+          "next": "19",
+          "choices": [
+            "18",
+            "19",
+            "20"
+          ],
+          "correct": 1,
+          "explanation": "La respuesta es 19. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 19."
+          ],
+          "spoken_answer": "El resultado es 19."
+        },
+        {
+          "catalog_id": "visual-residuos-02-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "remainder",
+          "params": {
+            "low": 25,
+            "high": 39,
+            "clues": [
+              [
+                3,
+                1
+              ],
+              [
+                5,
+                3
+              ]
+            ]
+          },
+          "question": "Entero entre 25 y 39, inclusive. Al dividir entre 3, sobra 1. Al dividir entre 5, sobra 3.",
+          "question_lines": [
+            "Entero entre 25 y 39, inclusive.",
+            "Al dividir entre 3, sobra 1.",
+            "Al dividir entre 5, sobra 3."
+          ],
+          "next": "28",
+          "choices": [
+            "28",
+            "29",
+            "27"
+          ],
+          "correct": 0,
+          "explanation": "La respuesta es 28. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 28."
+          ],
+          "spoken_answer": "El resultado es 28."
+        },
+        {
+          "catalog_id": "visual-residuos-02-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "remainder",
+          "params": {
+            "low": 70,
+            "high": 129,
+            "clues": [
+              [
+                3,
+                1
+              ],
+              [
+                4,
+                1
+              ],
+              [
+                5,
+                3
+              ]
+            ]
+          },
+          "question": "Entero entre 70 y 129, inclusive. Al dividir entre 3, sobra 1. Al dividir entre 4, sobra 1. Al dividir entre 5, sobra 3.",
+          "question_lines": [
+            "Entero entre 70 y 129, inclusive.",
+            "Al dividir entre 3, sobra 1.",
+            "Al dividir entre 4, sobra 1.",
+            "Al dividir entre 5, sobra 3."
+          ],
+          "next": "73",
+          "choices": [
+            "74",
+            "72",
+            "73"
+          ],
+          "correct": 2,
+          "explanation": "La respuesta es 73. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 73."
+          ],
+          "spoken_answer": "El resultado es 73."
+        }
+      ]
+    },
+    {
+      "pack_id": "visual-balanzas-03",
+      "topic": "balanzas",
+      "title": "Equilibra las figuras",
+      "rounds": [
+        {
+          "catalog_id": "visual-balanzas-03-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "balance",
+          "params": {
+            "circle_count": 2,
+            "circle_total": 12,
+            "circle_multiplier": 1,
+            "pair_total": 18,
+            "mode": "triangle"
+          },
+          "question": "2 C = 12 1 C + T = 18 ¿T = ?",
+          "question_lines": [
+            "2 C = 12",
+            "1 C + T = 18",
+            "¿T = ?"
+          ],
+          "next": "12",
+          "choices": [
+            "12",
+            "13",
+            "11"
+          ],
+          "correct": 0,
+          "explanation": "La respuesta es 12. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 12."
+          ],
+          "spoken_answer": "El resultado es 12."
+        },
+        {
+          "catalog_id": "visual-balanzas-03-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "balance",
+          "params": {
+            "circle_count": 3,
+            "circle_total": 21,
+            "circle_multiplier": 2,
+            "pair_total": 27,
+            "mode": "sum"
+          },
+          "question": "3 C = 21 2 C + T = 27 ¿C + T = ?",
+          "question_lines": [
+            "3 C = 21",
+            "2 C + T = 27",
+            "¿C + T = ?"
+          ],
+          "next": "20",
+          "choices": [
+            "21",
+            "19",
+            "20"
+          ],
+          "correct": 2,
+          "explanation": "La respuesta es 20. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 20."
+          ],
+          "spoken_answer": "El resultado es 20."
+        },
+        {
+          "catalog_id": "visual-balanzas-03-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "balance",
+          "params": {
+            "circle_count": 4,
+            "circle_total": 32,
+            "circle_multiplier": 2,
+            "pair_total": 30,
+            "mode": "expression",
+            "square_total": 20
+          },
+          "question": "4 C = 32 2 C + T = 30 Q + T = 20 ¿Q x T + C = ?",
+          "question_lines": [
+            "4 C = 32",
+            "2 C + T = 30",
+            "Q + T = 20",
+            "¿Q x T + C = ?"
+          ],
+          "next": "92",
+          "choices": [
+            "91",
+            "92",
+            "93"
+          ],
+          "correct": 1,
+          "explanation": "La respuesta es 92. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 92."
+          ],
+          "spoken_answer": "El resultado es 92."
+        }
+      ]
+    },
+    {
+      "pack_id": "visual-digitos-03",
+      "topic": "digitos",
+      "title": "Encuentra el dígito",
+      "rounds": [
+        {
+          "catalog_id": "visual-digitos-03-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "missing_digit",
+          "params": {
+            "mode": "add",
+            "pattern": "2?",
+            "operand": 9,
+            "result": 37
+          },
+          "question": "Sustituye ? por un dígito. 2? + 9 = 37",
+          "question_lines": [
+            "Sustituye ? por un dígito.",
+            "2? + 9 = 37"
+          ],
+          "next": "8",
+          "choices": [
+            "8",
+            "9",
+            "7"
+          ],
+          "correct": 0,
+          "explanation": "La respuesta es 8. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 8."
+          ],
+          "spoken_answer": "El resultado es 8."
+        },
+        {
+          "catalog_id": "visual-digitos-03-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "missing_digit",
+          "params": {
+            "mode": "multiply",
+            "pattern": "?9",
+            "operand": 5,
+            "result": 145
+          },
+          "question": "Sustituye ? por un dígito. ?9 x 5 = 145",
+          "question_lines": [
+            "Sustituye ? por un dígito.",
+            "?9 x 5 = 145"
+          ],
+          "next": "2",
+          "choices": [
+            "3",
+            "1",
+            "2"
+          ],
+          "correct": 2,
+          "explanation": "La respuesta es 2. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 2."
+          ],
+          "spoken_answer": "El resultado es 2."
+        },
+        {
+          "catalog_id": "visual-digitos-03-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "missing_digit",
+          "params": {
+            "mode": "divisible",
+            "pattern": "12?7",
+            "divisor": 11
+          },
+          "question": "12?7 es divisible entre 11. ¿Qué dígito sustituye a ?",
+          "question_lines": [
+            "12?7 es divisible entre 11.",
+            "¿Qué dígito sustituye a ?"
+          ],
+          "next": "8",
+          "choices": [
+            "7",
+            "8",
+            "9"
+          ],
+          "correct": 1,
+          "explanation": "La respuesta es 8. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 8."
+          ],
+          "spoken_answer": "El resultado es 8."
+        }
+      ]
+    },
+    {
+      "pack_id": "visual-cuadrados-03",
+      "topic": "cuadrados",
+      "title": "Completa el cuadrado",
+      "rounds": [
+        {
+          "catalog_id": "visual-cuadrados-03-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "magic",
+          "params": {
+            "grid": [
+              null,
+              22,
+              27,
+              24,
+              26,
+              28,
+              25,
+              30,
+              23
+            ],
+            "values": [
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30
+            ],
+            "total": 78,
+            "target": 0
+          },
+          "question": "Filas, columnas y diagonales: 78. X   22   27 24   26   28 25   30   23",
+          "question_lines": [
+            "Filas, columnas y diagonales: 78.",
+            "X   22   27",
+            "24   26   28",
+            "25   30   23"
+          ],
+          "next": "29",
+          "choices": [
+            "29",
+            "30",
+            "28"
+          ],
+          "correct": 0,
+          "explanation": "La respuesta es 29. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 29."
+          ],
+          "spoken_answer": "El resultado es 29."
+        },
+        {
+          "catalog_id": "visual-cuadrados-03-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "magic",
+          "params": {
+            "grid": [
+              null,
+              null,
+              34,
+              28,
+              null,
+              36,
+              30,
+              40,
+              26
+            ],
+            "values": [
+              24,
+              26,
+              28,
+              30,
+              32,
+              34,
+              36,
+              38,
+              40
+            ],
+            "total": 96,
+            "target": 1
+          },
+          "question": "Filas, columnas y diagonales: 96. ?   X   34 28   ?   36 30   40   26",
+          "question_lines": [
+            "Filas, columnas y diagonales: 96.",
+            "?   X   34",
+            "28   ?   36",
+            "30   40   26"
+          ],
+          "next": "24",
+          "choices": [
+            "25",
+            "23",
+            "24"
+          ],
+          "correct": 2,
+          "explanation": "La respuesta es 24. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 24."
+          ],
+          "spoken_answer": "El resultado es 24."
+        },
+        {
+          "catalog_id": "visual-cuadrados-03-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "magic",
+          "params": {
+            "grid": [
+              null,
+              null,
+              41,
+              null,
+              null,
+              44,
+              35,
+              50,
+              29
+            ],
+            "values": [
+              26,
+              29,
+              32,
+              35,
+              38,
+              41,
+              44,
+              47,
+              50
+            ],
+            "total": 114,
+            "target": 0
+          },
+          "question": "Filas, columnas y diagonales: 114. X   ?   41 ?   ?   44 35   50   29",
+          "question_lines": [
+            "Filas, columnas y diagonales: 114.",
+            "X   ?   41",
+            "?   ?   44",
+            "35   50   29"
+          ],
+          "next": "47",
+          "choices": [
+            "46",
+            "47",
+            "48"
+          ],
+          "correct": 1,
+          "explanation": "La respuesta es 47. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 47."
+          ],
+          "spoken_answer": "El resultado es 47."
+        }
+      ]
+    },
+    {
+      "pack_id": "visual-residuos-03",
+      "topic": "residuos",
+      "title": "Descubre el número secreto",
+      "rounds": [
+        {
+          "catalog_id": "visual-residuos-03-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "remainder",
+          "params": {
+            "low": 24,
+            "high": 30,
+            "clues": [
+              [
+                7,
+                0
+              ]
+            ]
+          },
+          "question": "Entero entre 24 y 30, inclusive. Al dividir entre 7, sobra 0.",
+          "question_lines": [
+            "Entero entre 24 y 30, inclusive.",
+            "Al dividir entre 7, sobra 0."
+          ],
+          "next": "28",
+          "choices": [
+            "28",
+            "29",
+            "27"
+          ],
+          "correct": 0,
+          "explanation": "La respuesta es 28. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 28."
+          ],
+          "spoken_answer": "El resultado es 28."
+        },
+        {
+          "catalog_id": "visual-residuos-03-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "remainder",
+          "params": {
+            "low": 40,
+            "high": 54,
+            "clues": [
+              [
+                3,
+                2
+              ],
+              [
+                5,
+                4
+              ]
+            ]
+          },
+          "question": "Entero entre 40 y 54, inclusive. Al dividir entre 3, sobra 2. Al dividir entre 5, sobra 4.",
+          "question_lines": [
+            "Entero entre 40 y 54, inclusive.",
+            "Al dividir entre 3, sobra 2.",
+            "Al dividir entre 5, sobra 4."
+          ],
+          "next": "44",
+          "choices": [
+            "45",
+            "43",
+            "44"
+          ],
+          "correct": 2,
+          "explanation": "La respuesta es 44. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 44."
+          ],
+          "spoken_answer": "El resultado es 44."
+        },
+        {
+          "catalog_id": "visual-residuos-03-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "remainder",
+          "params": {
+            "low": 130,
+            "high": 189,
+            "clues": [
+              [
+                3,
+                2
+              ],
+              [
+                4,
+                2
+              ],
+              [
+                5,
+                4
+              ]
+            ]
+          },
+          "question": "Entero entre 130 y 189, inclusive. Al dividir entre 3, sobra 2. Al dividir entre 4, sobra 2. Al dividir entre 5, sobra 4.",
+          "question_lines": [
+            "Entero entre 130 y 189, inclusive.",
+            "Al dividir entre 3, sobra 2.",
+            "Al dividir entre 4, sobra 2.",
+            "Al dividir entre 5, sobra 4."
+          ],
+          "next": "134",
+          "choices": [
+            "133",
+            "134",
+            "135"
+          ],
+          "correct": 1,
+          "explanation": "La respuesta es 134. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 134."
+          ],
+          "spoken_answer": "El resultado es 134."
+        }
+      ]
+    },
+    {
+      "pack_id": "visual-balanzas-04",
+      "topic": "balanzas",
+      "title": "Equilibra las figuras",
+      "rounds": [
+        {
+          "catalog_id": "visual-balanzas-04-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "balance",
+          "params": {
+            "circle_count": 2,
+            "circle_total": 14,
+            "circle_multiplier": 1,
+            "pair_total": 21,
+            "mode": "triangle"
+          },
+          "question": "2 C = 14 1 C + T = 21 ¿T = ?",
+          "question_lines": [
+            "2 C = 14",
+            "1 C + T = 21",
+            "¿T = ?"
+          ],
+          "next": "14",
+          "choices": [
+            "15",
+            "13",
+            "14"
+          ],
+          "correct": 2,
+          "explanation": "La respuesta es 14. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 14."
+          ],
+          "spoken_answer": "El resultado es 14."
+        },
+        {
+          "catalog_id": "visual-balanzas-04-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "balance",
+          "params": {
+            "circle_count": 3,
+            "circle_total": 24,
+            "circle_multiplier": 2,
+            "pair_total": 31,
+            "mode": "sum"
+          },
+          "question": "3 C = 24 2 C + T = 31 ¿C + T = ?",
+          "question_lines": [
+            "3 C = 24",
+            "2 C + T = 31",
+            "¿C + T = ?"
+          ],
+          "next": "23",
+          "choices": [
+            "22",
+            "23",
+            "24"
+          ],
+          "correct": 1,
+          "explanation": "La respuesta es 23. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 23."
+          ],
+          "spoken_answer": "El resultado es 23."
+        },
+        {
+          "catalog_id": "visual-balanzas-04-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "balance",
+          "params": {
+            "circle_count": 4,
+            "circle_total": 36,
+            "circle_multiplier": 2,
+            "pair_total": 34,
+            "mode": "expression",
+            "square_total": 23
+          },
+          "question": "4 C = 36 2 C + T = 34 Q + T = 23 ¿Q x T + C = ?",
+          "question_lines": [
+            "4 C = 36",
+            "2 C + T = 34",
+            "Q + T = 23",
+            "¿Q x T + C = ?"
+          ],
+          "next": "121",
+          "choices": [
+            "121",
+            "122",
+            "120"
+          ],
+          "correct": 0,
+          "explanation": "La respuesta es 121. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 121."
+          ],
+          "spoken_answer": "El resultado es 121."
+        }
+      ]
+    },
+    {
+      "pack_id": "visual-digitos-04",
+      "topic": "digitos",
+      "title": "Encuentra el dígito",
+      "rounds": [
+        {
+          "catalog_id": "visual-digitos-04-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "missing_digit",
+          "params": {
+            "mode": "add",
+            "pattern": "3?",
+            "operand": 10,
+            "result": 41
+          },
+          "question": "Sustituye ? por un dígito. 3? + 10 = 41",
+          "question_lines": [
+            "Sustituye ? por un dígito.",
+            "3? + 10 = 41"
+          ],
+          "next": "1",
+          "choices": [
+            "2",
+            "0",
+            "1"
+          ],
+          "correct": 2,
+          "explanation": "La respuesta es 1. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 1."
+          ],
+          "spoken_answer": "El resultado es 1."
+        },
+        {
+          "catalog_id": "visual-digitos-04-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "missing_digit",
+          "params": {
+            "mode": "multiply",
+            "pattern": "?2",
+            "operand": 6,
+            "result": 192
+          },
+          "question": "Sustituye ? por un dígito. ?2 x 6 = 192",
+          "question_lines": [
+            "Sustituye ? por un dígito.",
+            "?2 x 6 = 192"
+          ],
+          "next": "3",
+          "choices": [
+            "2",
+            "3",
+            "4"
+          ],
+          "correct": 1,
+          "explanation": "La respuesta es 3. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 3."
+          ],
+          "spoken_answer": "El resultado es 3."
+        },
+        {
+          "catalog_id": "visual-digitos-04-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "missing_digit",
+          "params": {
+            "mode": "divisible",
+            "pattern": "13?4",
+            "divisor": 11
+          },
+          "question": "13?4 es divisible entre 11. ¿Qué dígito sustituye a ?",
+          "question_lines": [
+            "13?4 es divisible entre 11.",
+            "¿Qué dígito sustituye a ?"
+          ],
+          "next": "6",
+          "choices": [
+            "6",
+            "7",
+            "5"
+          ],
+          "correct": 0,
+          "explanation": "La respuesta es 6. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 6."
+          ],
+          "spoken_answer": "El resultado es 6."
+        }
+      ]
+    },
+    {
+      "pack_id": "visual-cuadrados-04",
+      "topic": "cuadrados",
+      "title": "Completa el cuadrado",
+      "rounds": [
+        {
+          "catalog_id": "visual-cuadrados-04-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "magic",
+          "params": {
+            "grid": [
+              null,
+              32,
+              37,
+              34,
+              36,
+              38,
+              35,
+              40,
+              33
+            ],
+            "values": [
+              32,
+              33,
+              34,
+              35,
+              36,
+              37,
+              38,
+              39,
+              40
+            ],
+            "total": 108,
+            "target": 0
+          },
+          "question": "Filas, columnas y diagonales: 108. X   32   37 34   36   38 35   40   33",
+          "question_lines": [
+            "Filas, columnas y diagonales: 108.",
+            "X   32   37",
+            "34   36   38",
+            "35   40   33"
+          ],
+          "next": "39",
+          "choices": [
+            "40",
+            "38",
+            "39"
+          ],
+          "correct": 2,
+          "explanation": "La respuesta es 39. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 39."
+          ],
+          "spoken_answer": "El resultado es 39."
+        },
+        {
+          "catalog_id": "visual-cuadrados-04-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "magic",
+          "params": {
+            "grid": [
+              null,
+              null,
+              44,
+              38,
+              null,
+              46,
+              40,
+              50,
+              36
+            ],
+            "values": [
+              34,
+              36,
+              38,
+              40,
+              42,
+              44,
+              46,
+              48,
+              50
+            ],
+            "total": 126,
+            "target": 1
+          },
+          "question": "Filas, columnas y diagonales: 126. ?   X   44 38   ?   46 40   50   36",
+          "question_lines": [
+            "Filas, columnas y diagonales: 126.",
+            "?   X   44",
+            "38   ?   46",
+            "40   50   36"
+          ],
+          "next": "34",
+          "choices": [
+            "33",
+            "34",
+            "35"
+          ],
+          "correct": 1,
+          "explanation": "La respuesta es 34. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 34."
+          ],
+          "spoken_answer": "El resultado es 34."
+        },
+        {
+          "catalog_id": "visual-cuadrados-04-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "magic",
+          "params": {
+            "grid": [
+              null,
+              null,
+              51,
+              null,
+              null,
+              54,
+              45,
+              60,
+              39
+            ],
+            "values": [
+              36,
+              39,
+              42,
+              45,
+              48,
+              51,
+              54,
+              57,
+              60
+            ],
+            "total": 144,
+            "target": 0
+          },
+          "question": "Filas, columnas y diagonales: 144. X   ?   51 ?   ?   54 45   60   39",
+          "question_lines": [
+            "Filas, columnas y diagonales: 144.",
+            "X   ?   51",
+            "?   ?   54",
+            "45   60   39"
+          ],
+          "next": "57",
+          "choices": [
+            "57",
+            "58",
+            "56"
+          ],
+          "correct": 0,
+          "explanation": "La respuesta es 57. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 57."
+          ],
+          "spoken_answer": "El resultado es 57."
+        }
+      ]
+    },
+    {
+      "pack_id": "visual-residuos-04",
+      "topic": "residuos",
+      "title": "Descubre el número secreto",
+      "rounds": [
+        {
+          "catalog_id": "visual-residuos-04-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "remainder",
+          "params": {
+            "low": 25,
+            "high": 29,
+            "clues": [
+              [
+                5,
+                2
+              ]
+            ]
+          },
+          "question": "Entero entre 25 y 29, inclusive. Al dividir entre 5, sobra 2.",
+          "question_lines": [
+            "Entero entre 25 y 29, inclusive.",
+            "Al dividir entre 5, sobra 2."
+          ],
+          "next": "27",
+          "choices": [
+            "28",
+            "26",
+            "27"
+          ],
+          "correct": 2,
+          "explanation": "La respuesta es 27. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 27."
+          ],
+          "spoken_answer": "El resultado es 27."
+        },
+        {
+          "catalog_id": "visual-residuos-04-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "remainder",
+          "params": {
+            "low": 55,
+            "high": 69,
+            "clues": [
+              [
+                3,
+                0
+              ],
+              [
+                5,
+                0
+              ]
+            ]
+          },
+          "question": "Entero entre 55 y 69, inclusive. Al dividir entre 3, sobra 0. Al dividir entre 5, sobra 0.",
+          "question_lines": [
+            "Entero entre 55 y 69, inclusive.",
+            "Al dividir entre 3, sobra 0.",
+            "Al dividir entre 5, sobra 0."
+          ],
+          "next": "60",
+          "choices": [
+            "59",
+            "60",
+            "61"
+          ],
+          "correct": 1,
+          "explanation": "La respuesta es 60. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 60."
+          ],
+          "spoken_answer": "El resultado es 60."
+        },
+        {
+          "catalog_id": "visual-residuos-04-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "remainder",
+          "params": {
+            "low": 190,
+            "high": 249,
+            "clues": [
+              [
+                3,
+                0
+              ],
+              [
+                4,
+                3
+              ],
+              [
+                5,
+                0
+              ]
+            ]
+          },
+          "question": "Entero entre 190 y 249, inclusive. Al dividir entre 3, sobra 0. Al dividir entre 4, sobra 3. Al dividir entre 5, sobra 0.",
+          "question_lines": [
+            "Entero entre 190 y 249, inclusive.",
+            "Al dividir entre 3, sobra 0.",
+            "Al dividir entre 4, sobra 3.",
+            "Al dividir entre 5, sobra 0."
+          ],
+          "next": "195",
+          "choices": [
+            "195",
+            "196",
+            "194"
+          ],
+          "correct": 0,
+          "explanation": "La respuesta es 195. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 195."
+          ],
+          "spoken_answer": "El resultado es 195."
+        }
+      ]
+    },
+    {
+      "pack_id": "visual-balanzas-05",
+      "topic": "balanzas",
+      "title": "Equilibra las figuras",
+      "rounds": [
+        {
+          "catalog_id": "visual-balanzas-05-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "balance",
+          "params": {
+            "circle_count": 2,
+            "circle_total": 16,
+            "circle_multiplier": 1,
+            "pair_total": 24,
+            "mode": "triangle"
+          },
+          "question": "2 C = 16 1 C + T = 24 ¿T = ?",
+          "question_lines": [
+            "2 C = 16",
+            "1 C + T = 24",
+            "¿T = ?"
+          ],
+          "next": "16",
+          "choices": [
+            "15",
+            "16",
+            "17"
+          ],
+          "correct": 1,
+          "explanation": "La respuesta es 16. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 16."
+          ],
+          "spoken_answer": "El resultado es 16."
+        },
+        {
+          "catalog_id": "visual-balanzas-05-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "balance",
+          "params": {
+            "circle_count": 3,
+            "circle_total": 27,
+            "circle_multiplier": 2,
+            "pair_total": 35,
+            "mode": "sum"
+          },
+          "question": "3 C = 27 2 C + T = 35 ¿C + T = ?",
+          "question_lines": [
+            "3 C = 27",
+            "2 C + T = 35",
+            "¿C + T = ?"
+          ],
+          "next": "26",
+          "choices": [
+            "26",
+            "27",
+            "25"
+          ],
+          "correct": 0,
+          "explanation": "La respuesta es 26. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 26."
+          ],
+          "spoken_answer": "El resultado es 26."
+        },
+        {
+          "catalog_id": "visual-balanzas-05-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "balance",
+          "params": {
+            "circle_count": 4,
+            "circle_total": 40,
+            "circle_multiplier": 2,
+            "pair_total": 38,
+            "mode": "expression",
+            "square_total": 26
+          },
+          "question": "4 C = 40 2 C + T = 38 Q + T = 26 ¿Q x T + C = ?",
+          "question_lines": [
+            "4 C = 40",
+            "2 C + T = 38",
+            "Q + T = 26",
+            "¿Q x T + C = ?"
+          ],
+          "next": "154",
+          "choices": [
+            "155",
+            "153",
+            "154"
+          ],
+          "correct": 2,
+          "explanation": "La respuesta es 154. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 154."
+          ],
+          "spoken_answer": "El resultado es 154."
+        }
+      ]
+    },
+    {
+      "pack_id": "visual-digitos-05",
+      "topic": "digitos",
+      "title": "Encuentra el dígito",
+      "rounds": [
+        {
+          "catalog_id": "visual-digitos-05-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "missing_digit",
+          "params": {
+            "mode": "add",
+            "pattern": "3?",
+            "operand": 11,
+            "result": 45
+          },
+          "question": "Sustituye ? por un dígito. 3? + 11 = 45",
+          "question_lines": [
+            "Sustituye ? por un dígito.",
+            "3? + 11 = 45"
+          ],
+          "next": "4",
+          "choices": [
+            "3",
+            "4",
+            "5"
+          ],
+          "correct": 1,
+          "explanation": "La respuesta es 4. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 4."
+          ],
+          "spoken_answer": "El resultado es 4."
+        },
+        {
+          "catalog_id": "visual-digitos-05-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "missing_digit",
+          "params": {
+            "mode": "multiply",
+            "pattern": "?5",
+            "operand": 3,
+            "result": 105
+          },
+          "question": "Sustituye ? por un dígito. ?5 x 3 = 105",
+          "question_lines": [
+            "Sustituye ? por un dígito.",
+            "?5 x 3 = 105"
+          ],
+          "next": "3",
+          "choices": [
+            "3",
+            "4",
+            "2"
+          ],
+          "correct": 0,
+          "explanation": "La respuesta es 3. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 3."
+          ],
+          "spoken_answer": "El resultado es 3."
+        },
+        {
+          "catalog_id": "visual-digitos-05-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "missing_digit",
+          "params": {
+            "mode": "divisible",
+            "pattern": "14?1",
+            "divisor": 11
+          },
+          "question": "14?1 es divisible entre 11. ¿Qué dígito sustituye a ?",
+          "question_lines": [
+            "14?1 es divisible entre 11.",
+            "¿Qué dígito sustituye a ?"
+          ],
+          "next": "4",
+          "choices": [
+            "5",
+            "3",
+            "4"
+          ],
+          "correct": 2,
+          "explanation": "La respuesta es 4. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 4."
+          ],
+          "spoken_answer": "El resultado es 4."
+        }
+      ]
+    },
+    {
+      "pack_id": "visual-cuadrados-05",
+      "topic": "cuadrados",
+      "title": "Completa el cuadrado",
+      "rounds": [
+        {
+          "catalog_id": "visual-cuadrados-05-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "magic",
+          "params": {
+            "grid": [
+              null,
+              42,
+              47,
+              44,
+              46,
+              48,
+              45,
+              50,
+              43
+            ],
+            "values": [
+              42,
+              43,
+              44,
+              45,
+              46,
+              47,
+              48,
+              49,
+              50
+            ],
+            "total": 138,
+            "target": 0
+          },
+          "question": "Filas, columnas y diagonales: 138. X   42   47 44   46   48 45   50   43",
+          "question_lines": [
+            "Filas, columnas y diagonales: 138.",
+            "X   42   47",
+            "44   46   48",
+            "45   50   43"
+          ],
+          "next": "49",
+          "choices": [
+            "48",
+            "49",
+            "50"
+          ],
+          "correct": 1,
+          "explanation": "La respuesta es 49. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 49."
+          ],
+          "spoken_answer": "El resultado es 49."
+        },
+        {
+          "catalog_id": "visual-cuadrados-05-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "magic",
+          "params": {
+            "grid": [
+              null,
+              null,
+              54,
+              48,
+              null,
+              56,
+              50,
+              60,
+              46
+            ],
+            "values": [
+              44,
+              46,
+              48,
+              50,
+              52,
+              54,
+              56,
+              58,
+              60
+            ],
+            "total": 156,
+            "target": 1
+          },
+          "question": "Filas, columnas y diagonales: 156. ?   X   54 48   ?   56 50   60   46",
+          "question_lines": [
+            "Filas, columnas y diagonales: 156.",
+            "?   X   54",
+            "48   ?   56",
+            "50   60   46"
+          ],
+          "next": "44",
+          "choices": [
+            "44",
+            "45",
+            "43"
+          ],
+          "correct": 0,
+          "explanation": "La respuesta es 44. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 44."
+          ],
+          "spoken_answer": "El resultado es 44."
+        },
+        {
+          "catalog_id": "visual-cuadrados-05-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "magic",
+          "params": {
+            "grid": [
+              null,
+              null,
+              61,
+              null,
+              null,
+              64,
+              55,
+              70,
+              49
+            ],
+            "values": [
+              46,
+              49,
+              52,
+              55,
+              58,
+              61,
+              64,
+              67,
+              70
+            ],
+            "total": 174,
+            "target": 0
+          },
+          "question": "Filas, columnas y diagonales: 174. X   ?   61 ?   ?   64 55   70   49",
+          "question_lines": [
+            "Filas, columnas y diagonales: 174.",
+            "X   ?   61",
+            "?   ?   64",
+            "55   70   49"
+          ],
+          "next": "67",
+          "choices": [
+            "68",
+            "66",
+            "67"
+          ],
+          "correct": 2,
+          "explanation": "La respuesta es 67. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 67."
+          ],
+          "spoken_answer": "El resultado es 67."
+        }
+      ]
+    },
+    {
+      "pack_id": "visual-residuos-05",
+      "topic": "residuos",
+      "title": "Descubre el número secreto",
+      "rounds": [
+        {
+          "catalog_id": "visual-residuos-05-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "remainder",
+          "params": {
+            "low": 34,
+            "high": 39,
+            "clues": [
+              [
+                6,
+                0
+              ]
+            ]
+          },
+          "question": "Entero entre 34 y 39, inclusive. Al dividir entre 6, sobra 0.",
+          "question_lines": [
+            "Entero entre 34 y 39, inclusive.",
+            "Al dividir entre 6, sobra 0."
+          ],
+          "next": "36",
+          "choices": [
+            "35",
+            "36",
+            "37"
+          ],
+          "correct": 1,
+          "explanation": "La respuesta es 36. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 36."
+          ],
+          "spoken_answer": "El resultado es 36."
+        },
+        {
+          "catalog_id": "visual-residuos-05-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "remainder",
+          "params": {
+            "low": 70,
+            "high": 84,
+            "clues": [
+              [
+                3,
+                1
+              ],
+              [
+                5,
+                1
+              ]
+            ]
+          },
+          "question": "Entero entre 70 y 84, inclusive. Al dividir entre 3, sobra 1. Al dividir entre 5, sobra 1.",
+          "question_lines": [
+            "Entero entre 70 y 84, inclusive.",
+            "Al dividir entre 3, sobra 1.",
+            "Al dividir entre 5, sobra 1."
+          ],
+          "next": "76",
+          "choices": [
+            "76",
+            "77",
+            "75"
+          ],
+          "correct": 0,
+          "explanation": "La respuesta es 76. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 76."
+          ],
+          "spoken_answer": "El resultado es 76."
+        },
+        {
+          "catalog_id": "visual-residuos-05-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "remainder",
+          "params": {
+            "low": 250,
+            "high": 309,
+            "clues": [
+              [
+                3,
+                1
+              ],
+              [
+                4,
+                0
+              ],
+              [
+                5,
+                1
+              ]
+            ]
+          },
+          "question": "Entero entre 250 y 309, inclusive. Al dividir entre 3, sobra 1. Al dividir entre 4, sobra 0. Al dividir entre 5, sobra 1.",
+          "question_lines": [
+            "Entero entre 250 y 309, inclusive.",
+            "Al dividir entre 3, sobra 1.",
+            "Al dividir entre 4, sobra 0.",
+            "Al dividir entre 5, sobra 1."
+          ],
+          "next": "256",
+          "choices": [
+            "257",
+            "255",
+            "256"
+          ],
+          "correct": 2,
+          "explanation": "La respuesta es 256. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 256."
+          ],
+          "spoken_answer": "El resultado es 256."
+        }
+      ]
+    },
+    {
+      "pack_id": "visual-balanzas-06",
+      "topic": "balanzas",
+      "title": "Equilibra las figuras",
+      "rounds": [
+        {
+          "catalog_id": "visual-balanzas-06-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "balance",
+          "params": {
+            "circle_count": 2,
+            "circle_total": 18,
+            "circle_multiplier": 1,
+            "pair_total": 27,
+            "mode": "triangle"
+          },
+          "question": "2 C = 18 1 C + T = 27 ¿T = ?",
+          "question_lines": [
+            "2 C = 18",
+            "1 C + T = 27",
+            "¿T = ?"
+          ],
+          "next": "18",
+          "choices": [
+            "18",
+            "19",
+            "17"
+          ],
+          "correct": 0,
+          "explanation": "La respuesta es 18. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 18."
+          ],
+          "spoken_answer": "El resultado es 18."
+        },
+        {
+          "catalog_id": "visual-balanzas-06-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "balance",
+          "params": {
+            "circle_count": 3,
+            "circle_total": 30,
+            "circle_multiplier": 2,
+            "pair_total": 39,
+            "mode": "sum"
+          },
+          "question": "3 C = 30 2 C + T = 39 ¿C + T = ?",
+          "question_lines": [
+            "3 C = 30",
+            "2 C + T = 39",
+            "¿C + T = ?"
+          ],
+          "next": "29",
+          "choices": [
+            "30",
+            "28",
+            "29"
+          ],
+          "correct": 2,
+          "explanation": "La respuesta es 29. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 29."
+          ],
+          "spoken_answer": "El resultado es 29."
+        },
+        {
+          "catalog_id": "visual-balanzas-06-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "balance",
+          "params": {
+            "circle_count": 4,
+            "circle_total": 44,
+            "circle_multiplier": 2,
+            "pair_total": 42,
+            "mode": "expression",
+            "square_total": 29
+          },
+          "question": "4 C = 44 2 C + T = 42 Q + T = 29 ¿Q x T + C = ?",
+          "question_lines": [
+            "4 C = 44",
+            "2 C + T = 42",
+            "Q + T = 29",
+            "¿Q x T + C = ?"
+          ],
+          "next": "191",
+          "choices": [
+            "190",
+            "191",
+            "192"
+          ],
+          "correct": 1,
+          "explanation": "La respuesta es 191. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 191."
+          ],
+          "spoken_answer": "El resultado es 191."
+        }
+      ]
+    },
+    {
+      "pack_id": "visual-digitos-06",
+      "topic": "digitos",
+      "title": "Encuentra el dígito",
+      "rounds": [
+        {
+          "catalog_id": "visual-digitos-06-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "missing_digit",
+          "params": {
+            "mode": "add",
+            "pattern": "3?",
+            "operand": 12,
+            "result": 49
+          },
+          "question": "Sustituye ? por un dígito. 3? + 12 = 49",
+          "question_lines": [
+            "Sustituye ? por un dígito.",
+            "3? + 12 = 49"
+          ],
+          "next": "7",
+          "choices": [
+            "7",
+            "8",
+            "6"
+          ],
+          "correct": 0,
+          "explanation": "La respuesta es 7. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 7."
+          ],
+          "spoken_answer": "El resultado es 7."
+        },
+        {
+          "catalog_id": "visual-digitos-06-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "missing_digit",
+          "params": {
+            "mode": "multiply",
+            "pattern": "?8",
+            "operand": 4,
+            "result": 152
+          },
+          "question": "Sustituye ? por un dígito. ?8 x 4 = 152",
+          "question_lines": [
+            "Sustituye ? por un dígito.",
+            "?8 x 4 = 152"
+          ],
+          "next": "3",
+          "choices": [
+            "4",
+            "2",
+            "3"
+          ],
+          "correct": 2,
+          "explanation": "La respuesta es 3. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 3."
+          ],
+          "spoken_answer": "El resultado es 3."
+        },
+        {
+          "catalog_id": "visual-digitos-06-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "missing_digit",
+          "params": {
+            "mode": "divisible",
+            "pattern": "15?8",
+            "divisor": 11
+          },
+          "question": "15?8 es divisible entre 11. ¿Qué dígito sustituye a ?",
+          "question_lines": [
+            "15?8 es divisible entre 11.",
+            "¿Qué dígito sustituye a ?"
+          ],
+          "next": "1",
+          "choices": [
+            "0",
+            "1",
+            "2"
+          ],
+          "correct": 1,
+          "explanation": "La respuesta es 1. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 1."
+          ],
+          "spoken_answer": "El resultado es 1."
+        }
+      ]
+    },
+    {
+      "pack_id": "visual-cuadrados-06",
+      "topic": "cuadrados",
+      "title": "Completa el cuadrado",
+      "rounds": [
+        {
+          "catalog_id": "visual-cuadrados-06-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "magic",
+          "params": {
+            "grid": [
+              null,
+              52,
+              57,
+              54,
+              56,
+              58,
+              55,
+              60,
+              53
+            ],
+            "values": [
+              52,
+              53,
+              54,
+              55,
+              56,
+              57,
+              58,
+              59,
+              60
+            ],
+            "total": 168,
+            "target": 0
+          },
+          "question": "Filas, columnas y diagonales: 168. X   52   57 54   56   58 55   60   53",
+          "question_lines": [
+            "Filas, columnas y diagonales: 168.",
+            "X   52   57",
+            "54   56   58",
+            "55   60   53"
+          ],
+          "next": "59",
+          "choices": [
+            "59",
+            "60",
+            "58"
+          ],
+          "correct": 0,
+          "explanation": "La respuesta es 59. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 59."
+          ],
+          "spoken_answer": "El resultado es 59."
+        },
+        {
+          "catalog_id": "visual-cuadrados-06-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "magic",
+          "params": {
+            "grid": [
+              null,
+              null,
+              64,
+              58,
+              null,
+              66,
+              60,
+              70,
+              56
+            ],
+            "values": [
+              54,
+              56,
+              58,
+              60,
+              62,
+              64,
+              66,
+              68,
+              70
+            ],
+            "total": 186,
+            "target": 1
+          },
+          "question": "Filas, columnas y diagonales: 186. ?   X   64 58   ?   66 60   70   56",
+          "question_lines": [
+            "Filas, columnas y diagonales: 186.",
+            "?   X   64",
+            "58   ?   66",
+            "60   70   56"
+          ],
+          "next": "54",
+          "choices": [
+            "55",
+            "53",
+            "54"
+          ],
+          "correct": 2,
+          "explanation": "La respuesta es 54. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 54."
+          ],
+          "spoken_answer": "El resultado es 54."
+        },
+        {
+          "catalog_id": "visual-cuadrados-06-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "magic",
+          "params": {
+            "grid": [
+              null,
+              null,
+              71,
+              null,
+              null,
+              74,
+              65,
+              80,
+              59
+            ],
+            "values": [
+              56,
+              59,
+              62,
+              65,
+              68,
+              71,
+              74,
+              77,
+              80
+            ],
+            "total": 204,
+            "target": 0
+          },
+          "question": "Filas, columnas y diagonales: 204. X   ?   71 ?   ?   74 65   80   59",
+          "question_lines": [
+            "Filas, columnas y diagonales: 204.",
+            "X   ?   71",
+            "?   ?   74",
+            "65   80   59"
+          ],
+          "next": "77",
+          "choices": [
+            "76",
+            "77",
+            "78"
+          ],
+          "correct": 1,
+          "explanation": "La respuesta es 77. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 77."
+          ],
+          "spoken_answer": "El resultado es 77."
+        }
+      ]
+    },
+    {
+      "pack_id": "visual-residuos-06",
+      "topic": "residuos",
+      "title": "Descubre el número secreto",
+      "rounds": [
+        {
+          "catalog_id": "visual-residuos-06-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "remainder",
+          "params": {
+            "low": 45,
+            "high": 51,
+            "clues": [
+              [
+                7,
+                5
+              ]
+            ]
+          },
+          "question": "Entero entre 45 y 51, inclusive. Al dividir entre 7, sobra 5.",
+          "question_lines": [
+            "Entero entre 45 y 51, inclusive.",
+            "Al dividir entre 7, sobra 5."
+          ],
+          "next": "47",
+          "choices": [
+            "47",
+            "48",
+            "46"
+          ],
+          "correct": 0,
+          "explanation": "La respuesta es 47. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 47."
+          ],
+          "spoken_answer": "El resultado es 47."
+        },
+        {
+          "catalog_id": "visual-residuos-06-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "remainder",
+          "params": {
+            "low": 85,
+            "high": 99,
+            "clues": [
+              [
+                3,
+                2
+              ],
+              [
+                5,
+                2
+              ]
+            ]
+          },
+          "question": "Entero entre 85 y 99, inclusive. Al dividir entre 3, sobra 2. Al dividir entre 5, sobra 2.",
+          "question_lines": [
+            "Entero entre 85 y 99, inclusive.",
+            "Al dividir entre 3, sobra 2.",
+            "Al dividir entre 5, sobra 2."
+          ],
+          "next": "92",
+          "choices": [
+            "93",
+            "91",
+            "92"
+          ],
+          "correct": 2,
+          "explanation": "La respuesta es 92. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 92."
+          ],
+          "spoken_answer": "El resultado es 92."
+        },
+        {
+          "catalog_id": "visual-residuos-06-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "remainder",
+          "params": {
+            "low": 310,
+            "high": 369,
+            "clues": [
+              [
+                3,
+                2
+              ],
+              [
+                4,
+                1
+              ],
+              [
+                5,
+                2
+              ]
+            ]
+          },
+          "question": "Entero entre 310 y 369, inclusive. Al dividir entre 3, sobra 2. Al dividir entre 4, sobra 1. Al dividir entre 5, sobra 2.",
+          "question_lines": [
+            "Entero entre 310 y 369, inclusive.",
+            "Al dividir entre 3, sobra 2.",
+            "Al dividir entre 4, sobra 1.",
+            "Al dividir entre 5, sobra 2."
+          ],
+          "next": "317",
+          "choices": [
+            "316",
+            "317",
+            "318"
+          ],
+          "correct": 1,
+          "explanation": "La respuesta es 317. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 317."
+          ],
+          "spoken_answer": "El resultado es 317."
+        }
+      ]
+    },
+    {
+      "pack_id": "visual-balanzas-07",
+      "topic": "balanzas",
+      "title": "Equilibra las figuras",
+      "rounds": [
+        {
+          "catalog_id": "visual-balanzas-07-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "balance",
+          "params": {
+            "circle_count": 2,
+            "circle_total": 20,
+            "circle_multiplier": 1,
+            "pair_total": 30,
+            "mode": "triangle"
+          },
+          "question": "2 C = 20 1 C + T = 30 ¿T = ?",
+          "question_lines": [
+            "2 C = 20",
+            "1 C + T = 30",
+            "¿T = ?"
+          ],
+          "next": "20",
+          "choices": [
+            "21",
+            "19",
+            "20"
+          ],
+          "correct": 2,
+          "explanation": "La respuesta es 20. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 20."
+          ],
+          "spoken_answer": "El resultado es 20."
+        },
+        {
+          "catalog_id": "visual-balanzas-07-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "balance",
+          "params": {
+            "circle_count": 3,
+            "circle_total": 33,
+            "circle_multiplier": 2,
+            "pair_total": 43,
+            "mode": "sum"
+          },
+          "question": "3 C = 33 2 C + T = 43 ¿C + T = ?",
+          "question_lines": [
+            "3 C = 33",
+            "2 C + T = 43",
+            "¿C + T = ?"
+          ],
+          "next": "32",
+          "choices": [
+            "31",
+            "32",
+            "33"
+          ],
+          "correct": 1,
+          "explanation": "La respuesta es 32. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 32."
+          ],
+          "spoken_answer": "El resultado es 32."
+        },
+        {
+          "catalog_id": "visual-balanzas-07-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "balance",
+          "params": {
+            "circle_count": 4,
+            "circle_total": 48,
+            "circle_multiplier": 2,
+            "pair_total": 46,
+            "mode": "expression",
+            "square_total": 32
+          },
+          "question": "4 C = 48 2 C + T = 46 Q + T = 32 ¿Q x T + C = ?",
+          "question_lines": [
+            "4 C = 48",
+            "2 C + T = 46",
+            "Q + T = 32",
+            "¿Q x T + C = ?"
+          ],
+          "next": "232",
+          "choices": [
+            "232",
+            "233",
+            "231"
+          ],
+          "correct": 0,
+          "explanation": "La respuesta es 232. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 232."
+          ],
+          "spoken_answer": "El resultado es 232."
+        }
+      ]
+    },
+    {
+      "pack_id": "visual-digitos-07",
+      "topic": "digitos",
+      "title": "Encuentra el dígito",
+      "rounds": [
+        {
+          "catalog_id": "visual-digitos-07-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "missing_digit",
+          "params": {
+            "mode": "add",
+            "pattern": "4?",
+            "operand": 13,
+            "result": 53
+          },
+          "question": "Sustituye ? por un dígito. 4? + 13 = 53",
+          "question_lines": [
+            "Sustituye ? por un dígito.",
+            "4? + 13 = 53"
+          ],
+          "next": "0",
+          "choices": [
+            "1",
+            "-1",
+            "0"
+          ],
+          "correct": 2,
+          "explanation": "La respuesta es 0. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 0."
+          ],
+          "spoken_answer": "El resultado es 0."
+        },
+        {
+          "catalog_id": "visual-digitos-07-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "missing_digit",
+          "params": {
+            "mode": "multiply",
+            "pattern": "?1",
+            "operand": 5,
+            "result": 205
+          },
+          "question": "Sustituye ? por un dígito. ?1 x 5 = 205",
+          "question_lines": [
+            "Sustituye ? por un dígito.",
+            "?1 x 5 = 205"
+          ],
+          "next": "4",
+          "choices": [
+            "3",
+            "4",
+            "5"
+          ],
+          "correct": 1,
+          "explanation": "La respuesta es 4. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 4."
+          ],
+          "spoken_answer": "El resultado es 4."
+        },
+        {
+          "catalog_id": "visual-digitos-07-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "missing_digit",
+          "params": {
+            "mode": "divisible",
+            "pattern": "15?5",
+            "divisor": 11
+          },
+          "question": "15?5 es divisible entre 11. ¿Qué dígito sustituye a ?",
+          "question_lines": [
+            "15?5 es divisible entre 11.",
+            "¿Qué dígito sustituye a ?"
+          ],
+          "next": "9",
+          "choices": [
+            "9",
+            "10",
+            "8"
+          ],
+          "correct": 0,
+          "explanation": "La respuesta es 9. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 9."
+          ],
+          "spoken_answer": "El resultado es 9."
+        }
+      ]
+    },
+    {
+      "pack_id": "visual-cuadrados-07",
+      "topic": "cuadrados",
+      "title": "Completa el cuadrado",
+      "rounds": [
+        {
+          "catalog_id": "visual-cuadrados-07-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "magic",
+          "params": {
+            "grid": [
+              null,
+              62,
+              67,
+              64,
+              66,
+              68,
+              65,
+              70,
+              63
+            ],
+            "values": [
+              62,
+              63,
+              64,
+              65,
+              66,
+              67,
+              68,
+              69,
+              70
+            ],
+            "total": 198,
+            "target": 0
+          },
+          "question": "Filas, columnas y diagonales: 198. X   62   67 64   66   68 65   70   63",
+          "question_lines": [
+            "Filas, columnas y diagonales: 198.",
+            "X   62   67",
+            "64   66   68",
+            "65   70   63"
+          ],
+          "next": "69",
+          "choices": [
+            "70",
+            "68",
+            "69"
+          ],
+          "correct": 2,
+          "explanation": "La respuesta es 69. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 69."
+          ],
+          "spoken_answer": "El resultado es 69."
+        },
+        {
+          "catalog_id": "visual-cuadrados-07-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "magic",
+          "params": {
+            "grid": [
+              null,
+              null,
+              74,
+              68,
+              null,
+              76,
+              70,
+              80,
+              66
+            ],
+            "values": [
+              64,
+              66,
+              68,
+              70,
+              72,
+              74,
+              76,
+              78,
+              80
+            ],
+            "total": 216,
+            "target": 1
+          },
+          "question": "Filas, columnas y diagonales: 216. ?   X   74 68   ?   76 70   80   66",
+          "question_lines": [
+            "Filas, columnas y diagonales: 216.",
+            "?   X   74",
+            "68   ?   76",
+            "70   80   66"
+          ],
+          "next": "64",
+          "choices": [
+            "63",
+            "64",
+            "65"
+          ],
+          "correct": 1,
+          "explanation": "La respuesta es 64. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 64."
+          ],
+          "spoken_answer": "El resultado es 64."
+        },
+        {
+          "catalog_id": "visual-cuadrados-07-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "magic",
+          "params": {
+            "grid": [
+              null,
+              null,
+              81,
+              null,
+              null,
+              84,
+              75,
+              90,
+              69
+            ],
+            "values": [
+              66,
+              69,
+              72,
+              75,
+              78,
+              81,
+              84,
+              87,
+              90
+            ],
+            "total": 234,
+            "target": 0
+          },
+          "question": "Filas, columnas y diagonales: 234. X   ?   81 ?   ?   84 75   90   69",
+          "question_lines": [
+            "Filas, columnas y diagonales: 234.",
+            "X   ?   81",
+            "?   ?   84",
+            "75   90   69"
+          ],
+          "next": "87",
+          "choices": [
+            "87",
+            "88",
+            "86"
+          ],
+          "correct": 0,
+          "explanation": "La respuesta es 87. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 87."
+          ],
+          "spoken_answer": "El resultado es 87."
+        }
+      ]
+    },
+    {
+      "pack_id": "visual-residuos-07",
+      "topic": "residuos",
+      "title": "Descubre el número secreto",
+      "rounds": [
+        {
+          "catalog_id": "visual-residuos-07-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "remainder",
+          "params": {
+            "low": 40,
+            "high": 44,
+            "clues": [
+              [
+                5,
+                2
+              ]
+            ]
+          },
+          "question": "Entero entre 40 y 44, inclusive. Al dividir entre 5, sobra 2.",
+          "question_lines": [
+            "Entero entre 40 y 44, inclusive.",
+            "Al dividir entre 5, sobra 2."
+          ],
+          "next": "42",
+          "choices": [
+            "43",
+            "41",
+            "42"
+          ],
+          "correct": 2,
+          "explanation": "La respuesta es 42. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 42."
+          ],
+          "spoken_answer": "El resultado es 42."
+        },
+        {
+          "catalog_id": "visual-residuos-07-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "remainder",
+          "params": {
+            "low": 100,
+            "high": 114,
+            "clues": [
+              [
+                3,
+                0
+              ],
+              [
+                5,
+                3
+              ]
+            ]
+          },
+          "question": "Entero entre 100 y 114, inclusive. Al dividir entre 3, sobra 0. Al dividir entre 5, sobra 3.",
+          "question_lines": [
+            "Entero entre 100 y 114, inclusive.",
+            "Al dividir entre 3, sobra 0.",
+            "Al dividir entre 5, sobra 3."
+          ],
+          "next": "108",
+          "choices": [
+            "107",
+            "108",
+            "109"
+          ],
+          "correct": 1,
+          "explanation": "La respuesta es 108. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 108."
+          ],
+          "spoken_answer": "El resultado es 108."
+        },
+        {
+          "catalog_id": "visual-residuos-07-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "remainder",
+          "params": {
+            "low": 370,
+            "high": 429,
+            "clues": [
+              [
+                3,
+                0
+              ],
+              [
+                4,
+                2
+              ],
+              [
+                5,
+                3
+              ]
+            ]
+          },
+          "question": "Entero entre 370 y 429, inclusive. Al dividir entre 3, sobra 0. Al dividir entre 4, sobra 2. Al dividir entre 5, sobra 3.",
+          "question_lines": [
+            "Entero entre 370 y 429, inclusive.",
+            "Al dividir entre 3, sobra 0.",
+            "Al dividir entre 4, sobra 2.",
+            "Al dividir entre 5, sobra 3."
+          ],
+          "next": "378",
+          "choices": [
+            "378",
+            "379",
+            "377"
+          ],
+          "correct": 0,
+          "explanation": "La respuesta es 378. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 378."
+          ],
+          "spoken_answer": "El resultado es 378."
+        }
+      ]
+    },
+    {
+      "pack_id": "visual-balanzas-08",
+      "topic": "balanzas",
+      "title": "Equilibra las figuras",
+      "rounds": [
+        {
+          "catalog_id": "visual-balanzas-08-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "balance",
+          "params": {
+            "circle_count": 2,
+            "circle_total": 22,
+            "circle_multiplier": 1,
+            "pair_total": 33,
+            "mode": "triangle"
+          },
+          "question": "2 C = 22 1 C + T = 33 ¿T = ?",
+          "question_lines": [
+            "2 C = 22",
+            "1 C + T = 33",
+            "¿T = ?"
+          ],
+          "next": "22",
+          "choices": [
+            "21",
+            "22",
+            "23"
+          ],
+          "correct": 1,
+          "explanation": "La respuesta es 22. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 22."
+          ],
+          "spoken_answer": "El resultado es 22."
+        },
+        {
+          "catalog_id": "visual-balanzas-08-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "balance",
+          "params": {
+            "circle_count": 3,
+            "circle_total": 36,
+            "circle_multiplier": 2,
+            "pair_total": 47,
+            "mode": "sum"
+          },
+          "question": "3 C = 36 2 C + T = 47 ¿C + T = ?",
+          "question_lines": [
+            "3 C = 36",
+            "2 C + T = 47",
+            "¿C + T = ?"
+          ],
+          "next": "35",
+          "choices": [
+            "35",
+            "36",
+            "34"
+          ],
+          "correct": 0,
+          "explanation": "La respuesta es 35. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 35."
+          ],
+          "spoken_answer": "El resultado es 35."
+        },
+        {
+          "catalog_id": "visual-balanzas-08-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "balance",
+          "params": {
+            "circle_count": 4,
+            "circle_total": 52,
+            "circle_multiplier": 2,
+            "pair_total": 50,
+            "mode": "expression",
+            "square_total": 35
+          },
+          "question": "4 C = 52 2 C + T = 50 Q + T = 35 ¿Q x T + C = ?",
+          "question_lines": [
+            "4 C = 52",
+            "2 C + T = 50",
+            "Q + T = 35",
+            "¿Q x T + C = ?"
+          ],
+          "next": "277",
+          "choices": [
+            "278",
+            "276",
+            "277"
+          ],
+          "correct": 2,
+          "explanation": "La respuesta es 277. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 277."
+          ],
+          "spoken_answer": "El resultado es 277."
+        }
+      ]
+    },
+    {
+      "pack_id": "visual-digitos-08",
+      "topic": "digitos",
+      "title": "Encuentra el dígito",
+      "rounds": [
+        {
+          "catalog_id": "visual-digitos-08-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "missing_digit",
+          "params": {
+            "mode": "add",
+            "pattern": "4?",
+            "operand": 14,
+            "result": 57
+          },
+          "question": "Sustituye ? por un dígito. 4? + 14 = 57",
+          "question_lines": [
+            "Sustituye ? por un dígito.",
+            "4? + 14 = 57"
+          ],
+          "next": "3",
+          "choices": [
+            "2",
+            "3",
+            "4"
+          ],
+          "correct": 1,
+          "explanation": "La respuesta es 3. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 3."
+          ],
+          "spoken_answer": "El resultado es 3."
+        },
+        {
+          "catalog_id": "visual-digitos-08-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "missing_digit",
+          "params": {
+            "mode": "multiply",
+            "pattern": "?4",
+            "operand": 6,
+            "result": 264
+          },
+          "question": "Sustituye ? por un dígito. ?4 x 6 = 264",
+          "question_lines": [
+            "Sustituye ? por un dígito.",
+            "?4 x 6 = 264"
+          ],
+          "next": "4",
+          "choices": [
+            "4",
+            "5",
+            "3"
+          ],
+          "correct": 0,
+          "explanation": "La respuesta es 4. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 4."
+          ],
+          "spoken_answer": "El resultado es 4."
+        },
+        {
+          "catalog_id": "visual-digitos-08-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "missing_digit",
+          "params": {
+            "mode": "divisible",
+            "pattern": "16?2",
+            "divisor": 11
+          },
+          "question": "16?2 es divisible entre 11. ¿Qué dígito sustituye a ?",
+          "question_lines": [
+            "16?2 es divisible entre 11.",
+            "¿Qué dígito sustituye a ?"
+          ],
+          "next": "7",
+          "choices": [
+            "8",
+            "6",
+            "7"
+          ],
+          "correct": 2,
+          "explanation": "La respuesta es 7. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 7."
+          ],
+          "spoken_answer": "El resultado es 7."
+        }
+      ]
+    },
+    {
+      "pack_id": "visual-cuadrados-08",
+      "topic": "cuadrados",
+      "title": "Completa el cuadrado",
+      "rounds": [
+        {
+          "catalog_id": "visual-cuadrados-08-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "magic",
+          "params": {
+            "grid": [
+              null,
+              72,
+              77,
+              74,
+              76,
+              78,
+              75,
+              80,
+              73
+            ],
+            "values": [
+              72,
+              73,
+              74,
+              75,
+              76,
+              77,
+              78,
+              79,
+              80
+            ],
+            "total": 228,
+            "target": 0
+          },
+          "question": "Filas, columnas y diagonales: 228. X   72   77 74   76   78 75   80   73",
+          "question_lines": [
+            "Filas, columnas y diagonales: 228.",
+            "X   72   77",
+            "74   76   78",
+            "75   80   73"
+          ],
+          "next": "79",
+          "choices": [
+            "78",
+            "79",
+            "80"
+          ],
+          "correct": 1,
+          "explanation": "La respuesta es 79. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 79."
+          ],
+          "spoken_answer": "El resultado es 79."
+        },
+        {
+          "catalog_id": "visual-cuadrados-08-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "magic",
+          "params": {
+            "grid": [
+              null,
+              null,
+              84,
+              78,
+              null,
+              86,
+              80,
+              90,
+              76
+            ],
+            "values": [
+              74,
+              76,
+              78,
+              80,
+              82,
+              84,
+              86,
+              88,
+              90
+            ],
+            "total": 246,
+            "target": 1
+          },
+          "question": "Filas, columnas y diagonales: 246. ?   X   84 78   ?   86 80   90   76",
+          "question_lines": [
+            "Filas, columnas y diagonales: 246.",
+            "?   X   84",
+            "78   ?   86",
+            "80   90   76"
+          ],
+          "next": "74",
+          "choices": [
+            "74",
+            "75",
+            "73"
+          ],
+          "correct": 0,
+          "explanation": "La respuesta es 74. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 74."
+          ],
+          "spoken_answer": "El resultado es 74."
+        },
+        {
+          "catalog_id": "visual-cuadrados-08-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "magic",
+          "params": {
+            "grid": [
+              null,
+              null,
+              91,
+              null,
+              null,
+              94,
+              85,
+              100,
+              79
+            ],
+            "values": [
+              76,
+              79,
+              82,
+              85,
+              88,
+              91,
+              94,
+              97,
+              100
+            ],
+            "total": 264,
+            "target": 0
+          },
+          "question": "Filas, columnas y diagonales: 264. X   ?   91 ?   ?   94 85   100   79",
+          "question_lines": [
+            "Filas, columnas y diagonales: 264.",
+            "X   ?   91",
+            "?   ?   94",
+            "85   100   79"
+          ],
+          "next": "97",
+          "choices": [
+            "98",
+            "96",
+            "97"
+          ],
+          "correct": 2,
+          "explanation": "La respuesta es 97. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 97."
+          ],
+          "spoken_answer": "El resultado es 97."
+        }
+      ]
+    },
+    {
+      "pack_id": "visual-residuos-08",
+      "topic": "residuos",
+      "title": "Descubre el número secreto",
+      "rounds": [
+        {
+          "catalog_id": "visual-residuos-08-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "remainder",
+          "params": {
+            "low": 52,
+            "high": 57,
+            "clues": [
+              [
+                6,
+                3
+              ]
+            ]
+          },
+          "question": "Entero entre 52 y 57, inclusive. Al dividir entre 6, sobra 3.",
+          "question_lines": [
+            "Entero entre 52 y 57, inclusive.",
+            "Al dividir entre 6, sobra 3."
+          ],
+          "next": "57",
+          "choices": [
+            "56",
+            "57",
+            "58"
+          ],
+          "correct": 1,
+          "explanation": "La respuesta es 57. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 57."
+          ],
+          "spoken_answer": "El resultado es 57."
+        },
+        {
+          "catalog_id": "visual-residuos-08-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "remainder",
+          "params": {
+            "low": 115,
+            "high": 129,
+            "clues": [
+              [
+                3,
+                1
+              ],
+              [
+                5,
+                4
+              ]
+            ]
+          },
+          "question": "Entero entre 115 y 129, inclusive. Al dividir entre 3, sobra 1. Al dividir entre 5, sobra 4.",
+          "question_lines": [
+            "Entero entre 115 y 129, inclusive.",
+            "Al dividir entre 3, sobra 1.",
+            "Al dividir entre 5, sobra 4."
+          ],
+          "next": "124",
+          "choices": [
+            "124",
+            "125",
+            "123"
+          ],
+          "correct": 0,
+          "explanation": "La respuesta es 124. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 124."
+          ],
+          "spoken_answer": "El resultado es 124."
+        },
+        {
+          "catalog_id": "visual-residuos-08-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "remainder",
+          "params": {
+            "low": 430,
+            "high": 489,
+            "clues": [
+              [
+                3,
+                1
+              ],
+              [
+                4,
+                3
+              ],
+              [
+                5,
+                4
+              ]
+            ]
+          },
+          "question": "Entero entre 430 y 489, inclusive. Al dividir entre 3, sobra 1. Al dividir entre 4, sobra 3. Al dividir entre 5, sobra 4.",
+          "question_lines": [
+            "Entero entre 430 y 489, inclusive.",
+            "Al dividir entre 3, sobra 1.",
+            "Al dividir entre 4, sobra 3.",
+            "Al dividir entre 5, sobra 4."
+          ],
+          "next": "439",
+          "choices": [
+            "440",
+            "438",
+            "439"
+          ],
+          "correct": 2,
+          "explanation": "La respuesta es 439. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 439."
+          ],
+          "spoken_answer": "El resultado es 439."
+        }
+      ]
+    },
+    {
+      "pack_id": "visual-balanzas-09",
+      "topic": "balanzas",
+      "title": "Equilibra las figuras",
+      "rounds": [
+        {
+          "catalog_id": "visual-balanzas-09-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "balance",
+          "params": {
+            "circle_count": 2,
+            "circle_total": 24,
+            "circle_multiplier": 1,
+            "pair_total": 36,
+            "mode": "triangle"
+          },
+          "question": "2 C = 24 1 C + T = 36 ¿T = ?",
+          "question_lines": [
+            "2 C = 24",
+            "1 C + T = 36",
+            "¿T = ?"
+          ],
+          "next": "24",
+          "choices": [
+            "24",
+            "25",
+            "23"
+          ],
+          "correct": 0,
+          "explanation": "La respuesta es 24. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 24."
+          ],
+          "spoken_answer": "El resultado es 24."
+        },
+        {
+          "catalog_id": "visual-balanzas-09-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "balance",
+          "params": {
+            "circle_count": 3,
+            "circle_total": 39,
+            "circle_multiplier": 2,
+            "pair_total": 51,
+            "mode": "sum"
+          },
+          "question": "3 C = 39 2 C + T = 51 ¿C + T = ?",
+          "question_lines": [
+            "3 C = 39",
+            "2 C + T = 51",
+            "¿C + T = ?"
+          ],
+          "next": "38",
+          "choices": [
+            "39",
+            "37",
+            "38"
+          ],
+          "correct": 2,
+          "explanation": "La respuesta es 38. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 38."
+          ],
+          "spoken_answer": "El resultado es 38."
+        },
+        {
+          "catalog_id": "visual-balanzas-09-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "balance",
+          "params": {
+            "circle_count": 4,
+            "circle_total": 56,
+            "circle_multiplier": 2,
+            "pair_total": 54,
+            "mode": "expression",
+            "square_total": 38
+          },
+          "question": "4 C = 56 2 C + T = 54 Q + T = 38 ¿Q x T + C = ?",
+          "question_lines": [
+            "4 C = 56",
+            "2 C + T = 54",
+            "Q + T = 38",
+            "¿Q x T + C = ?"
+          ],
+          "next": "326",
+          "choices": [
+            "325",
+            "326",
+            "327"
+          ],
+          "correct": 1,
+          "explanation": "La respuesta es 326. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 326."
+          ],
+          "spoken_answer": "El resultado es 326."
+        }
+      ]
+    },
+    {
+      "pack_id": "visual-digitos-09",
+      "topic": "digitos",
+      "title": "Encuentra el dígito",
+      "rounds": [
+        {
+          "catalog_id": "visual-digitos-09-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "missing_digit",
+          "params": {
+            "mode": "add",
+            "pattern": "4?",
+            "operand": 15,
+            "result": 61
+          },
+          "question": "Sustituye ? por un dígito. 4? + 15 = 61",
+          "question_lines": [
+            "Sustituye ? por un dígito.",
+            "4? + 15 = 61"
+          ],
+          "next": "6",
+          "choices": [
+            "6",
+            "7",
+            "5"
+          ],
+          "correct": 0,
+          "explanation": "La respuesta es 6. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 6."
+          ],
+          "spoken_answer": "El resultado es 6."
+        },
+        {
+          "catalog_id": "visual-digitos-09-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "missing_digit",
+          "params": {
+            "mode": "multiply",
+            "pattern": "?7",
+            "operand": 3,
+            "result": 141
+          },
+          "question": "Sustituye ? por un dígito. ?7 x 3 = 141",
+          "question_lines": [
+            "Sustituye ? por un dígito.",
+            "?7 x 3 = 141"
+          ],
+          "next": "4",
+          "choices": [
+            "5",
+            "3",
+            "4"
+          ],
+          "correct": 2,
+          "explanation": "La respuesta es 4. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 4."
+          ],
+          "spoken_answer": "El resultado es 4."
+        },
+        {
+          "catalog_id": "visual-digitos-09-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "missing_digit",
+          "params": {
+            "mode": "divisible",
+            "pattern": "17?9",
+            "divisor": 11
+          },
+          "question": "17?9 es divisible entre 11. ¿Qué dígito sustituye a ?",
+          "question_lines": [
+            "17?9 es divisible entre 11.",
+            "¿Qué dígito sustituye a ?"
+          ],
+          "next": "4",
+          "choices": [
+            "3",
+            "4",
+            "5"
+          ],
+          "correct": 1,
+          "explanation": "La respuesta es 4. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 4."
+          ],
+          "spoken_answer": "El resultado es 4."
+        }
+      ]
+    },
+    {
+      "pack_id": "visual-cuadrados-09",
+      "topic": "cuadrados",
+      "title": "Completa el cuadrado",
+      "rounds": [
+        {
+          "catalog_id": "visual-cuadrados-09-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "magic",
+          "params": {
+            "grid": [
+              null,
+              82,
+              87,
+              84,
+              86,
+              88,
+              85,
+              90,
+              83
+            ],
+            "values": [
+              82,
+              83,
+              84,
+              85,
+              86,
+              87,
+              88,
+              89,
+              90
+            ],
+            "total": 258,
+            "target": 0
+          },
+          "question": "Filas, columnas y diagonales: 258. X   82   87 84   86   88 85   90   83",
+          "question_lines": [
+            "Filas, columnas y diagonales: 258.",
+            "X   82   87",
+            "84   86   88",
+            "85   90   83"
+          ],
+          "next": "89",
+          "choices": [
+            "89",
+            "90",
+            "88"
+          ],
+          "correct": 0,
+          "explanation": "La respuesta es 89. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 89."
+          ],
+          "spoken_answer": "El resultado es 89."
+        },
+        {
+          "catalog_id": "visual-cuadrados-09-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "magic",
+          "params": {
+            "grid": [
+              null,
+              null,
+              94,
+              88,
+              null,
+              96,
+              90,
+              100,
+              86
+            ],
+            "values": [
+              84,
+              86,
+              88,
+              90,
+              92,
+              94,
+              96,
+              98,
+              100
+            ],
+            "total": 276,
+            "target": 1
+          },
+          "question": "Filas, columnas y diagonales: 276. ?   X   94 88   ?   96 90   100   86",
+          "question_lines": [
+            "Filas, columnas y diagonales: 276.",
+            "?   X   94",
+            "88   ?   96",
+            "90   100   86"
+          ],
+          "next": "84",
+          "choices": [
+            "85",
+            "83",
+            "84"
+          ],
+          "correct": 2,
+          "explanation": "La respuesta es 84. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 84."
+          ],
+          "spoken_answer": "El resultado es 84."
+        },
+        {
+          "catalog_id": "visual-cuadrados-09-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "magic",
+          "params": {
+            "grid": [
+              null,
+              null,
+              101,
+              null,
+              null,
+              104,
+              95,
+              110,
+              89
+            ],
+            "values": [
+              86,
+              89,
+              92,
+              95,
+              98,
+              101,
+              104,
+              107,
+              110
+            ],
+            "total": 294,
+            "target": 0
+          },
+          "question": "Filas, columnas y diagonales: 294. X   ?   101 ?   ?   104 95   110   89",
+          "question_lines": [
+            "Filas, columnas y diagonales: 294.",
+            "X   ?   101",
+            "?   ?   104",
+            "95   110   89"
+          ],
+          "next": "107",
+          "choices": [
+            "106",
+            "107",
+            "108"
+          ],
+          "correct": 1,
+          "explanation": "La respuesta es 107. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 107."
+          ],
+          "spoken_answer": "El resultado es 107."
+        }
+      ]
+    },
+    {
+      "pack_id": "visual-residuos-09",
+      "topic": "residuos",
+      "title": "Descubre el número secreto",
+      "rounds": [
+        {
+          "catalog_id": "visual-residuos-09-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "remainder",
+          "params": {
+            "low": 66,
+            "high": 72,
+            "clues": [
+              [
+                7,
+                1
+              ]
+            ]
+          },
+          "question": "Entero entre 66 y 72, inclusive. Al dividir entre 7, sobra 1.",
+          "question_lines": [
+            "Entero entre 66 y 72, inclusive.",
+            "Al dividir entre 7, sobra 1."
+          ],
+          "next": "71",
+          "choices": [
+            "71",
+            "72",
+            "70"
+          ],
+          "correct": 0,
+          "explanation": "La respuesta es 71. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 71."
+          ],
+          "spoken_answer": "El resultado es 71."
+        },
+        {
+          "catalog_id": "visual-residuos-09-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "remainder",
+          "params": {
+            "low": 130,
+            "high": 144,
+            "clues": [
+              [
+                3,
+                2
+              ],
+              [
+                5,
+                0
+              ]
+            ]
+          },
+          "question": "Entero entre 130 y 144, inclusive. Al dividir entre 3, sobra 2. Al dividir entre 5, sobra 0.",
+          "question_lines": [
+            "Entero entre 130 y 144, inclusive.",
+            "Al dividir entre 3, sobra 2.",
+            "Al dividir entre 5, sobra 0."
+          ],
+          "next": "140",
+          "choices": [
+            "141",
+            "139",
+            "140"
+          ],
+          "correct": 2,
+          "explanation": "La respuesta es 140. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 140."
+          ],
+          "spoken_answer": "El resultado es 140."
+        },
+        {
+          "catalog_id": "visual-residuos-09-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "remainder",
+          "params": {
+            "low": 490,
+            "high": 549,
+            "clues": [
+              [
+                3,
+                2
+              ],
+              [
+                4,
+                0
+              ],
+              [
+                5,
+                0
+              ]
+            ]
+          },
+          "question": "Entero entre 490 y 549, inclusive. Al dividir entre 3, sobra 2. Al dividir entre 4, sobra 0. Al dividir entre 5, sobra 0.",
+          "question_lines": [
+            "Entero entre 490 y 549, inclusive.",
+            "Al dividir entre 3, sobra 2.",
+            "Al dividir entre 4, sobra 0.",
+            "Al dividir entre 5, sobra 0."
+          ],
+          "next": "500",
+          "choices": [
+            "499",
+            "500",
+            "501"
+          ],
+          "correct": 1,
+          "explanation": "La respuesta es 500. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 500."
+          ],
+          "spoken_answer": "El resultado es 500."
+        }
+      ]
+    },
+    {
+      "pack_id": "visual-balanzas-10",
+      "topic": "balanzas",
+      "title": "Equilibra las figuras",
+      "rounds": [
+        {
+          "catalog_id": "visual-balanzas-10-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "balance",
+          "params": {
+            "circle_count": 2,
+            "circle_total": 26,
+            "circle_multiplier": 1,
+            "pair_total": 39,
+            "mode": "triangle"
+          },
+          "question": "2 C = 26 1 C + T = 39 ¿T = ?",
+          "question_lines": [
+            "2 C = 26",
+            "1 C + T = 39",
+            "¿T = ?"
+          ],
+          "next": "26",
+          "choices": [
+            "27",
+            "25",
+            "26"
+          ],
+          "correct": 2,
+          "explanation": "La respuesta es 26. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 26."
+          ],
+          "spoken_answer": "El resultado es 26."
+        },
+        {
+          "catalog_id": "visual-balanzas-10-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "balance",
+          "params": {
+            "circle_count": 3,
+            "circle_total": 42,
+            "circle_multiplier": 2,
+            "pair_total": 55,
+            "mode": "sum"
+          },
+          "question": "3 C = 42 2 C + T = 55 ¿C + T = ?",
+          "question_lines": [
+            "3 C = 42",
+            "2 C + T = 55",
+            "¿C + T = ?"
+          ],
+          "next": "41",
+          "choices": [
+            "40",
+            "41",
+            "42"
+          ],
+          "correct": 1,
+          "explanation": "La respuesta es 41. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 41."
+          ],
+          "spoken_answer": "El resultado es 41."
+        },
+        {
+          "catalog_id": "visual-balanzas-10-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "balance",
+          "params": {
+            "circle_count": 4,
+            "circle_total": 60,
+            "circle_multiplier": 2,
+            "pair_total": 58,
+            "mode": "expression",
+            "square_total": 41
+          },
+          "question": "4 C = 60 2 C + T = 58 Q + T = 41 ¿Q x T + C = ?",
+          "question_lines": [
+            "4 C = 60",
+            "2 C + T = 58",
+            "Q + T = 41",
+            "¿Q x T + C = ?"
+          ],
+          "next": "379",
+          "choices": [
+            "379",
+            "380",
+            "378"
+          ],
+          "correct": 0,
+          "explanation": "La respuesta es 379. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 379."
+          ],
+          "spoken_answer": "El resultado es 379."
+        }
+      ]
+    },
+    {
+      "pack_id": "visual-digitos-10",
+      "topic": "digitos",
+      "title": "Encuentra el dígito",
+      "rounds": [
+        {
+          "catalog_id": "visual-digitos-10-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "missing_digit",
+          "params": {
+            "mode": "add",
+            "pattern": "4?",
+            "operand": 16,
+            "result": 65
+          },
+          "question": "Sustituye ? por un dígito. 4? + 16 = 65",
+          "question_lines": [
+            "Sustituye ? por un dígito.",
+            "4? + 16 = 65"
+          ],
+          "next": "9",
+          "choices": [
+            "10",
+            "8",
+            "9"
+          ],
+          "correct": 2,
+          "explanation": "La respuesta es 9. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 9."
+          ],
+          "spoken_answer": "El resultado es 9."
+        },
+        {
+          "catalog_id": "visual-digitos-10-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "missing_digit",
+          "params": {
+            "mode": "multiply",
+            "pattern": "?0",
+            "operand": 4,
+            "result": 200
+          },
+          "question": "Sustituye ? por un dígito. ?0 x 4 = 200",
+          "question_lines": [
+            "Sustituye ? por un dígito.",
+            "?0 x 4 = 200"
+          ],
+          "next": "5",
+          "choices": [
+            "4",
+            "5",
+            "6"
+          ],
+          "correct": 1,
+          "explanation": "La respuesta es 5. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 5."
+          ],
+          "spoken_answer": "El resultado es 5."
+        },
+        {
+          "catalog_id": "visual-digitos-10-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "missing_digit",
+          "params": {
+            "mode": "divisible",
+            "pattern": "18?6",
+            "divisor": 11
+          },
+          "question": "18?6 es divisible entre 11. ¿Qué dígito sustituye a ?",
+          "question_lines": [
+            "18?6 es divisible entre 11.",
+            "¿Qué dígito sustituye a ?"
+          ],
+          "next": "2",
+          "choices": [
+            "2",
+            "3",
+            "1"
+          ],
+          "correct": 0,
+          "explanation": "La respuesta es 2. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 2."
+          ],
+          "spoken_answer": "El resultado es 2."
+        }
+      ]
+    },
+    {
+      "pack_id": "visual-cuadrados-10",
+      "topic": "cuadrados",
+      "title": "Completa el cuadrado",
+      "rounds": [
+        {
+          "catalog_id": "visual-cuadrados-10-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "magic",
+          "params": {
+            "grid": [
+              null,
+              92,
+              97,
+              94,
+              96,
+              98,
+              95,
+              100,
+              93
+            ],
+            "values": [
+              92,
+              93,
+              94,
+              95,
+              96,
+              97,
+              98,
+              99,
+              100
+            ],
+            "total": 288,
+            "target": 0
+          },
+          "question": "Filas, columnas y diagonales: 288. X   92   97 94   96   98 95   100   93",
+          "question_lines": [
+            "Filas, columnas y diagonales: 288.",
+            "X   92   97",
+            "94   96   98",
+            "95   100   93"
+          ],
+          "next": "99",
+          "choices": [
+            "100",
+            "98",
+            "99"
+          ],
+          "correct": 2,
+          "explanation": "La respuesta es 99. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 99."
+          ],
+          "spoken_answer": "El resultado es 99."
+        },
+        {
+          "catalog_id": "visual-cuadrados-10-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "magic",
+          "params": {
+            "grid": [
+              null,
+              null,
+              104,
+              98,
+              null,
+              106,
+              100,
+              110,
+              96
+            ],
+            "values": [
+              94,
+              96,
+              98,
+              100,
+              102,
+              104,
+              106,
+              108,
+              110
+            ],
+            "total": 306,
+            "target": 1
+          },
+          "question": "Filas, columnas y diagonales: 306. ?   X   104 98   ?   106 100   110   96",
+          "question_lines": [
+            "Filas, columnas y diagonales: 306.",
+            "?   X   104",
+            "98   ?   106",
+            "100   110   96"
+          ],
+          "next": "94",
+          "choices": [
+            "93",
+            "94",
+            "95"
+          ],
+          "correct": 1,
+          "explanation": "La respuesta es 94. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 94."
+          ],
+          "spoken_answer": "El resultado es 94."
+        },
+        {
+          "catalog_id": "visual-cuadrados-10-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "magic",
+          "params": {
+            "grid": [
+              null,
+              null,
+              111,
+              null,
+              null,
+              114,
+              105,
+              120,
+              99
+            ],
+            "values": [
+              96,
+              99,
+              102,
+              105,
+              108,
+              111,
+              114,
+              117,
+              120
+            ],
+            "total": 324,
+            "target": 0
+          },
+          "question": "Filas, columnas y diagonales: 324. X   ?   111 ?   ?   114 105   120   99",
+          "question_lines": [
+            "Filas, columnas y diagonales: 324.",
+            "X   ?   111",
+            "?   ?   114",
+            "105   120   99"
+          ],
+          "next": "117",
+          "choices": [
+            "117",
+            "118",
+            "116"
+          ],
+          "correct": 0,
+          "explanation": "La respuesta es 117. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 117."
+          ],
+          "spoken_answer": "El resultado es 117."
+        }
+      ]
+    },
+    {
+      "pack_id": "visual-residuos-10",
+      "topic": "residuos",
+      "title": "Descubre el número secreto",
+      "rounds": [
+        {
+          "catalog_id": "visual-residuos-10-L1",
+          "level": 1,
+          "difficulty": "BÁSICO",
+          "kind": "remainder",
+          "params": {
+            "low": 55,
+            "high": 59,
+            "clues": [
+              [
+                5,
+                2
+              ]
+            ]
+          },
+          "question": "Entero entre 55 y 59, inclusive. Al dividir entre 5, sobra 2.",
+          "question_lines": [
+            "Entero entre 55 y 59, inclusive.",
+            "Al dividir entre 5, sobra 2."
+          ],
+          "next": "57",
+          "choices": [
+            "58",
+            "56",
+            "57"
+          ],
+          "correct": 2,
+          "explanation": "La respuesta es 57. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 57."
+          ],
+          "spoken_answer": "El resultado es 57."
+        },
+        {
+          "catalog_id": "visual-residuos-10-L2",
+          "level": 2,
+          "difficulty": "INTERMEDIO",
+          "kind": "remainder",
+          "params": {
+            "low": 145,
+            "high": 159,
+            "clues": [
+              [
+                3,
+                0
+              ],
+              [
+                5,
+                1
+              ]
+            ]
+          },
+          "question": "Entero entre 145 y 159, inclusive. Al dividir entre 3, sobra 0. Al dividir entre 5, sobra 1.",
+          "question_lines": [
+            "Entero entre 145 y 159, inclusive.",
+            "Al dividir entre 3, sobra 0.",
+            "Al dividir entre 5, sobra 1."
+          ],
+          "next": "156",
+          "choices": [
+            "155",
+            "156",
+            "157"
+          ],
+          "correct": 1,
+          "explanation": "La respuesta es 156. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 156."
+          ],
+          "spoken_answer": "El resultado es 156."
+        },
+        {
+          "catalog_id": "visual-residuos-10-L3",
+          "level": 3,
+          "difficulty": "AVANZADO",
+          "kind": "remainder",
+          "params": {
+            "low": 550,
+            "high": 609,
+            "clues": [
+              [
+                3,
+                0
+              ],
+              [
+                4,
+                1
+              ],
+              [
+                5,
+                1
+              ]
+            ]
+          },
+          "question": "Entero entre 550 y 609, inclusive. Al dividir entre 3, sobra 0. Al dividir entre 4, sobra 1. Al dividir entre 5, sobra 1.",
+          "question_lines": [
+            "Entero entre 550 y 609, inclusive.",
+            "Al dividir entre 3, sobra 0.",
+            "Al dividir entre 4, sobra 1.",
+            "Al dividir entre 5, sobra 1."
+          ],
+          "next": "561",
+          "choices": [
+            "561",
+            "562",
+            "560"
+          ],
+          "correct": 0,
+          "explanation": "La respuesta es 561. Comprueba los pasos.",
+          "solution_lines": [
+            "Resultado: 561."
+          ],
+          "spoken_answer": "El resultado es 561."
+        }
+      ]
+    }
+  ]
+}

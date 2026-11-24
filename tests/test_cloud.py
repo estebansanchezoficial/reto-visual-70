@@ -33,7 +33,7 @@ class CloudTests(unittest.TestCase):
     def test_unique_daily_puzzles_and_solutions(self):
         previous=set()
         history=[]
-        for offset in range(30):
+        for offset in range(63):
             day=(date(2026,11,1)+timedelta(days=offset)).isoformat()
             data=generate.plan(day,history=history)
             if data['family']=='color':
@@ -48,7 +48,7 @@ class CloudTests(unittest.TestCase):
                     self.assertIn(r['new'],text);self.assertIn(dict(r['items'])[r['target']],text)
                 else:self.assertIn('ABC'[r['correct']],text)
             history.append(data)
-        with self.assertRaisesRegex(ValueError,'Catálogo agotado'):generate.plan('2026-12-01',history=history)
+        with self.assertRaisesRegex(ValueError,'Catálogo agotado'):generate.plan('2027-01-03',history=history)
 
     def test_rotation_compares_actual_previous_episodes(self):
         history=json.loads((generate.video.ROOT/'daily/content-history.json').read_text(encoding='utf-8'))

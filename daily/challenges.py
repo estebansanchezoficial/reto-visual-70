@@ -145,7 +145,26 @@ def board(i,phase,count):
         if not answer:video.text(d,(550,630),str(count),27,'#ffdb36','rt')
         video.text(d,(360,669),'SOLUCIÓN' if answer else ('HALLA LA RESPUESTA' if DATA.get('catalog_version') else TITLES[family]),25)
         if DATA.get('catalog_version'):
-            for line_no,line in enumerate(r['question_lines']):fit(d,(360,707+25*line_no),line,27,width=380)
+            if r['kind']=='magic':
+                p=r['params']
+                fit(d,(360,701),r['question_lines'][0],24,width=380)
+                for j,value in enumerate(p['grid']):
+                    x=300+(j%3)*60;y=729+(j//3)*25
+                    d.rectangle((x-29,y-2,x+29,y+23),outline='#48dce2',width=1)
+                    fit(d,(x,y),'X' if j==p['target'] else '?' if value is None else str(value),23,width=54,color='#ffdb36' if value is None else 'white')
+            elif r['kind']=='balance':
+                # Draw the same figure for every occurrence; do not rely on font glyphs.
+                for line_no,line in enumerate(r['question_lines']):
+                    tokens=line.split();widths=[25 if token in ('C','T','Q') else video.font(24).getlength(token) for token in tokens]
+                    x=360-(sum(widths)+7*(len(tokens)-1))/2;y=707+25*line_no
+                    for token,w in zip(tokens,widths):
+                        if token=='C':d.ellipse((x+3,y+3,x+21,y+21),fill='#48dce2')
+                        elif token=='T':d.polygon(((x+12,y+2),(x+2,y+22),(x+23,y+22)),fill='#ffdb36')
+                        elif token=='Q':d.rectangle((x+3,y+3,x+22,y+22),fill='#ff9bcc')
+                        else:d.text((x,y),token,font=video.font(24),fill='white')
+                        x+=w+7
+            else:
+                for line_no,line in enumerate(r['question_lines']):fit(d,(360,707+25*line_no),line,27,width=380)
         elif family=='arithmetic':
             fit(d,(360,724),f"{r['a']} {r['op']} {r['b']} = {r['next'] if answer else '?'}",57,width=380)
         elif family=='vowels':fit(d,(360,729),r['word'],45,width=380,color='#48dce2')

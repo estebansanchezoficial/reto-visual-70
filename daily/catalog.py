@@ -3,6 +3,7 @@ from pathlib import Path
 from fractions import Fraction
 from math import comb, factorial, isqrt
 import hashlib, json
+import visual_puzzles
 
 PATH = Path(__file__).with_name('puzzle-catalog.json')
 LEVELS = ['BÁSICO', 'INTERMEDIO', 'AVANZADO']
@@ -38,6 +39,7 @@ def solve(kind, p):
         if p['mode']=='choose': return comb(p['a'],p['b'])
         return factorial(p['a'])//factorial(p['a']-p['b'])
     if kind == 'average': return p['target']*p['count']-sum(p['known'])
+    if kind in ('balance','missing_digit','magic','remainder'): return visual_puzzles.solve(kind,p)
     raise ValueError(f'Unknown catalog solver: {kind}')
 
 def exercise_key(r):
@@ -63,6 +65,7 @@ def validate_round(r):
 def load():
     bank=json.loads(PATH.read_text(encoding='utf-8'))
     assert bank['rights']=='original_project_text_and_parameters'
+    bank['packs'] += json.loads(PATH.with_name('visual-puzzle-catalog.json').read_text(encoding='utf-8'))['packs']
     ids=set(); keys=set()
     for pack in bank['packs']:
         assert [r['level'] for r in pack['rounds']]==[1,2,3]
@@ -72,12 +75,16 @@ def load():
             ids.add(r['catalog_id']);keys.add(exercise_key(r))
     return bank
 
-def select(history, rejected_family=None):
+def select(history, rejected_family=None, day=None):
     used_ids={r.get('catalog_id') for h in history for r in h.get('rounds',[])}
     used_keys={exercise_key(r) for h in history for r in h.get('rounds',[])}
     # Every presented/rejected version counts. Avoid the most recent five topics.
     recent=[h.get('family') for h in sorted(history,key=lambda h:(h.get('episode',0),h.get('revision',1)))][-5:]
+    new_series=day is not None and str(day)>=visual_puzzles.START_DATE
+    if new_series: recent=recent[-3:]
     for pack in load()['packs']:
+        if new_series and pack['topic'] not in visual_puzzles.TOPICS: continue
+        if not new_series and pack['topic'] in visual_puzzles.TOPICS: continue
         family='catalog_'+pack['topic']
         if family in recent or family==rejected_family: continue
         if any(r['catalog_id'] in used_ids or exercise_key(r) in used_keys for r in pack['rounds']): continue

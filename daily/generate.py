@@ -15,7 +15,7 @@ def plan(day,revision=1,history=None,rejected_family=None,requested_family=None)
     episode=4+(day-date(2026,11,1)).days
     history=history if history is not None else json.loads((video.ROOT/'daily/content-history.json').read_text(encoding='utf-8'))
     if requested_family in (None,'catalog_math','arithmetic'):
-        pack=catalog.select(history,rejected_family)
+        pack=catalog.select(history,rejected_family,day.isoformat())
         rounds=pack['rounds']
         for r,timing in zip(rounds,[(6,20,25),(25,40,45),(45,61,66)]):
             r.update(zip(['start','answer','end'],timing))

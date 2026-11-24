@@ -99,6 +99,9 @@ def worked(r):
         add('Multiplica el promedio por el número de datos.',f"Total = {p['target']} x {p['count']} = {total}")
         add('Suma los datos que ya conoces.',' + '.join(map(str,p['known']))+f' = {known}')
         add('Resta esa suma al total necesario.',f'x = {total} - {known} = {answer}')
+    elif kind in ('balance','missing_digit','magic','remainder'):
+        import visual_puzzles
+        for instruction,calculation in visual_puzzles.worked(kind,p,answer):add(instruction,calculation)
     else:raise ValueError('No worked procedure for this math kind')
     assert len(steps)==3
     return steps

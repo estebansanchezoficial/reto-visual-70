@@ -10,8 +10,8 @@ import cloud
 class CatalogTests(unittest.TestCase):
     def test_full_catalog_has_three_tiers_and_exact_answers(self):
         bank=catalog.load()
-        self.assertEqual(len(bank['packs']),30)
-        self.assertEqual(len({p['topic'] for p in bank['packs']}),10)
+        self.assertEqual(len(bank['packs']),70)
+        self.assertEqual(len({p['topic'] for p in bank['packs']}),14)
         for pack in bank['packs']:
             self.assertEqual([r['level'] for r in pack['rounds']],[1,2,3])
             for r in pack['rounds']:

@@ -5,7 +5,7 @@ sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'daily'))
 import catalog,procedure,generate,challenges,second_video as video
 
 class ProcedureTests(unittest.TestCase):
-    def test_all_ninety_exercises_have_three_readable_worked_steps(self):
+    def test_all_exercises_have_three_readable_worked_steps(self):
         for pack in catalog.load()['packs']:
             for r in pack['rounds']:
                 steps=procedure.worked(r)

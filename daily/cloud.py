@@ -178,7 +178,7 @@ def deliver(tag,record,history,rejected_family=None):
     try:
         # Reject an exhausted/reused catalog before model downloads or synthesis.
         import catalog
-        catalog.select(history,rejected_family)
+        catalog.select(history,rejected_family,record['date'])
         subprocess.run([sys.executable,str(ROOT/'daily/prepare_models.py')],check=True)
         args=[sys.executable,str(ROOT/'daily/generate.py'),'--date',record['date'],'--revision',str(record.get('revision',1)),'--history',str(history_path)]
         if rejected_family:args+=['--rejected-family',rejected_family]
